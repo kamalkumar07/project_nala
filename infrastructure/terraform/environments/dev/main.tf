@@ -4,6 +4,11 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 6.0"
     }
+
+    archive = {
+      source  = "hashicorp/archive"
+      version = "~> 2.7"
+    }
   }
 
   required_version = ">= 1.6.0"
@@ -22,6 +27,13 @@ module "networking" {
   availability_zone   = var.availability_zone
 }
 
+module "cloud_api" {
+  source = "../../modules/cloud_api"
+
+  aws_region           = var.aws_region
+  environment          = "dev"
+  lambda_function_name = "nala-cloud-api-dev"
+}
 
 
 

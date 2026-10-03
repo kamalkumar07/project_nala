@@ -12,3 +12,7 @@ output "private_subnet_id" {
   description = "Nala development private subnet ID"
   value       = module.networking.private_subnet_id
 }
+output "cloud_api_base_url" {
+  description = "Base URL for the Nala Cloud API"
+  value       = module.cloud_api.cloud_api_base_url
+}
