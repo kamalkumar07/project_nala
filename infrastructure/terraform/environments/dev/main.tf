@@ -41,6 +41,11 @@ module "storage" {
   environment = "dev"
 }
 
+module "database" {
+  source = "../../modules/database"
+
+  environment = "dev"
+}
 
 
 

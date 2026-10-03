@@ -25,3 +25,12 @@ output "uploads_bucket_arn" {
   description = "Nala uploads S3 bucket ARN"
   value       = module.storage.uploads_bucket_arn
 }
+output "reports_table_name" {
+  description = "Nala reports DynamoDB table"
+  value       = module.database.reports_table_name
+}
+
+output "reports_table_arn" {
+  description = "Nala reports DynamoDB table ARN"
+  value       = module.database.reports_table_arn
+}
