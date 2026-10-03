@@ -1,3 +1,4 @@
+data "aws_caller_identity" "current" {}
 resource "aws_iam_role" "lambda" {
   name = "${var.lambda_function_name}-${var.environment}-role"
 
@@ -32,10 +33,36 @@ resource "aws_iam_role_policy_attachment" "lambda_logs" {
 
 }
 
+resource "aws_iam_role_policy" "lambda_s3_uploads" {
+  name = "${var.lambda_function_name}-${var.environment}-s3-uploads"
+  role = aws_iam_role.lambda.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+
+    Statement = [
+      {
+        Effect = "Allow"
+
+        Action = [
+          "s3:PutObject"
+        ]
+
+        Resource = "arn:aws:s3:::nala-upload-${var.environment}-${data.aws_caller_identity.current.account_id}/*"
+      }
+    ]
+  })
+}
+
 data "archive_file" "lambda_zip" {
   type        = "zip"
-  source_file = "${path.module}/lambda/index.mjs"
+
+  source_dir = "${path.module}/lambda"
   output_path = "${path.module}/lambda/function.zip"
+ 
+  excludes = [
+    "function.zip"
+  ] 
 }
 
 resource "aws_lambda_function" "cloud_api" {
@@ -54,6 +81,7 @@ resource "aws_lambda_function" "cloud_api" {
   environment {
     variables = {
       ENVIRONMENT = var.environment
+      UPLOADS_BUCKET_NAME = "nala-upload-${var.environment}-${data.aws_caller_identity.current.account_id}"
     }
   }
 
@@ -86,6 +114,16 @@ resource "aws_apigatewayv2_integration" "lambda" {
 resource "aws_apigatewayv2_route" "health" {
   api_id    = aws_apigatewayv2_api.cloud_api.id
   route_key = "GET /cloud/health"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
+
+  depends_on = [
+    aws_apigatewayv2_integration.lambda
+  ]
+}
+
+resource "aws_apigatewayv2_route" "presign" {
+  api_id    = aws_apigatewayv2_api.cloud_api.id
+  route_key = "POST /cloud/uploads/presign"
   target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
 
   depends_on = [

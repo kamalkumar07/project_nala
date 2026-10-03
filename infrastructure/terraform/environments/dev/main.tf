@@ -35,7 +35,11 @@ module "cloud_api" {
   lambda_function_name = "nala-cloud-api-dev"
 }
 
+module "storage" {
+  source = "../../modules/storage"
 
+  environment = "dev"
+}
 
 
 
