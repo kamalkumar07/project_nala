@@ -217,6 +217,14 @@ resource "aws_apigatewayv2_route" "delete_subscription" {
   depends_on = [aws_apigatewayv2_integration.lambda]
 }
 
+resource "aws_apigatewayv2_route" "get_risk" {
+  api_id    = aws_apigatewayv2_api.cloud_api.id
+  route_key = "GET /cloud/risk"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
+
+  depends_on = [aws_apigatewayv2_integration.lambda]
+}
+
 resource "aws_apigatewayv2_stage" "dev" {
   api_id      = aws_apigatewayv2_api.cloud_api.id
   name        = var.environment

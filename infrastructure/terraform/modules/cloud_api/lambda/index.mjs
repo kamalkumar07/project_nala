@@ -10,6 +10,7 @@ import {
   DeleteCommand
 } from "@aws-sdk/lib-dynamodb";
 import ngeohash from "ngeohash";
+import { calculateRisk } from "./risk/engine.mjs";
 
 const s3 = new S3Client({
   region: process.env.AWS_REGION
@@ -544,6 +545,98 @@ export const handler = async (event) => {
       });
     }
   }
+
+if (routeKey === "GET /cloud/risk") {
+  try {
+    const params = event.queryStringParameters || {};
+
+    const lat = Number(params.lat);
+    const lng = Number(params.lng);
+    const rainfall = Number(params.rainfall);
+    const elevation = Number(params.elevation);
+    const recentReports = Number(params.recentReports);
+
+    const rainfallWindow = params.rainfallWindow || "1d";
+    const recentReportDepth =
+      params.recentReportDepth !== undefined
+        ? Number(params.recentReportDepth)
+        : null;
+
+    const reportConfidence =
+      params.reportConfidence !== undefined
+        ? Number(params.reportConfidence)
+        : null;
+
+    if (
+      !Number.isFinite(lat) ||
+      lat < -90 ||
+      lat > 90 ||
+      !Number.isFinite(lng) ||
+      lng < -180 ||
+      lng > 180
+    ) {
+      return response(400, {
+        error: "VALIDATION_ERROR",
+        message: "Valid lat and lng are required"
+      });
+    }
+
+    if (!Number.isFinite(rainfall) || rainfall < 0) {
+      return response(400, {
+        error: "VALIDATION_ERROR",
+        message: "Valid rainfall is required"
+      });
+    }
+
+    if (!Number.isFinite(elevation)) {
+      return response(400, {
+        error: "VALIDATION_ERROR",
+        message: "Valid elevation is required"
+      });
+    }
+
+    if (!Number.isFinite(recentReports) || recentReports < 0) {
+      return response(400, {
+        error: "VALIDATION_ERROR",
+        message: "Valid recentReports is required"
+      });
+    }
+
+    if (recentReportDepth !== null && !Number.isFinite(recentReportDepth)) {
+      return response(400, {
+        error: "VALIDATION_ERROR",
+        message: "recentReportDepth must be a number"
+      });
+    }
+
+    if (reportConfidence !== null && !Number.isFinite(reportConfidence)) {
+      return response(400, {
+        error: "VALIDATION_ERROR",
+        message: "reportConfidence must be a number"
+      });
+    }
+
+    const risk = calculateRisk({
+      lat,
+      lng,
+      rainfall,
+      rainfallWindow,
+      elevation,
+      recentReports,
+      recentReportDepth,
+      reportConfidence
+    });
+
+    return response(200, risk);
+  } catch (error) {
+    console.error("Risk calculation error:", error);
+
+    return response(500, {
+      error: "RISK_CALCULATION_ERROR",
+      message: "Unable to calculate flood risk"
+    });
+  }
+}
 
   return response(404, {
     error: "NOT_FOUND",
