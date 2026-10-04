@@ -27,7 +27,7 @@ resource "aws_iam_role" "lambda" {
 
 resource "aws_iam_role_policy_attachment" "lambda_logs" {
 
-  role       = aws_iam_role.lambda.name
+  role = aws_iam_role.lambda.name
 
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 
@@ -54,15 +54,43 @@ resource "aws_iam_role_policy" "lambda_s3_uploads" {
   })
 }
 
-data "archive_file" "lambda_zip" {
-  type        = "zip"
+resource "aws_iam_role_policy" "lambda_dynamodb_reports" {
+  name = "${var.lambda_function_name}-${var.environment}-dynamodb-reports"
+  role = aws_iam_role.lambda.id
 
-  source_dir = "${path.module}/lambda"
+  policy = jsonencode({
+    Version = "2012-10-17"
+
+    Statement = [
+      {
+        Effect = "Allow"
+
+        Action = [
+          "dynamodb:PutItem",
+          "dynamodb:GetItem",
+          "dynamodb:UpdateItem",
+          "dynamodb:Query",
+          "dynamodb:Scan"
+        ]
+
+        Resource = [
+          "arn:aws:dynamodb:${var.aws_region}:${data.aws_caller_identity.current.account_id}:table/nala-reports-${var.environment}",
+          "arn:aws:dynamodb:${var.aws_region}:${data.aws_caller_identity.current.account_id}:table/nala-reports-${var.environment}/index/*"
+        ]
+      }
+    ]
+  })
+}
+
+data "archive_file" "lambda_zip" {
+  type = "zip"
+
+  source_dir  = "${path.module}/lambda"
   output_path = "${path.module}/lambda/function.zip"
- 
+
   excludes = [
     "function.zip"
-  ] 
+  ]
 }
 
 resource "aws_lambda_function" "cloud_api" {
@@ -80,8 +108,9 @@ resource "aws_lambda_function" "cloud_api" {
 
   environment {
     variables = {
-      ENVIRONMENT = var.environment
+      ENVIRONMENT         = var.environment
       UPLOADS_BUCKET_NAME = "nala-upload-${var.environment}-${data.aws_caller_identity.current.account_id}"
+      REPORTS_TABLE_NAME  = "nala-reports-${var.environment}"
     }
   }
 
@@ -93,13 +122,13 @@ resource "aws_lambda_function" "cloud_api" {
 }
 
 resource "aws_apigatewayv2_api" "cloud_api" {
-  name            = "nala-cloud-api-${var.environment}"
-  protocol_type   = "HTTP"
+  name          = "nala-cloud-api-${var.environment}"
+  protocol_type = "HTTP"
 
   tags = {
-    Name          = "nala-cloud-api-${var.environment}"
-    Environment   = var.environment
-    Project       = "nala"
+    Name        = "nala-cloud-api-${var.environment}"
+    Environment = var.environment
+    Project     = "nala"
   }
 }
 
@@ -131,10 +160,50 @@ resource "aws_apigatewayv2_route" "presign" {
   ]
 }
 
+resource "aws_apigatewayv2_route" "create_report" {
+  api_id    = aws_apigatewayv2_api.cloud_api.id
+  route_key = "POST /cloud/reports"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
+
+  depends_on = [
+    aws_apigatewayv2_integration.lambda
+  ]
+}
+
+resource "aws_apigatewayv2_route" "get_report" {
+  api_id    = aws_apigatewayv2_api.cloud_api.id
+  route_key = "GET /cloud/reports/{id}"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
+
+  depends_on = [
+    aws_apigatewayv2_integration.lambda
+  ]
+}
+
+resource "aws_apigatewayv2_route" "list_reports" {
+  api_id    = aws_apigatewayv2_api.cloud_api.id
+  route_key = "GET /cloud/reports"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
+
+  depends_on = [
+    aws_apigatewayv2_integration.lambda
+  ]
+}
+
+resource "aws_apigatewayv2_route" "update_report" {
+  api_id    = aws_apigatewayv2_api.cloud_api.id
+  route_key = "PATCH /cloud/reports/{id}"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
+
+  depends_on = [
+    aws_apigatewayv2_integration.lambda
+  ]
+}
+
 resource "aws_apigatewayv2_stage" "dev" {
-  api_id        = aws_apigatewayv2_api.cloud_api.id
-  name          = var.environment
-  auto_deploy   = true 
+  api_id      = aws_apigatewayv2_api.cloud_api.id
+  name        = var.environment
+  auto_deploy = true
 
   tags = {
     Environment = var.environment
