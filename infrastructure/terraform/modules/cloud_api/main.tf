@@ -8,7 +8,6 @@ resource "aws_iam_role" "lambda" {
     Statement = [
       {
         Effect = "Allow"
-
         Principal = {
           Service = "lambda.amazonaws.com"
         }
@@ -43,7 +42,6 @@ resource "aws_iam_role_policy" "lambda_s3_uploads" {
     Statement = [
       {
         Effect = "Allow"
-
         Action = [
           "s3:PutObject"
         ]
@@ -65,17 +63,19 @@ resource "aws_iam_role_policy" "lambda_dynamodb_reports" {
       {
         Effect = "Allow"
 
-        Action = [
+
+  Action = [
           "dynamodb:PutItem",
           "dynamodb:GetItem",
           "dynamodb:UpdateItem",
           "dynamodb:Query",
-          "dynamodb:Scan"
+          "dynamodb:Scan",
+          "dynamodb:DeleteItem"
         ]
-
         Resource = [
           "arn:aws:dynamodb:${var.aws_region}:${data.aws_caller_identity.current.account_id}:table/nala-reports-${var.environment}",
-          "arn:aws:dynamodb:${var.aws_region}:${data.aws_caller_identity.current.account_id}:table/nala-reports-${var.environment}/index/*"
+          "arn:aws:dynamodb:${var.aws_region}:${data.aws_caller_identity.current.account_id}:table/nala-reports-${var.environment}/index/*",
+          "arn:aws:dynamodb:${var.aws_region}:${data.aws_caller_identity.current.account_id}:table/nala-subscriptions-${var.environment}"
         ]
       }
     ]
@@ -108,9 +108,10 @@ resource "aws_lambda_function" "cloud_api" {
 
   environment {
     variables = {
-      ENVIRONMENT         = var.environment
-      UPLOADS_BUCKET_NAME = "nala-upload-${var.environment}-${data.aws_caller_identity.current.account_id}"
-      REPORTS_TABLE_NAME  = "nala-reports-${var.environment}"
+      ENVIRONMENT              = var.environment
+      UPLOADS_BUCKET_NAME      = "nala-upload-${var.environment}-${data.aws_caller_identity.current.account_id}"
+      REPORTS_TABLE_NAME       = "nala-reports-${var.environment}"
+      SUBSCRIPTIONS_TABLE_NAME = "nala-subscriptions-${var.environment}"
     }
   }
 
@@ -198,6 +199,22 @@ resource "aws_apigatewayv2_route" "update_report" {
   depends_on = [
     aws_apigatewayv2_integration.lambda
   ]
+}
+
+resource "aws_apigatewayv2_route" "create_subscription" {
+  api_id    = aws_apigatewayv2_api.cloud_api.id
+  route_key = "POST /cloud/subscriptions"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
+
+  depends_on = [aws_apigatewayv2_integration.lambda]
+}
+
+resource "aws_apigatewayv2_route" "delete_subscription" {
+  api_id    = aws_apigatewayv2_api.cloud_api.id
+  route_key = "DELETE /cloud/subscriptions/{id}"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
+
+  depends_on = [aws_apigatewayv2_integration.lambda]
 }
 
 resource "aws_apigatewayv2_stage" "dev" {

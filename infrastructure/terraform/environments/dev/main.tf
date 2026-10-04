@@ -47,7 +47,11 @@ module "database" {
   environment = "dev"
 }
 
+module "subscriptions" {
+  source = "../../modules/subscriptions"
 
+  environment = var.environment
+}
 
 
 

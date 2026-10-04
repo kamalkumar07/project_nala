@@ -6,7 +6,8 @@ import {
   PutCommand,
   GetCommand,
   QueryCommand,
-  UpdateCommand
+  UpdateCommand,
+  DeleteCommand
 } from "@aws-sdk/lib-dynamodb";
 import ngeohash from "ngeohash";
 
@@ -22,6 +23,7 @@ const dynamo = DynamoDBDocumentClient.from(dynamoClient);
 
 const BUCKET_NAME = process.env.UPLOADS_BUCKET_NAME;
 const REPORTS_TABLE_NAME = process.env.REPORTS_TABLE_NAME;
+const SUBSCRIPTIONS_TABLE_NAME = process.env.SUBSCRIPTIONS_TABLE_NAME;
 
 export const handler = async (event) => {
   const routeKey = event.routeKey;
@@ -382,6 +384,163 @@ export const handler = async (event) => {
       return response(500, {
         error: "REPORT_UPDATE_ERROR",
         message: "Unable to update report"
+      });
+    }
+  }
+
+  if (routeKey === "POST /cloud/subscriptions") {
+    try {
+      const body = JSON.parse(event.body || "{}");
+
+      const channel = body.channel;
+      const email = body.email;
+      const pushSubscription = body.pushSubscription;
+      const lat = body.lat;
+      const lng = body.lng;
+      const radiusM = body.radiusM ?? 1000;
+      const minBand = body.minBand ?? "high";
+
+      if (!["email", "push"].includes(channel)) {
+        return response(400, {
+          error: "VALIDATION_ERROR",
+          message: "channel must be email or push"
+        });
+      }
+
+      if (channel === "email") {
+        if (!email || typeof email !== "string" || !email.includes("@")) {
+          return response(400, {
+            error: "VALIDATION_ERROR",
+            message: "Valid email is required for email subscriptions"
+          });
+        }
+      }
+
+      if (channel === "push") {
+        if (
+          !pushSubscription ||
+          typeof pushSubscription !== "object"
+        ) {
+          return response(400, {
+            error: "VALIDATION_ERROR",
+            message: "pushSubscription is required for push subscriptions"
+          });
+        }
+      }
+
+      if (
+        typeof lat !== "number" ||
+        typeof lng !== "number" ||
+        lat < -90 ||
+        lat > 90 ||
+        lng < -180 ||
+        lng > 180
+      ) {
+        return response(400, {
+          error: "VALIDATION_ERROR",
+          message: "Valid lat and lng are required"
+        });
+      }
+
+      if (
+        !Number.isFinite(radiusM) ||
+        radiusM < 250 ||
+        radiusM > 5000
+      ) {
+        return response(400, {
+          error: "VALIDATION_ERROR",
+          message: "radiusM must be between 250 and 5000"
+        });
+      }
+
+      if (!["moderate", "high", "severe"].includes(minBand)) {
+        return response(400, {
+          error: "VALIDATION_ERROR",
+          message: "minBand must be moderate, high, or severe"
+        });
+      }
+
+      const subscriptionId = `sub_${crypto.randomUUID()}`;
+      const createdAt = new Date().toISOString();
+
+      const item = {
+        subscriptionId,
+        channel,
+        email: channel === "email" ? email : null,
+        pushSubscription:
+          channel === "push" ? pushSubscription : null,
+        lat,
+        lng,
+        radiusM,
+        minBand,
+        createdAt
+      };
+
+      await dynamo.send(
+        new PutCommand({
+          TableName: SUBSCRIPTIONS_TABLE_NAME,
+          Item: item,
+          ConditionExpression: "attribute_not_exists(subscriptionId)"
+        })
+      );
+
+      return response(201, {
+        subscriptionId,
+        channel,
+        radiusM,
+        minBand
+      });
+    } catch (error) {
+      console.error("Create subscription error:", error);
+
+      return response(500, {
+        error: "SUBSCRIPTION_CREATE_ERROR",
+        message: "Unable to create subscription"
+      });
+    }
+  }
+
+  if (routeKey === "DELETE /cloud/subscriptions/{id}") {
+    try {
+      const subscriptionId = event.pathParameters?.id;
+
+      if (!subscriptionId) {
+        return response(400, {
+          error: "VALIDATION_ERROR",
+          message: "subscriptionId is required"
+        });
+      }
+
+      await dynamo.send(
+        new DeleteCommand({
+          TableName: SUBSCRIPTIONS_TABLE_NAME,
+          Key: {
+            subscriptionId
+          },
+          ConditionExpression: "attribute_exists(subscriptionId)"
+        })
+      );
+
+      return {
+        statusCode: 204,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: ""
+      };
+    } catch (error) {
+      if (error.name === "ConditionalCheckFailedException") {
+        return response(404, {
+          error: "NOT_FOUND",
+          message: "Subscription not found"
+        });
+      }
+
+      console.error("Delete subscription error:", error);
+
+      return response(500, {
+        error: "SUBSCRIPTION_DELETE_ERROR",
+        message: "Unable to delete subscription"
       });
     }
   }
