@@ -7,3 +7,7 @@ node_modules/
 *.tfstate.*
 crash.log
 crash.*.log
+
+infrastructure/data/himachal/terrain/raw/
+infrastructure/data/himachal/terrain/**/*.tif
+infrastructure/data/himachal/terrain/**/*.vrt
