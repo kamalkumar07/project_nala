@@ -42,11 +42,21 @@ resource "aws_iam_role_policy" "lambda_s3_uploads" {
     Statement = [
       {
         Effect = "Allow"
+
         Action = [
           "s3:PutObject"
         ]
 
-        Resource = "arn:aws:s3:::nala-upload-${var.environment}-${data.aws_caller_identity.current.account_id}/*"
+        Resource = "arn:aws:s3:::nala-upload-${var.environment}-${data.aws_caller_identity.current.account_id}/reports/*"
+      },
+      {
+        Effect = "Allow"
+
+        Action = [
+          "s3:GetObject"
+        ]
+
+        Resource = "arn:aws:s3:::nala-upload-${var.environment}-${data.aws_caller_identity.current.account_id}/reference-data/delhi-mcd-2022.geojson"
       }
     ]
   })
@@ -144,6 +154,16 @@ resource "aws_apigatewayv2_integration" "lambda" {
 resource "aws_apigatewayv2_route" "health" {
   api_id    = aws_apigatewayv2_api.cloud_api.id
   route_key = "GET /cloud/health"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
+
+  depends_on = [
+    aws_apigatewayv2_integration.lambda
+  ]
+}
+
+resource "aws_apigatewayv2_route" "get_wards" {
+  api_id    = aws_apigatewayv2_api.cloud_api.id
+  route_key = "GET /cloud/wards"
   target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
 
   depends_on = [

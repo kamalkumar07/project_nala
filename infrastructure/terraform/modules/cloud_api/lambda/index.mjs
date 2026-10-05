@@ -11,6 +11,7 @@ import {
 } from "@aws-sdk/lib-dynamodb";
 import ngeohash from "ngeohash";
 import { calculateRisk } from "./risk/engine.mjs";
+import { findWard } from "./wards/lookup.mjs";
 
 const s3 = new S3Client({
   region: process.env.AWS_REGION
@@ -36,6 +37,47 @@ export const handler = async (event) => {
       environment: process.env.ENVIRONMENT
     });
   }
+
+if (routeKey === "GET /cloud/wards") {
+  try {
+    const query = event.queryStringParameters || {};
+
+    const lat = Number(query.lat);
+    const lng = Number(query.lng);
+
+    if (
+      !Number.isFinite(lat) ||
+      !Number.isFinite(lng) ||
+      lat < -90 ||
+      lat > 90 ||
+      lng < -180 ||
+      lng > 180
+    ) {
+      return response(400, {
+        error: "VALIDATION_ERROR",
+        message: "Valid lat and lng are required"
+      });
+    }
+
+    const ward = await findWard(lat, lng);
+
+    if (!ward) {
+      return response(404, {
+        error: "WARD_NOT_FOUND",
+        message: "No MCD ward found for this location"
+      });
+    }
+
+    return response(200, ward);
+  } catch (error) {
+    console.error("Ward lookup error:", error);
+
+    return response(500, {
+      error: "WARD_LOOKUP_ERROR",
+      message: "Unable to determine ward"
+    });
+  }
+}
 
   if (routeKey === "POST /cloud/uploads/presign") {
     try {

@@ -56,3 +56,13 @@ resource "aws_s3_bucket_cors_configuration" "uploads" {
     max_age_seconds = 3000
   }
 }
+
+resource "aws_s3_object" "delhi_wards" {
+  bucket = aws_s3_bucket.uploads.id
+  key    = "reference-data/delhi-mcd-2022.geojson"
+
+  source = "${path.module}/../../../data/wards/delhi-wards-2022.geojson"
+  etag   = filemd5("${path.module}/../../../data/wards/delhi-wards-2022.geojson")
+
+  content_type = "application/geo+json"
+}
