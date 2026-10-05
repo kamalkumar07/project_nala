@@ -1,0 +1,42 @@
+[
+  {
+    "segmentId": "seg_07_NORTH_001",
+    "wardId": "ward_07",
+    "score": 0.82,
+    "band": "severe",
+    "drivers": { "rain": 0.35, "reports": 0.30, "lowness": 0.17 },
+    "updatedAt": "2026-10-09T10:05:00Z"
+  },
+  {
+    "segmentId": "seg_07_SOUTH_002",
+    "wardId": "ward_07",
+    "score": 0.61,
+    "band": "high",
+    "drivers": { "rain": 0.28, "reports": 0.20, "lowness": 0.13 },
+    "updatedAt": "2026-10-09T10:05:00Z"
+  },
+  {
+    "segmentId": "seg_05_EAST_001",
+    "wardId": "ward_05",
+    "score": 0.91,
+    "band": "severe",
+    "drivers": { "rain": 0.38, "reports": 0.35, "lowness": 0.18 },
+    "updatedAt": "2026-10-09T10:05:00Z"
+  },
+  {
+    "segmentId": "seg_09_WEST_001",
+    "wardId": "ward_09",
+    "score": 0.34,
+    "band": "moderate",
+    "drivers": { "rain": 0.15, "reports": 0.10, "lowness": 0.09 },
+    "updatedAt": "2026-10-09T10:05:00Z"
+  },
+  {
+    "segmentId": "seg_03_CENTRAL_001",
+    "wardId": "ward_03",
+    "score": 0.18,
+    "band": "low",
+    "drivers": { "rain": 0.08, "reports": 0.05, "lowness": 0.05 },
+    "updatedAt": "2026-10-09T10:05:00Z"
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "subscriptionId": "sub_MOCK0001",
+    "channel": "email",
+    "contact": "demo@nalawatch.example",
+    "lat": 28.6448,
+    "lng": 77.2167,
+    "radiusM": 1000
+  }
+]

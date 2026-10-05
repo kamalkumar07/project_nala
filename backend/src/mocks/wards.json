@@ -1,0 +1,22 @@
+[
+  {
+    "wardId": "ward_03",
+    "name": "Karol Bagh",
+    "centroid": { "lat": 28.6508, "lng": 77.1907 }
+  },
+  {
+    "wardId": "ward_05",
+    "name": "Paharganj",
+    "centroid": { "lat": 28.643, "lng": 77.213 }
+  },
+  {
+    "wardId": "ward_07",
+    "name": "Connaught Place",
+    "centroid": { "lat": 28.6315, "lng": 77.2167 }
+  },
+  {
+    "wardId": "ward_09",
+    "name": "Daryaganj",
+    "centroid": { "lat": 28.641, "lng": 77.243 }
+  }
+]

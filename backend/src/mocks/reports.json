@@ -1,0 +1,97 @@
+[
+  {
+    "reportId": "rpt_01HZAA0001MOCK000001",
+    "status": "assessed",
+    "lat": 28.6448,
+    "lng": 77.2167,
+    "geohash": "ttnfv2",
+    "wardId": "ward_07",
+    "photoKey": "reports/2026/10/09/mock-001.jpg",
+    "createdAt": "2026-10-09T06:12:00Z",
+    "assessment": {
+      "depthClass": "knee",
+      "passable": "no",
+      "confidence": 0.83,
+      "rationale": "Water visible above car tyre line; pedestrian passage unsafe"
+    },
+    "userConfirmed": true,
+    "userDepthClass": "knee",
+    "opsStatus": "open"
+  },
+  {
+    "reportId": "rpt_01HZAA0002MOCK000002",
+    "status": "assessed",
+    "lat": 28.6512,
+    "lng": 77.2310,
+    "geohash": "ttnfv5",
+    "wardId": "ward_07",
+    "photoKey": "reports/2026/10/09/mock-002.jpg",
+    "createdAt": "2026-10-09T07:45:00Z",
+    "assessment": {
+      "depthClass": "ankle",
+      "passable": "caution",
+      "confidence": 0.71,
+      "rationale": "Shallow puddle; two-wheelers should proceed with care"
+    },
+    "userConfirmed": false,
+    "userDepthClass": null,
+    "opsStatus": "open"
+  },
+  {
+    "reportId": "rpt_01HZAA0003MOCK000003",
+    "status": "assessed",
+    "lat": 28.6380,
+    "lng": 77.2050,
+    "geohash": "ttnfqz",
+    "wardId": "ward_05",
+    "photoKey": "reports/2026/10/09/mock-003.jpg",
+    "createdAt": "2026-10-09T08:30:00Z",
+    "assessment": {
+      "depthClass": "waist",
+      "passable": "no",
+      "confidence": 0.91,
+      "rationale": "Deep flooding; waterline above vehicle bonnet in background"
+    },
+    "userConfirmed": true,
+    "userDepthClass": "waist",
+    "opsStatus": "dispatched"
+  },
+  {
+    "reportId": "rpt_01HZAA0004MOCK000004",
+    "status": "assessed",
+    "lat": 28.6600,
+    "lng": 77.2400,
+    "geohash": "ttnfvy",
+    "wardId": "ward_09",
+    "photoKey": "reports/2026/10/09/mock-004.jpg",
+    "createdAt": "2026-10-09T09:10:00Z",
+    "assessment": {
+      "depthClass": "ankle",
+      "passable": "yes",
+      "confidence": 0.65,
+      "rationale": "Minor waterlogging; road mostly clear"
+    },
+    "userConfirmed": false,
+    "userDepthClass": null,
+    "opsStatus": "resolved"
+  },
+  {
+    "reportId": "rpt_01HZAA0005MOCK000005",
+    "status": "assessed",
+    "lat": 28.6490,
+    "lng": 77.2250,
+    "geohash": "ttnfv3",
+    "wardId": "ward_07",
+    "photoKey": "reports/2026/10/09/mock-005.jpg",
+    "createdAt": "2026-10-09T10:00:00Z",
+    "assessment": {
+      "depthClass": "knee",
+      "passable": "no",
+      "confidence": 0.79,
+      "rationale": "Significant pooling at intersection; vehicles stalled visible"
+    },
+    "userConfirmed": false,
+    "userDepthClass": null,
+    "opsStatus": "open"
+  }
+]

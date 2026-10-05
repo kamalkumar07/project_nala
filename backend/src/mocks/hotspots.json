@@ -1,0 +1,38 @@
+[
+  {
+    "rank": 1,
+    "segmentId": "seg_05_EAST_001",
+    "score": 0.91,
+    "openReports": 5,
+    "latestReportAt": "2026-10-09T10:00:00Z",
+    "lat": 28.638,
+    "lng": 77.205
+  },
+  {
+    "rank": 2,
+    "segmentId": "seg_07_NORTH_001",
+    "score": 0.82,
+    "openReports": 4,
+    "latestReportAt": "2026-10-09T09:55:00Z",
+    "lat": 28.6448,
+    "lng": 77.2167
+  },
+  {
+    "rank": 3,
+    "segmentId": "seg_07_SOUTH_002",
+    "score": 0.61,
+    "openReports": 2,
+    "latestReportAt": "2026-10-09T09:00:00Z",
+    "lat": 28.651,
+    "lng": 77.231
+  },
+  {
+    "rank": 4,
+    "segmentId": "seg_09_WEST_001",
+    "score": 0.34,
+    "openReports": 1,
+    "latestReportAt": "2026-10-09T08:00:00Z",
+    "lat": 28.66,
+    "lng": 77.24
+  }
+]
