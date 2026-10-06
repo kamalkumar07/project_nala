@@ -11,3 +11,8 @@ crash.*.log
 infrastructure/data/himachal/terrain/raw/
 infrastructure/data/himachal/terrain/**/*.tif
 infrastructure/data/himachal/terrain/**/*.vrt
+infrastructure/data/himachal/terrain/**/*.aux.xml
+
+# Nala Himachal rainfall rasters
+infrastructure/data/himachal/rainfall/*.tif
+infrastructure/data/himachal/rainfall/*.aux.xml
