@@ -109,7 +109,7 @@ async function request(method, path, body) {
       method,
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': KEY,
+        ...(KEY ? { 'x-api-key': KEY } : {}),
       },
       body: body !== undefined ? JSON.stringify(body) : undefined,
       signal: controller.signal,
@@ -158,7 +158,16 @@ async function request(method, path, body) {
  * @returns {{ photoKey: string, uploadUrl: string, expiresIn: number }}
  */
 export async function presignUpload({ contentType, sizeBytes }) {
-  return request('POST', '/cloud/uploads/presign', { contentType, sizeBytes });
+  const extension = contentType === 'image/png'
+    ? 'png'
+    : contentType === 'image/webp'
+      ? 'webp'
+      : 'jpg';
+
+  return request('POST', '/cloud/uploads/presign', {
+    file_name: `upload.${extension}`,
+    content_type: contentType,
+  });
 }
 
 /**
@@ -214,28 +223,26 @@ export async function listReports({ bbox, since, limit = 200 } = {}) {
   const seen    = new Set();
   const results = [];
 
-  // Fan out across prefixes; each prefix may have multiple pages
-  await Promise.all(
-    prefixes.map(async (prefix) => {
-      let cursor = null;
+  // Process prefixes sequentially to avoid bursting the Cloud API
+for (const prefix of prefixes) {
+  let cursor = null;
 
-      do {
-        const qs = new URLSearchParams({ geohash: prefix, limit: '20' });
-        if (cursor) qs.set('cursor', cursor);
+  do {
+    const qs = new URLSearchParams({ geohash: prefix, limit: '20' });
+    if (cursor) qs.set('cursor', cursor);
 
-        const data = await request('GET', `/cloud/reports?${qs}`);
-        const items = data?.items ?? [];
-        cursor = data?.nextCursor ?? null;
+    const data = await request('GET', `/cloud/reports?${qs}`);
+    const items = data?.items ?? [];
+    cursor = data?.nextCursor ?? null;
 
-        for (const item of items) {
-          if (!seen.has(item.reportId)) {
-            seen.add(item.reportId);
-            results.push(normaliseReport(item));
-          }
-        }
-      } while (cursor !== null);
-    }),
-  );
+    for (const item of items) {
+      if (!seen.has(item.reportId)) {
+        seen.add(item.reportId);
+        results.push(normaliseReport(item));
+      }
+    }
+  } while (cursor !== null);
+}
 
   // Apply since filter in Express (Cloud API has no since param — O-5)
   const sinceMs = since ? new Date(since).getTime() : null;

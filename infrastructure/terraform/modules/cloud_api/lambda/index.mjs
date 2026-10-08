@@ -181,6 +181,7 @@ if (routeKey === "GET /cloud/districts") {
       const reportToken = crypto.randomUUID();
       const createdAt = new Date().toISOString();
       const geohash = ngeohash.encode(lat, lng, 7);
+      const geohashPrefix5 = ngeohash.encode(lat, lng, 5);
 
       const item = {
         reportId,
@@ -189,6 +190,7 @@ if (routeKey === "GET /cloud/districts") {
         lat,
         lng,
         geohash,
+        geohashPrefix5,
         note: note || null,
         clientTimestamp: clientTimestamp || null,
         createdAt,
@@ -277,10 +279,10 @@ if (routeKey === "GET /cloud/districts") {
       const result = await dynamo.send(
         new QueryCommand({
           TableName: REPORTS_TABLE_NAME,
-          IndexName: "geohash-createdAt-index",
-          KeyConditionExpression: "geohash = :geohash",
+          IndexName: "geohashPrefix5-createdAt-index",
+          KeyConditionExpression: "geohashPrefix5 = :geohashPrefix5",
           ExpressionAttributeValues: {
-            ":geohash": geohash
+             ":geohashPrefix5": geohash
           },
           ScanIndexForward: false,
           Limit: limit,
