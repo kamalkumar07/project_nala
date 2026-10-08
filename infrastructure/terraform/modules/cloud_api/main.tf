@@ -56,7 +56,7 @@ resource "aws_iam_role_policy" "lambda_s3_uploads" {
           "s3:GetObject"
         ]
 
-        Resource = "arn:aws:s3:::nala-upload-${var.environment}-${data.aws_caller_identity.current.account_id}/reference-data/delhi-mcd-2022.geojson"
+        Resource = "arn:aws:s3:::nala-upload-${var.environment}-${data.aws_caller_identity.current.account_id}/reference-data/himachal/districts.geojson"
       }
     ]
   })
@@ -74,7 +74,7 @@ resource "aws_iam_role_policy" "lambda_dynamodb_reports" {
         Effect = "Allow"
 
 
-  Action = [
+        Action = [
           "dynamodb:PutItem",
           "dynamodb:GetItem",
           "dynamodb:UpdateItem",
@@ -161,9 +161,9 @@ resource "aws_apigatewayv2_route" "health" {
   ]
 }
 
-resource "aws_apigatewayv2_route" "get_wards" {
+resource "aws_apigatewayv2_route" "get_districts" {
   api_id    = aws_apigatewayv2_api.cloud_api.id
-  route_key = "GET /cloud/wards"
+  route_key = "GET /cloud/districts"
   target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
 
   depends_on = [

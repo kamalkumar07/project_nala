@@ -11,7 +11,7 @@ import {
 } from "@aws-sdk/lib-dynamodb";
 import ngeohash from "ngeohash";
 import { calculateRisk } from "./risk/engine.mjs";
-import { findWard } from "./wards/lookup.mjs";
+import { findDistrict } from "./districts/lookup.mjs";
 
 const s3 = new S3Client({
   region: process.env.AWS_REGION
@@ -38,7 +38,7 @@ export const handler = async (event) => {
     });
   }
 
-if (routeKey === "GET /cloud/wards") {
+if (routeKey === "GET /cloud/districts") {
   try {
     const query = event.queryStringParameters || {};
 
@@ -59,22 +59,22 @@ if (routeKey === "GET /cloud/wards") {
       });
     }
 
-    const ward = await findWard(lat, lng);
+    const district = await findDistrict(lat, lng);
 
-    if (!ward) {
+    if (!district) {
       return response(404, {
-        error: "WARD_NOT_FOUND",
-        message: "No MCD ward found for this location"
+        error: "DISTRICT_NOT_FOUND",
+        message: "No Himachal Pradesh district found for this location"
       });
     }
 
-    return response(200, ward);
+    return response(200, district);
   } catch (error) {
-    console.error("Ward lookup error:", error);
+    console.error("District lookup error:", error);
 
     return response(500, {
-      error: "WARD_LOOKUP_ERROR",
-      message: "Unable to determine ward"
+      error: "DISTRICT_LOOKUP_ERROR",
+      message: "Unable to determine district"
     });
   }
 }
