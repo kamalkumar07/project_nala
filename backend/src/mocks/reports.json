@@ -6,7 +6,10 @@
     "lng": 77.2167,
     "geohash": "ttnfv2",
     "wardId": "ward_07",
+    "wardNo": "80",
+    "wardName": "Chandni Chowk",
     "photoKey": "reports/2026/10/09/mock-001.jpg",
+    "hazardType": "flood",
     "createdAt": "2026-10-09T06:12:00Z",
     "assessment": {
       "depthClass": "knee",
@@ -25,7 +28,10 @@
     "lng": 77.2310,
     "geohash": "ttnfv5",
     "wardId": "ward_07",
+    "wardNo": "85",
+    "wardName": "Idgah Road",
     "photoKey": "reports/2026/10/09/mock-002.jpg",
+    "hazardType": "waterlogging",
     "createdAt": "2026-10-09T07:45:00Z",
     "assessment": {
       "depthClass": "ankle",
@@ -44,7 +50,10 @@
     "lng": 77.2050,
     "geohash": "ttnfqz",
     "wardId": "ward_05",
+    "wardNo": "90",
+    "wardName": "Kotwali",
     "photoKey": "reports/2026/10/09/mock-003.jpg",
+    "hazardType": "flood",
     "createdAt": "2026-10-09T08:30:00Z",
     "assessment": {
       "depthClass": "waist",
@@ -63,7 +72,10 @@
     "lng": 77.2400,
     "geohash": "ttnfvy",
     "wardId": "ward_09",
+    "wardNo": "72",
+    "wardName": "Seelampur",
     "photoKey": "reports/2026/10/09/mock-004.jpg",
+    "hazardType": "road_damage",
     "createdAt": "2026-10-09T09:10:00Z",
     "assessment": {
       "depthClass": "ankle",
@@ -82,7 +94,10 @@
     "lng": 77.2250,
     "geohash": "ttnfv3",
     "wardId": "ward_07",
+    "wardNo": "76",
+    "wardName": "Chandni Mahal",
     "photoKey": "reports/2026/10/09/mock-005.jpg",
+    "hazardType": "flood",
     "createdAt": "2026-10-09T10:00:00Z",
     "assessment": {
       "depthClass": "knee",
@@ -92,6 +107,6 @@
     },
     "userConfirmed": false,
     "userDepthClass": null,
-    "opsStatus": "open"
+    "opsStatus": "dispatched"
   }
 ]

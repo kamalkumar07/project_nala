@@ -99,7 +99,7 @@ export async function presignUpload({ contentType, sizeBytes }) {
  * Create a report and start the fake analyzing → assessed transition.
  * @param {{ photoKey: string, lat: number, lng: number, note?: string, clientTimestamp?: string }} params
  */
-export async function createReport({ photoKey, lat, lng, note, clientTimestamp }) {
+export async function createReport({ photoKey, lat, lng, hazardType = 'flood', note, clientTimestamp }) {
   const reports = await getReports();
   const reportToken = `tok_${nanoid()}`;
   const reportId = `rpt_MOCK${nanoid()}`;
@@ -109,15 +109,16 @@ export async function createReport({ photoKey, lat, lng, note, clientTimestamp }
     status: 'analyzing',
     lat,
     lng,
-    geohash: 'ttnfv0', // simplified — real geohash would be computed
+    geohash: 'ttnfv0',
     wardId: 'ward_07',
     photoKey,
+    hazardType,
     createdAt: clientTimestamp ?? nowIso(),
     assessment: null,
     userConfirmed: false,
     userDepthClass: null,
     opsStatus: 'open',
-    _reportToken: reportToken, // internal only
+    _reportToken: reportToken,
   };
 
   reports.push(report);

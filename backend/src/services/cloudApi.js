@@ -283,9 +283,27 @@ function notImplemented(name) {
 }
 
 export const getRisk             = notImplemented('getRisk');
-export const getHotspots         = notImplemented('getHotspots');
-export const getWardReports      = notImplemented('getWardReports');
-export const patchReportStatus   = notImplemented('patchReportStatus');
+
+/**
+ * GET /cloud/hotspots
+ * Returns ranked flood-risk hotspots matching the Phase 3 contract.
+ * Response shape: { hotspots: [...], total, updatedAt }
+ *
+ * TODO: Kamal to confirm the exact Cloud API path and pagination scheme.
+ * Endpoint assumed: GET /cloud/hotspots?district=&bbox=&riskBand=&limit=
+ *
+ * @param {{ district?: string, bbox?: string, riskBand?: string, limit?: number }} params
+ */
+export async function getHotspots({ district, bbox, riskBand, limit = 20 } = {}) {
+  const qs = new URLSearchParams();
+  if (district) qs.set('district', district);
+  if (bbox)     qs.set('bbox',     bbox);
+  if (riskBand) qs.set('riskBand', riskBand);
+  qs.set('limit', String(limit));
+  return request('GET', `/cloud/hotspots?${qs}`);
+}
+
+export const getWardReports      = notImplemented('getWardReports');export const patchReportStatus   = notImplemented('patchReportStatus');
 export const createSubscription  = notImplemented('createSubscription');
 export const deleteSubscription  = notImplemented('deleteSubscription');
 export const listWards           = notImplemented('listWards');

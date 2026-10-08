@@ -37,6 +37,8 @@ const schema = z.object({
   REAL_PRESIGN:  z.string().transform((v) => v === 'true').default('false'),
   REAL_REPORTS:  z.string().transform((v) => v === 'true').default('false'),
   REAL_CONFIRM:  z.string().transform((v) => v === 'true').default('false'),
+  // getHotspots — primary Phase 3 endpoint; flip to true once Kamal delivers /cloud/hotspots
+  REAL_HOTSPOTS: z.string().transform((v) => v === 'true').default('false'),
 
   // AWS / Cognito
   AWS_REGION: z.string().default('ap-south-1'),

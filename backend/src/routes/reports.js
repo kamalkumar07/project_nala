@@ -23,10 +23,11 @@ const router = Router();
 // ── POST /reports ───────────────────────────────────────────────────────────
 
 const CreateReportBody = z.object({
-  photoKey: z.string().min(1),
-  lat: z.number().min(-90).max(90),
-  lng: z.number().min(-180).max(180),
-  note: z.string().max(500).optional(),
+  photoKey:        z.string().min(1),
+  lat:             z.number().min(-90).max(90),
+  lng:             z.number().min(-180).max(180),
+  hazardType:      z.enum(['flood', 'landslide', 'waterlogging', 'road_damage', 'other']).default('flood'),
+  note:            z.string().max(500).optional(),
   clientTimestamp: z.string().datetime({ offset: true }).optional(),
 });
 

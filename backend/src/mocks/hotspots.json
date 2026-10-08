@@ -1,38 +1,97 @@
 [
   {
-    "rank": 1,
-    "segmentId": "seg_05_EAST_001",
-    "score": 0.91,
-    "openReports": 5,
-    "latestReportAt": "2026-10-09T10:00:00Z",
-    "lat": 28.638,
-    "lng": 77.205
+    "hotspotId": "hsp_001",
+    "district": "North Delhi",
+    "wardId": "ward_07",
+    "wardNo": "80",
+    "wardName": "Chandni Chowk",
+    "latitude": 28.6448,
+    "longitude": 77.2167,
+    "riskScore": 91,
+    "riskBand": "HIGH",
+    "reportCount": 5,
+    "activeReports": 4,
+    "lastUpdated": "2026-10-09T10:05:00Z",
+    "riskFactors": {
+      "rainfall": 0.38,
+      "reports": 0.35,
+      "lowness": 0.18
+    }
   },
   {
-    "rank": 2,
-    "segmentId": "seg_07_NORTH_001",
-    "score": 0.82,
-    "openReports": 4,
-    "latestReportAt": "2026-10-09T09:55:00Z",
-    "lat": 28.6448,
-    "lng": 77.2167
+    "hotspotId": "hsp_002",
+    "district": "North Delhi",
+    "wardId": "ward_07",
+    "wardNo": "85",
+    "wardName": "Idgah Road",
+    "latitude": 28.6380,
+    "longitude": 77.2050,
+    "riskScore": 82,
+    "riskBand": "HIGH",
+    "reportCount": 4,
+    "activeReports": 4,
+    "lastUpdated": "2026-10-09T09:55:00Z",
+    "riskFactors": {
+      "rainfall": 0.35,
+      "reports": 0.30,
+      "lowness": 0.17
+    }
   },
   {
-    "rank": 3,
-    "segmentId": "seg_07_SOUTH_002",
-    "score": 0.61,
-    "openReports": 2,
-    "latestReportAt": "2026-10-09T09:00:00Z",
-    "lat": 28.651,
-    "lng": 77.231
+    "hotspotId": "hsp_003",
+    "district": "Central Delhi",
+    "wardId": "ward_07",
+    "wardNo": "90",
+    "wardName": "Kotwali",
+    "latitude": 28.6512,
+    "longitude": 77.2310,
+    "riskScore": 61,
+    "riskBand": "MEDIUM",
+    "reportCount": 2,
+    "activeReports": 2,
+    "lastUpdated": "2026-10-09T09:00:00Z",
+    "riskFactors": {
+      "rainfall": 0.28,
+      "reports": 0.20,
+      "lowness": 0.13
+    }
   },
   {
-    "rank": 4,
-    "segmentId": "seg_09_WEST_001",
-    "score": 0.34,
-    "openReports": 1,
-    "latestReportAt": "2026-10-09T08:00:00Z",
-    "lat": 28.66,
-    "lng": 77.24
+    "hotspotId": "hsp_004",
+    "district": "East Delhi",
+    "wardId": "ward_09",
+    "wardNo": "72",
+    "wardName": "Seelampur",
+    "latitude": 28.6600,
+    "longitude": 77.2400,
+    "riskScore": 34,
+    "riskBand": "LOW",
+    "reportCount": 1,
+    "activeReports": 0,
+    "lastUpdated": "2026-10-09T08:00:00Z",
+    "riskFactors": {
+      "rainfall": 0.15,
+      "reports": 0.10,
+      "lowness": 0.09
+    }
+  },
+  {
+    "hotspotId": "hsp_005",
+    "district": "Central Delhi",
+    "wardId": "ward_03",
+    "wardNo": "76",
+    "wardName": "Chandni Mahal",
+    "latitude": 28.6490,
+    "longitude": 77.2250,
+    "riskScore": 18,
+    "riskBand": "LOW",
+    "reportCount": 0,
+    "activeReports": 0,
+    "lastUpdated": "2026-10-09T10:05:00Z",
+    "riskFactors": {
+      "rainfall": 0.08,
+      "reports": 0.05,
+      "lowness": 0.05
+    }
   }
 ]

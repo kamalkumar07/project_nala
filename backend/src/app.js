@@ -12,14 +12,15 @@ import logger from './logger.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
 // Routes
-import healthRouter from './routes/health.js';
-import uploadsRouter from './routes/uploads.js';
-import reportsRouter from './routes/reports.js';
-import riskRouter from './routes/risk.js';
-import alertsRouter from './routes/alerts.js';
-import authRouter from './routes/auth.js';
-import wardsRouter from './routes/wards.js';
-import wardRouter from './routes/ward.js';
+import healthRouter   from './routes/health.js';
+import uploadsRouter  from './routes/uploads.js';
+import reportsRouter  from './routes/reports.js';
+import hotspotsRouter from './routes/hotspots.js';
+import riskRouter     from './routes/risk.js';
+import alertsRouter   from './routes/alerts.js';
+import authRouter     from './routes/auth.js';
+import wardsRouter    from './routes/wards.js';
+import wardRouter     from './routes/ward.js';
 
 const app = express();
 
@@ -54,6 +55,7 @@ app.use(healthRouter);
 // All other routes are under /api/v1
 app.use('/api/v1', uploadsRouter);
 app.use('/api/v1', reportsRouter);
+app.use('/api/v1', hotspotsRouter);
 app.use('/api/v1', riskRouter);
 app.use('/api/v1', alertsRouter);
 app.use('/api/v1', authRouter);
