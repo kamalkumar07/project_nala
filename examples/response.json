@@ -1,0 +1,32 @@
+{
+  "location": {
+    "latitude": 31.1048,
+    "longitude": 77.1734,
+    "district": "Shimla"
+  },
+  "flood": {
+    "score": 0.34,
+    "band": "LOW",
+    "confidence": 1.0,
+    "water_depth": "NONE",
+    "passability": "passable",
+    "factors": {
+      "valley_slope": 0.0,
+      "floodplain_flatness": 0.0,
+      "rain_1d": 0.6296,
+      "rain_3d": 0.5856
+    }
+  },
+  "landslide": {
+    "score": 0.74,
+    "band": "HIGH",
+    "confidence": 1.0,
+    "factors": {
+      "slope": 0.6833,
+      "tri": 0.865,
+      "rain_1d": 0.6296,
+      "rain_3d": 0.5856
+    }
+  },
+  "modelVersion": "V1"
+}

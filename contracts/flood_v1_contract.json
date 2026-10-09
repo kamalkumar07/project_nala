@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "contractName": "Nala Flood / Flash-Flood Risk Model V1 Contract",
+  "version": "1.0.0",
+  "targetGeography": "Himachal Pradesh",
+  "hazardType": "FLOOD_AND_FLASH_FLOOD",
+  "status": "VALIDATED_LOCAL_V1",
+  "inputs": {
+    "latitude": {
+      "type": "number",
+      "minimum": 30.3773,
+      "maximum": 33.2564,
+      "description": "WGS84 latitude coordinate in Himachal Pradesh",
+      "required": true
+    },
+    "longitude": {
+      "type": "number",
+      "minimum": 75.5946,
+      "maximum": 79.0089,
+      "description": "WGS84 longitude coordinate in Himachal Pradesh",
+      "required": true
+    },
+    "slope_deg": {
+      "type": "number",
+      "unit": "degrees",
+      "minimum": 0.0,
+      "maximum": 90.0,
+      "description": "Topographic slope angle. Flood risk is inverted: slope <= 3 deg receives max score.",
+      "required": false,
+      "default": 0.20
+    },
+    "tri": {
+      "type": "number",
+      "unit": "meters",
+      "minimum": 0.0,
+      "description": "Terrain Ruggedness Index. Flat alluvial terraces (TRI <= 5m) receive highest flood accumulation factor.",
+      "required": false,
+      "default": 0.20
+    },
+    "rainfall_1d_mm": {
+      "type": "number",
+      "unit": "mm",
+      "minimum": 0.0,
+      "maximum": 500.0,
+      "description": "Daily precipitation accumulation.",
+      "required": false,
+      "default": 0.0
+    },
+    "rainfall_3d_mm": {
+      "type": "number",
+      "unit": "mm",
+      "minimum": 0.0,
+      "maximum": 1000.0,
+      "description": "3-day antecedent rolling precipitation sum.",
+      "required": false,
+      "default": 0.0
+    }
+  },
+  "weights": {
+    "rain_1d": 0.30,
+    "rain_3d": 0.25,
+    "valley_slope": 0.30,
+    "floodplain_tri": 0.15
+  },
+  "normalization": {
+    "rain_1d": "Domain piecewise: [0mm->0.0, 15.5mm->0.15, 64.4mm->0.45, 115.5mm->0.75, 204.4mm->1.0]",
+    "rain_3d": "Domain piecewise scaled by 1.6: [0mm->0.0, 24.8mm->0.15, 103mm->0.45, 185mm->0.75, 327mm->1.0]",
+    "valley_slope": "Inverted piecewise: [0 deg->1.0, 3 deg->0.70, 8 deg->0.25, 15 deg->0.0, >15 deg->0.0]",
+    "floodplain_tri": "Inverted linear clamp: clamp01(1.0 - tri / 25.0)"
+  },
+  "amplificationRule": {
+    "description": "Hydrologic valley pooling surge: if slope <= 6.0 deg AND rain_1d >= 64.4 mm, score receives +0.15 * (f_slope * f_rain)",
+    "boostCoeff": 0.15
+  },
+  "riskBands": {
+    "LOW": {
+      "min": 0.00,
+      "max": 0.34,
+      "action": "Routine monitoring; nominal water flow."
+    },
+    "MEDIUM": {
+      "min": 0.35,
+      "max": 0.69,
+      "action": "Advisory alert; stream banks and low crossings at risk."
+    },
+    "HIGH": {
+      "min": 0.70,
+      "max": 1.00,
+      "action": "Emergency warning; severe valley inundation and flash-flood surge likely."
+    }
+  },
+  "confidencePolicy": {
+    "formula": "1.0 - (0.30 * missing_rain1d + 0.25 * missing_rain3d + 0.30 * missing_slope + 0.15 * missing_tri)",
+    "description": "Reflects observational data completeness independently from risk score."
+  },
+  "waterDepthLevels": [
+    "NONE",
+    "ANKLE",
+    "KNEE",
+    "WAIST",
+    "ABOVE_WAIST",
+    "UNKNOWN"
+  ],
+  "passabilityPolicy": {
+    "passable": ["NONE", "ANKLE"],
+    "not_passable": ["KNEE", "WAIST", "ABOVE_WAIST"],
+    "undetermined": ["UNKNOWN"]
+  }
+}

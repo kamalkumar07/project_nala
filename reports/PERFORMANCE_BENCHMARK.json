@@ -1,0 +1,27 @@
+{
+  "single_point_inference": {
+    "iterations": 10000,
+    "total_time_ms": 2290.64,
+    "latency_per_query_ms": 0.22906,
+    "throughput_qps": 4365.6
+  },
+  "batch_vectorized_inference": {
+    "batch_size": 100000,
+    "total_time_ms": 7.51,
+    "throughput_points_per_sec": 13308668.0
+  },
+  "raster_slope_tri_generation": {
+    "pixels_tested": 3240000,
+    "latency_sec": 0.321,
+    "throughput_pixels_per_sec": 10100887.3
+  },
+  "storage_footprint": {
+    "districts.geojson": "4.17 MB",
+    "landslide_training_points_2023.csv": "0.39 MB",
+    "elevation_hp_mosaic.tif": "162.49 MB",
+    "slope_hp_mosaic.tif": "178.72 MB",
+    "tri_hp_mosaic.tif": "177.86 MB",
+    "landslide_features.parquet": "0.36 MB",
+    "flood_features.parquet": "0.04 MB"
+  }
+}

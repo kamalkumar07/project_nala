@@ -1,0 +1,500 @@
+[
+  {
+    "id": "case_01_normal_location",
+    "description": "Normal baseline conditions on moderate Shimla slope with light rain",
+    "input": {
+      "latitude": 31.1048,
+      "longitude": 77.1734,
+      "slope_deg": 15.0,
+      "tri": 18.0,
+      "rainfall_1d_mm": 12.0,
+      "rainfall_3d_mm": 20.0,
+      "elevation_m": 2200.0
+    },
+    "expected_output": {
+      "location": {
+        "latitude": 31.1048,
+        "longitude": 77.1734,
+        "district": "Shimla"
+      },
+      "flood": {
+        "score": 0.11,
+        "band": "LOW",
+        "confidence": 1.0,
+        "factors": {
+          "valley_slope": 0.0,
+          "floodplain_flatness": 0.28,
+          "rain_1d": 0.1161,
+          "rain_3d": 0.121
+        }
+      },
+      "landslide": {
+        "score": 0.21,
+        "band": "LOW",
+        "confidence": 1.0,
+        "factors": {
+          "slope": 0.225,
+          "tri": 0.41,
+          "rain_1d": 0.1161,
+          "rain_3d": 0.121
+        }
+      },
+      "modelVersion": "V1"
+    }
+  },
+  {
+    "id": "case_02_high_rainfall",
+    "description": "Heavy monsoon storm (115 mm) on moderate terrain",
+    "input": {
+      "latitude": 31.1048,
+      "longitude": 77.1734,
+      "slope_deg": 18.0,
+      "tri": 22.0,
+      "rainfall_1d_mm": 115.0,
+      "rainfall_3d_mm": 150.0,
+      "elevation_m": 2150.0
+    },
+    "expected_output": {
+      "location": {
+        "latitude": 31.1048,
+        "longitude": 77.1734,
+        "district": "Shimla"
+      },
+      "flood": {
+        "score": 0.4,
+        "band": "MEDIUM",
+        "confidence": 1.0,
+        "factors": {
+          "valley_slope": 0.0,
+          "floodplain_flatness": 0.12,
+          "rain_1d": 0.7471,
+          "rain_3d": 0.6223
+        }
+      },
+      "landslide": {
+        "score": 0.51,
+        "band": "MEDIUM",
+        "confidence": 1.0,
+        "factors": {
+          "slope": 0.3,
+          "tri": 0.49,
+          "rain_1d": 0.7471,
+          "rain_3d": 0.6223
+        }
+      },
+      "modelVersion": "V1"
+    }
+  },
+  {
+    "id": "case_03_high_3d_accumulation",
+    "description": "Prolonged multi-day saturation (250 mm 3-day sum) in Solan",
+    "input": {
+      "latitude": 30.9084,
+      "longitude": 77.0999,
+      "slope_deg": 24.0,
+      "tri": 30.0,
+      "rainfall_1d_mm": 45.0,
+      "rainfall_3d_mm": 250.0,
+      "elevation_m": 1550.0
+    },
+    "expected_output": {
+      "location": {
+        "latitude": 30.9084,
+        "longitude": 77.0999,
+        "district": "Solan"
+      },
+      "flood": {
+        "score": 0.32,
+        "band": "LOW",
+        "confidence": 1.0,
+        "factors": {
+          "valley_slope": 0.0,
+          "floodplain_flatness": 0.0,
+          "rain_1d": 0.331,
+          "rain_3d": 0.8646
+        }
+      },
+      "landslide": {
+        "score": 0.57,
+        "band": "MEDIUM",
+        "confidence": 1.0,
+        "factors": {
+          "slope": 0.5167,
+          "tri": 0.65,
+          "rain_1d": 0.331,
+          "rain_3d": 0.8646
+        }
+      },
+      "modelVersion": "V1"
+    }
+  },
+  {
+    "id": "case_04_steep_terrain",
+    "description": "Very steep mountain slope (40 deg) with moderate rain",
+    "input": {
+      "latitude": 31.25,
+      "longitude": 77.2,
+      "slope_deg": 40.0,
+      "tri": 45.0,
+      "rainfall_1d_mm": 30.0,
+      "rainfall_3d_mm": 45.0,
+      "elevation_m": 2600.0
+    },
+    "expected_output": {
+      "location": {
+        "latitude": 31.25,
+        "longitude": 77.2,
+        "district": "Mandi"
+      },
+      "flood": {
+        "score": 0.13,
+        "band": "LOW",
+        "confidence": 1.0,
+        "factors": {
+          "valley_slope": 0.0,
+          "floodplain_flatness": 0.0,
+          "rain_1d": 0.239,
+          "rain_3d": 0.2275
+        }
+      },
+      "landslide": {
+        "score": 0.62,
+        "band": "MEDIUM",
+        "confidence": 1.0,
+        "factors": {
+          "slope": 0.97,
+          "tri": 0.8875,
+          "rain_1d": 0.239,
+          "rain_3d": 0.2275
+        }
+      },
+      "modelVersion": "V1"
+    }
+  },
+  {
+    "id": "case_05_flood_prone",
+    "description": "Alluvial valley bottom (Beas river terrace) with low slope and intense rain",
+    "input": {
+      "latitude": 31.9579,
+      "longitude": 77.1095,
+      "slope_deg": 2.0,
+      "tri": 2.5,
+      "rainfall_1d_mm": 110.0,
+      "rainfall_3d_mm": 160.0,
+      "elevation_m": 1200.0
+    },
+    "expected_output": {
+      "location": {
+        "latitude": 31.9579,
+        "longitude": 77.1095,
+        "district": "Kullu"
+      },
+      "flood": {
+        "score": 0.84,
+        "band": "HIGH",
+        "confidence": 1.0,
+        "factors": {
+          "valley_slope": 0.8,
+          "floodplain_flatness": 0.9,
+          "rain_1d": 0.7177,
+          "rain_3d": 0.659
+        }
+      },
+      "landslide": {
+        "score": 0.33,
+        "band": "LOW",
+        "confidence": 1.0,
+        "factors": {
+          "slope": 0.02,
+          "tri": 0.075,
+          "rain_1d": 0.7177,
+          "rain_3d": 0.659
+        }
+      },
+      "modelVersion": "V1"
+    }
+  },
+  {
+    "id": "case_06_landslide_prone",
+    "description": "Critical Himalayan failure envelope (32 deg colluvium, high TRI, extreme storm)",
+    "input": {
+      "latitude": 31.05,
+      "longitude": 77.15,
+      "slope_deg": 32.0,
+      "tri": 42.0,
+      "rainfall_1d_mm": 125.0,
+      "rainfall_3d_mm": 190.0,
+      "elevation_m": 1850.0
+    },
+    "expected_output": {
+      "location": {
+        "latitude": 31.05,
+        "longitude": 77.15,
+        "district": "Shimla"
+      },
+      "flood": {
+        "score": 0.42,
+        "band": "MEDIUM",
+        "confidence": 1.0,
+        "factors": {
+          "valley_slope": 0.0,
+          "floodplain_flatness": 0.0,
+          "rain_1d": 0.7767,
+          "rain_3d": 0.7591
+        }
+      },
+      "landslide": {
+        "score": 0.9,
+        "band": "HIGH",
+        "confidence": 1.0,
+        "factors": {
+          "slope": 0.85,
+          "tri": 0.865,
+          "rain_1d": 0.7767,
+          "rain_3d": 0.7591
+        }
+      },
+      "modelVersion": "V1"
+    }
+  },
+  {
+    "id": "case_07_missing_rainfall",
+    "description": "Terrain available but rainfall feeds are offline (None)",
+    "input": {
+      "latitude": 31.1048,
+      "longitude": 77.1734,
+      "slope_deg": 25.0,
+      "tri": 35.0,
+      "rainfall_1d_mm": null,
+      "rainfall_3d_mm": null,
+      "elevation_m": 2200.0
+    },
+    "expected_output": {
+      "location": {
+        "latitude": 31.1048,
+        "longitude": 77.1734,
+        "district": "Shimla"
+      },
+      "flood": {
+        "score": 0.0,
+        "band": "LOW",
+        "confidence": 0.45,
+        "factors": {
+          "valley_slope": 0.0,
+          "floodplain_flatness": 0.0
+        }
+      },
+      "landslide": {
+        "score": 0.35,
+        "band": "MEDIUM",
+        "confidence": 0.55,
+        "factors": {
+          "slope": 0.5583,
+          "tri": 0.75
+        }
+      },
+      "modelVersion": "V1"
+    }
+  },
+  {
+    "id": "case_08_missing_terrain",
+    "description": "Rainfall feeds available but DEM terrain values are missing (None)",
+    "input": {
+      "latitude": 31.1048,
+      "longitude": 77.1734,
+      "slope_deg": null,
+      "tri": null,
+      "rainfall_1d_mm": 75.0,
+      "rainfall_3d_mm": 110.0,
+      "elevation_m": null
+    },
+    "expected_output": {
+      "location": {
+        "latitude": 31.1048,
+        "longitude": 77.1734,
+        "district": "Shimla"
+      },
+      "flood": {
+        "score": 0.36,
+        "band": "MEDIUM",
+        "confidence": 0.55,
+        "factors": {
+          "rain_1d": 0.5122,
+          "rain_3d": 0.4755
+        }
+      },
+      "landslide": {
+        "score": 0.33,
+        "band": "LOW",
+        "confidence": 0.45,
+        "factors": {
+          "rain_1d": 0.5122,
+          "rain_3d": 0.4755
+        }
+      },
+      "modelVersion": "V1"
+    }
+  },
+  {
+    "id": "case_09_all_optional_missing",
+    "description": "Only coordinates provided; all environmental inputs missing",
+    "input": {
+      "latitude": 31.1048,
+      "longitude": 77.1734,
+      "slope_deg": null,
+      "tri": null,
+      "rainfall_1d_mm": null,
+      "rainfall_3d_mm": null,
+      "elevation_m": null
+    },
+    "expected_output": {
+      "location": {
+        "latitude": 31.1048,
+        "longitude": 77.1734,
+        "district": "Shimla"
+      },
+      "flood": {
+        "score": 0.09,
+        "band": "LOW",
+        "confidence": 0.0,
+        "factors": {}
+      },
+      "landslide": {
+        "score": 0.11,
+        "band": "LOW",
+        "confidence": 0.0,
+        "factors": {}
+      },
+      "modelVersion": "V1"
+    }
+  },
+  {
+    "id": "case_10_outside_himachal",
+    "description": "Query point located outside Himachal Pradesh (Delhi coordinates)",
+    "input": {
+      "latitude": 28.6139,
+      "longitude": 77.209,
+      "slope_deg": 1.0,
+      "tri": 1.0,
+      "rainfall_1d_mm": 10.0,
+      "rainfall_3d_mm": 15.0,
+      "elevation_m": 215.0
+    },
+    "expected_output": {
+      "location": {
+        "latitude": 28.6139,
+        "longitude": 77.209,
+        "district": "Outside_Himachal_Pradesh"
+      },
+      "flood": {
+        "score": 0.47,
+        "band": "MEDIUM",
+        "confidence": 1.0,
+        "factors": {
+          "valley_slope": 0.9,
+          "floodplain_flatness": 0.96,
+          "rain_1d": 0.0968,
+          "rain_3d": 0.0907
+        }
+      },
+      "landslide": {
+        "score": 0.05,
+        "band": "LOW",
+        "confidence": 1.0,
+        "factors": {
+          "slope": 0.01,
+          "tri": 0.03,
+          "rain_1d": 0.0968,
+          "rain_3d": 0.0907
+        }
+      },
+      "modelVersion": "V1"
+    }
+  },
+  {
+    "id": "case_11_low_medium_boundary",
+    "description": "Calibrated inputs near LOW/MEDIUM risk band boundary (score ~ 0.34 - 0.35)",
+    "input": {
+      "latitude": 31.1048,
+      "longitude": 77.1734,
+      "slope_deg": 18.0,
+      "tri": 18.0,
+      "rainfall_1d_mm": 42.0,
+      "rainfall_3d_mm": 60.0,
+      "elevation_m": 2000.0
+    },
+    "expected_output": {
+      "location": {
+        "latitude": 31.1048,
+        "longitude": 77.1734,
+        "district": "Shimla"
+      },
+      "flood": {
+        "score": 0.21,
+        "band": "LOW",
+        "confidence": 1.0,
+        "factors": {
+          "valley_slope": 0.0,
+          "floodplain_flatness": 0.28,
+          "rain_1d": 0.3126,
+          "rain_3d": 0.285
+        }
+      },
+      "landslide": {
+        "score": 0.32,
+        "band": "LOW",
+        "confidence": 1.0,
+        "factors": {
+          "slope": 0.3,
+          "tri": 0.41,
+          "rain_1d": 0.3126,
+          "rain_3d": 0.285
+        }
+      },
+      "modelVersion": "V1"
+    }
+  },
+  {
+    "id": "case_12_medium_high_boundary",
+    "description": "Calibrated inputs near MEDIUM/HIGH risk band boundary (score ~ 0.69 - 0.70)",
+    "input": {
+      "latitude": 31.1048,
+      "longitude": 77.1734,
+      "slope_deg": 26.0,
+      "tri": 32.0,
+      "rainfall_1d_mm": 78.0,
+      "rainfall_3d_mm": 115.0,
+      "elevation_m": 1900.0
+    },
+    "expected_output": {
+      "location": {
+        "latitude": 31.1048,
+        "longitude": 77.1734,
+        "district": "Shimla"
+      },
+      "flood": {
+        "score": 0.28,
+        "band": "LOW",
+        "confidence": 1.0,
+        "factors": {
+          "valley_slope": 0.0,
+          "floodplain_flatness": 0.0,
+          "rain_1d": 0.5298,
+          "rain_3d": 0.4939
+        }
+      },
+      "landslide": {
+        "score": 0.62,
+        "band": "MEDIUM",
+        "confidence": 1.0,
+        "factors": {
+          "slope": 0.6,
+          "tri": 0.69,
+          "rain_1d": 0.5298,
+          "rain_3d": 0.4939
+        }
+      },
+      "modelVersion": "V1"
+    }
+  }
+]

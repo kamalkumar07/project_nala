@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "contractName": "Nala Landslide Risk Model V1 Contract",
+  "version": "1.0.0",
+  "targetGeography": "Himachal Pradesh",
+  "hazardType": "LANDSLIDE_AND_SLOPE_FAILURE",
+  "status": "VALIDATED_LOCAL_V1",
+  "inputs": {
+    "latitude": {
+      "type": "number",
+      "minimum": 30.3773,
+      "maximum": 33.2564,
+      "description": "WGS84 latitude coordinate in Himachal Pradesh",
+      "required": true
+    },
+    "longitude": {
+      "type": "number",
+      "minimum": 75.5946,
+      "maximum": 79.0089,
+      "description": "WGS84 longitude coordinate in Himachal Pradesh",
+      "required": true
+    },
+    "slope_deg": {
+      "type": "number",
+      "unit": "degrees",
+      "minimum": 0.0,
+      "maximum": 90.0,
+      "description": "Topographic slope angle. Primary static shear stress driver.",
+      "required": false,
+      "default": 0.20
+    },
+    "tri": {
+      "type": "number",
+      "unit": "meters",
+      "minimum": 0.0,
+      "description": "Terrain Ruggedness Index. Represents gully incision and talus exposure.",
+      "required": false,
+      "default": 0.20
+    },
+    "rainfall_1d_mm": {
+      "type": "number",
+      "unit": "mm",
+      "minimum": 0.0,
+      "maximum": 500.0,
+      "description": "Daily precipitation downpour triggering pore-water pressure spikes.",
+      "required": false,
+      "default": 0.0
+    },
+    "rainfall_3d_mm": {
+      "type": "number",
+      "unit": "mm",
+      "minimum": 0.0,
+      "maximum": 1000.0,
+      "description": "3-day antecedent precipitation sum inducing soil saturation.",
+      "required": false,
+      "default": 0.0
+    }
+  },
+  "weights": {
+    "slope": 0.35,
+    "tri": 0.20,
+    "rain_1d": 0.25,
+    "rain_3d": 0.20
+  },
+  "normalization": {
+    "slope": "Geomorphological piecewise: [0 deg->0.0, 10 deg->0.10, 20 deg->0.35, 32 deg->0.85, 42 deg->1.00, 60 deg->0.80]",
+    "tri": "Piecewise ruggedness: [0m->0.0, 5m->0.15, 20m->0.45, 40m->0.85, 60m->1.00]",
+    "rain_1d": "IMD meteorological piecewise: [0mm->0.0, 15.5mm->0.15, 64.4mm->0.45, 115.5mm->0.75, 204.4mm->1.0]",
+    "rain_3d": "IMD meteorological piecewise scaled by 1.6: [0mm->0.0, 24.8mm->0.15, 103mm->0.45, 185mm->0.75, 327mm->1.0]"
+  },
+  "amplificationRule": {
+    "description": "Critical colluvium shear failure: if slope >= 22.0 deg AND rain_1d >= 64.4 mm, score receives +0.12 * (f_slope * f_rain)",
+    "boostCoeff": 0.12
+  },
+  "riskBands": {
+    "LOW": {
+      "min": 0.00,
+      "max": 0.34,
+      "action": "Stable conditions; routine monitoring."
+    },
+    "MEDIUM": {
+      "min": 0.35,
+      "max": 0.69,
+      "action": "Advisory warning; vulnerable road cuts and debris fans on alert."
+    },
+    "HIGH": {
+      "min": 0.70,
+      "max": 1.00,
+      "action": "Evacuation and closure warning; imminent debris flows and rockfall expected."
+    }
+  },
+  "confidencePolicy": {
+    "formula": "1.0 - (0.35 * missing_slope + 0.20 * missing_tri + 0.25 * missing_rain1d + 0.20 * missing_rain3d)",
+    "description": "Reflects observational data completeness independently from risk score."
+  }
+}

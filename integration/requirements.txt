@@ -1,0 +1,4 @@
+# NALA Risk Engine V1 — Minimal Python Dependencies
+numpy>=1.24.0
+geopandas>=0.14.0
+shapely>=2.0.0
