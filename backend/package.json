@@ -1,7 +1,7 @@
 {
   "name": "nala-watch-backend",
   "version": "0.1.0",
-  "description": "Nala Watch — Express application backend",
+  "description": "PARVAT — Express application backend",
   "type": "module",
   "main": "src/server.js",
   "scripts": {

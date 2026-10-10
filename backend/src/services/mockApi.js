@@ -28,7 +28,11 @@ const mocksDir = path.join(__dirname, '../mocks');
 // ── helpers ────────────────────────────────────────────────────────────────
 
 async function loadSeed(filename) {
-  const raw = await readFile(path.join(mocksDir, filename), 'utf8');
+  let raw = await readFile(path.join(mocksDir, filename), 'utf8');
+  // Resolve relative-time placeholders so timestamps are always fresh
+  raw = raw.replace(/"__NOW_MINUS_(\d+)MIN__"/g, (_, mins) =>
+    `"${new Date(Date.now() - Number(mins) * 60000).toISOString()}"`
+  );
   return JSON.parse(raw);
 }
 

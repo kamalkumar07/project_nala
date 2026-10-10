@@ -1,4 +1,4 @@
-# Nala Watch — Application Backend
+# PARVAT — Application Backend
 
 > **Owner:** Hardik (Frontend + Application Backend Engineer)  
 > **Purpose:** Express application layer between the React frontend and the Nala Cloud API.  

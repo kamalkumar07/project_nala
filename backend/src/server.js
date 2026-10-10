@@ -9,7 +9,7 @@ import logger from './logger.js';
 const server = app.listen(env.PORT, () => {
   logger.info(
     { port: env.PORT, useMock: env.USE_MOCK, nodeEnv: env.NODE_ENV },
-    'Nala Watch backend started',
+    'PARVAT backend started',
   );
 });
 
