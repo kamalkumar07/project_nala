@@ -1,0 +1,37 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  padding: var(--sp-8) var(--sp-6);
+  max-width: var(--max-content);
+  width: 100%;
+  margin: 0 auto;
+  gap: var(--sp-8);
+}
+
+.hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--sp-4);
+}
+
+.logo      { font-size: 4rem; }
+.title     { font-size: var(--fs-3xl); font-weight: 800; color: var(--color-text); }
+.tagline   { font-size: var(--fs-lg); color: var(--color-text-muted); line-height: 1.5; max-width: 20rem; }
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.hint {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  text-align: center;
+  padding-bottom: max(var(--sp-4), env(safe-area-inset-bottom));
+}

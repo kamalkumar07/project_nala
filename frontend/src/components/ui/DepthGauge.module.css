@@ -1,0 +1,178 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.gaugeBox {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-surface, #FFFFFF);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-default, 14px);
+  padding: 12px 16px;
+  box-shadow: var(--shadow-soft);
+  overflow: visible;
+  transition: all var(--motion-fast);
+}
+
+[data-theme="ops"] .gaugeBox {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+.silhouetteSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.refLine {
+  stroke: var(--color-line);
+  stroke-width: 1;
+}
+
+[data-theme="ops"] .refLine {
+  stroke: var(--color-border);
+}
+
+.refLabel {
+  font-family: var(--font-body);
+  font-size: 7px;
+  fill: var(--color-muted);
+  font-weight: 600;
+}
+
+.silhouetteBase {
+  transition: fill var(--motion-fast);
+}
+
+[data-theme="ops"] .silhouetteBase {
+  fill: var(--color-border);
+}
+
+.waterVolume {
+  transition: y var(--motion-normal), height var(--motion-normal);
+}
+
+.waterVolumeEntering {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: depthFillRise 950ms cubic-bezier(0.2, 0.75, 0.3, 1) both;
+}
+
+.waveGroup {
+  animation: waveOscillate 2.4s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+.waterlineEntering {
+  animation: depthLineRise 950ms cubic-bezier(0.2, 0.75, 0.3, 1) both;
+}
+
+.waterlineWave {
+  transition: all var(--motion-normal);
+}
+
+@keyframes depthFillRise {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes depthLineRise {
+  from {
+    transform: translateY(58px);
+    opacity: 0.15;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes waveOscillate {
+  0% {
+    transform: translateY(-1.5px) scaleY(0.9);
+  }
+  100% {
+    transform: translateY(1.5px) scaleY(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .waveGroup {
+    animation: none !important;
+  }
+  .waterVolume,
+  .waterlineWave {
+    transition: none !important;
+  }
+  .waterVolumeEntering,
+  .waterlineEntering {
+    animation: none !important;
+  }
+}
+
+.markerBadge {
+  position: absolute;
+  right: -8px;
+  transform: translateY(50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #FFFFFF;
+  border: 1.5px solid var(--color-line);
+  border-radius: var(--radius-full);
+  padding: 3px 10px;
+  box-shadow: var(--shadow-card);
+  white-space: nowrap;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-ink);
+  transition: bottom var(--motion-normal), border-color var(--motion-fast);
+}
+
+[data-theme="ops"] .markerBadge {
+  background: var(--color-surface);
+  color: var(--color-ink);
+}
+
+.markerDot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.markerText {
+  letter-spacing: -0.01em;
+}
+
+.summaryCaption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2px;
+}
+
+.captionTitle {
+  font-family: var(--font-heading);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.captionSub {
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  color: var(--color-muted);
+}

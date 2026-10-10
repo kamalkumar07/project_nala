@@ -1,0 +1,250 @@
+/* ── Teaser (idle, collapsed) ────────────────────────────────────────────── */
+
+.teaser {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.teaserIcon { font-size: 1.75rem; flex-shrink: 0; }
+
+.teaserText { flex: 1; min-width: 0; }
+.teaserTitle { font-size: var(--fs-base); font-weight: 700; color: var(--color-text); }
+.teaserSub   { font-size: var(--fs-xs);  color: var(--color-text-muted); margin-top: 2px; }
+
+.teaserBtn {
+  flex-shrink: 0;
+  min-height: var(--touch-min);
+  padding: var(--sp-2) var(--sp-4);
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: var(--radius-full);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  transition: background var(--transition-fast);
+}
+.teaserBtn:hover { background: var(--color-primary-dark); }
+
+/* ── Card (expanded form / locating / subscribed) ────────────────────────── */
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--sp-5);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+/* ── Form header ─────────────────────────────────────────────────────────── */
+
+.formTitle {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.formSub { font-size: var(--fs-sm); color: var(--color-text-muted); line-height: 1.4; }
+
+/* ── Form fields ─────────────────────────────────────────────────────────── */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.label {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.input {
+  width: 100%;
+  min-height: var(--touch-min);
+  padding: var(--sp-3) var(--sp-4);
+  font-size: var(--fs-base);
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--transition-fast);
+  -webkit-appearance: none;
+}
+.input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px var(--color-primary-light); }
+.input:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ── Channel toggle ──────────────────────────────────────────────────────── */
+
+.channelGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-2);
+}
+
+.channelBtn {
+  min-height: var(--touch-min);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+  transition: border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+.channelBtn:hover { border-color: var(--color-primary); color: var(--color-primary); }
+.channelActive {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* ── Radius selector ─────────────────────────────────────────────────────── */
+
+.radiusGroup {
+  display: flex;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+
+.radiusBtn {
+  flex: 1;
+  min-width: 4rem;
+  min-height: var(--touch-min);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+  transition: border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+.radiusBtn:hover:not(:disabled) { border-color: var(--color-primary); color: var(--color-primary); }
+.radiusActive {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+}
+.radiusBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Location row ────────────────────────────────────────────────────────── */
+
+.locationRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.locationIcon { font-size: 1.1rem; flex-shrink: 0; }
+
+.locationText { flex: 1; font-size: var(--fs-sm); color: var(--color-text-muted); }
+
+.detectBtn {
+  flex-shrink: 0;
+  min-height: var(--touch-min);
+  padding: var(--sp-1) var(--sp-3);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-full);
+  background: transparent;
+  transition: background var(--transition-fast);
+}
+.detectBtn:hover:not(:disabled) { background: var(--color-primary-light); }
+.detectBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Submit / cancel buttons ─────────────────────────────────────────────── */
+
+.submitBtn {
+  width: 100%;
+  min-height: var(--touch-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  font-size: var(--fs-base);
+  font-weight: 700;
+  padding: var(--sp-3) var(--sp-4);
+  transition: background var(--transition-fast);
+  margin-top: var(--sp-2);
+}
+.submitBtn:hover:not(:disabled) { background: var(--color-primary-dark); }
+.submitBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.cancelBtn {
+  width: 100%;
+  min-height: var(--touch-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  border-radius: var(--radius-lg);
+  transition: color var(--transition-fast);
+}
+.cancelBtn:hover:not(:disabled) { color: var(--color-text); }
+
+/* ── Locating row ────────────────────────────────────────────────────────── */
+
+.locatingRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-4);
+  color: var(--color-text-muted);
+  font-size: var(--fs-base);
+}
+
+/* ── Subscribed / success state ──────────────────────────────────────────── */
+
+.successRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-4);
+}
+
+.successIcon { font-size: 2rem; flex-shrink: 0; }
+
+.successTitle { font-size: var(--fs-base); font-weight: 700; color: var(--color-text); }
+.successSub   { font-size: var(--fs-sm); color: var(--color-text-muted); margin-top: var(--sp-1); line-height: 1.4; }
+
+/* ── Unsubscribe link ────────────────────────────────────────────────────── */
+
+.unsubLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-error);
+  min-height: var(--touch-min);
+  padding: var(--sp-1) var(--sp-2);
+  border-radius: var(--radius-sm);
+  align-self: flex-start;
+}
+.unsubLink:hover:not(:disabled) { text-decoration: underline; }
+.unsubLink:disabled { opacity: 0.5; cursor: not-allowed; }

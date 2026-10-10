@@ -1,0 +1,82 @@
+.statCard {
+  background: var(--color-surface, #FFFFFF);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-default, 14px);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  box-shadow: var(--shadow-soft);
+  transition: all var(--motion-fast);
+}
+
+[data-theme="ops"] .statCard {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.icon {
+  display: inline-flex;
+  color: var(--color-water);
+}
+
+.valueRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-1);
+}
+
+.value {
+  font-family: var(--font-heading);
+  font-size: var(--fs-3xl);
+  font-weight: 800;
+  color: var(--color-ink);
+  line-height: var(--lh-tight);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+.bottomRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.subtext {
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  color: var(--color-muted);
+}
+
+.trend {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.trend.up {
+  color: var(--color-risk-severe);
+}
+
+.trend.down {
+  color: var(--color-risk-low);
+}

@@ -1,0 +1,45 @@
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-8) var(--space-5);
+  background: var(--color-risk-severe-bg);
+  border: 1px solid var(--color-risk-severe-border);
+  border-radius: var(--radius-default);
+  color: var(--color-ink);
+  width: 100%;
+}
+
+.iconWrap {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  background: rgba(214, 69, 69, 0.18);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-3);
+}
+
+.title {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-heading);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: #B52B2B;
+}
+
+.message {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--color-ink);
+  max-width: 24rem;
+  line-height: var(--lh-normal);
+}
+
+.actionWrap {
+  margin-top: var(--space-5);
+}

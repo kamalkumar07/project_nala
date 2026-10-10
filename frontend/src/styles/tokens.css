@@ -1,0 +1,222 @@
+/* ── PARVAT design system tokens ────────────────────────────────────────────
+   Ink, Water, Mist, Line, Muted & Risk Band Palette.
+   Fonts: Sora (headings), Inter (body, tabular numerals).
+   Dark "Ops" theme applied under [data-theme="ops"].
+   Motion tokens: 150 / 250 / 400 ms, ease-out, reduced-motion safe.
+   Radius: 14px default, 4/8px spacing grid, WCAG AA compliant.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap');
+
+:root {
+  /* ── Core Palette (Kept as specified) ──────────────────────────────────── */
+  --color-ink:            #0B1F33; /* Deep navy text & primary contrast */
+  --color-water:          #1688A8; /* River teal accent / primary brand */
+  --color-water-hover:    #12718C;
+  --color-water-light:    rgba(22, 136, 168, 0.12);
+  --color-mist:           #F3F8FA; /* Soft atmospheric neutral background */
+  --color-line:           #D8E4EA; /* Subtle divider and border stroke */
+  --color-muted:          #5B7184; /* Secondary metadata & muted copy */
+
+  /* ── Risk Band Tokens (Always paired with icon & label) ─────────────────── */
+  --color-risk-low:         #2E9E5B;
+  --color-risk-low-bg:      rgba(46, 158, 91, 0.12);
+  --color-risk-low-border:  rgba(46, 158, 91, 0.30);
+
+  --color-risk-moderate:        #E8A317;
+  --color-risk-moderate-bg:     rgba(232, 163, 23, 0.12);
+  --color-risk-moderate-border: rgba(232, 163, 23, 0.32);
+
+  --color-risk-high:         #E5742B;
+  --color-risk-high-bg:      rgba(229, 116, 43, 0.14);
+  --color-risk-high-border:  rgba(229, 116, 43, 0.34);
+
+  --color-risk-severe:         #D64545;
+  --color-risk-severe-bg:      rgba(214, 69, 69, 0.14);
+  --color-risk-severe-border:  rgba(214, 69, 69, 0.34);
+
+  --color-risk-unknown:        #8A99A6;
+  --color-risk-unknown-bg:     rgba(138, 153, 166, 0.14);
+  --color-risk-unknown-border: rgba(138, 153, 166, 0.30);
+
+  /* ── Surface, Background & Border Tokens ───────────────────────────────── */
+  --color-bg:             var(--color-mist);
+  --color-surface:        #FFFFFF;
+  --color-surface-hover:  #F7FAFC;
+  --color-border:         var(--color-line);
+  --color-text:           var(--color-ink);
+  --color-text-muted:     var(--color-muted);
+  --color-overlay:        rgba(11, 31, 51, 0.50);
+
+  /* ── Glassmorphism Tokens ──────────────────────────────────────────────── */
+  --glass-bg:             rgba(255, 255, 255, 0.82);
+  --glass-border:         rgba(216, 228, 234, 0.75);
+  --glass-blur:           12px;
+
+  /* ── Legacy & Compatibility Aliases ────────────────────────────────────── */
+  --color-primary:        var(--color-water);
+  --color-primary-dark:   var(--color-water-hover);
+  --color-primary-light:  var(--color-water-light);
+
+  /* Passable & Feedback */
+  --color-yes:            #1F7341;
+  --color-caution:        #8A5D00;
+  --color-no:             #B52B2B;
+  --color-unknown:        var(--color-risk-unknown);
+
+  --color-ankle:          var(--color-risk-moderate);
+  --color-knee:           var(--color-risk-high);
+  --color-waist:          var(--color-risk-severe);
+
+  --color-error:          #B52B2B;
+  --color-error-bg:       var(--color-risk-severe-bg);
+  --color-warn:           #8A5D00;
+  --color-warn-bg:        var(--color-risk-moderate-bg);
+  --color-success:        #1F7341;
+  --color-success-bg:     var(--color-risk-low-bg);
+  --color-offline:        #374151;
+
+  /* ── Typography (Tightened Type Scale) ─────────────────────────────────── */
+  --font-heading: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-sans:    var(--font-body);
+
+  /* Hero: 44-56px max, line-height 1.1 */
+  --fs-hero: clamp(2.75rem, 5vw, 3.5rem); /* 44px to 56px max */
+  --lh-hero: 1.1;
+
+  --fs-xs:   0.75rem;   /* 12px */
+  --fs-sm:   0.875rem;  /* 14px */
+  --fs-base: 1rem;      /* 16px */
+  --fs-md:   1.0625rem; /* 17px */
+  --fs-lg:   1.125rem;  /* 18px */
+  --fs-xl:   1.25rem;   /* 20px */
+  --fs-2xl:  1.5rem;    /* 24px */
+  --fs-3xl:  1.875rem;  /* 30px */
+  --fs-4xl:  2.25rem;   /* 36px */
+
+  --lh-tight:  1.15;
+  --lh-normal: 1.5;
+  --lh-loose:  1.65;
+
+  /* ── 4px / 8px Spacing Grid ────────────────────────────────────────────── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Aliases for legacy layout */
+  --sp-1:  0.25rem;  /* 4px */
+  --sp-2:  0.5rem;   /* 8px */
+  --sp-3:  0.75rem;  /* 12px */
+  --sp-4:  1rem;     /* 16px */
+  --sp-5:  1.25rem;  /* 20px */
+  --sp-6:  1.5rem;   /* 24px */
+  --sp-8:  2rem;     /* 32px */
+  --sp-10: 2.5rem;   /* 40px */
+  --sp-12: 3rem;     /* 48px */
+  --sp-16: 4rem;     /* 64px */
+
+  /* ── Touch Target Standards (WCAG 2.5.5) ───────────────────────────────── */
+  --touch-target-min: 44px;
+  --touch-min:        44px;
+
+  /* ── Radii ─────────────────────────────────────────────────────────────── */
+  --radius-sm:      6px;
+  --radius-md:      10px;
+  --radius-default: 14px; /* Standard PARVAT card and sheet radius */
+  --radius-lg:      14px;
+  --radius-xl:      18px;
+  --radius-full:    9999px;
+
+  /* ── Soft Shadows ──────────────────────────────────────────────────────── */
+  --shadow-soft:     0 2px 8px rgba(11, 31, 51, 0.05), 0 1px 2px rgba(11, 31, 51, 0.03);
+  --shadow-card:     0 4px 16px rgba(11, 31, 51, 0.08);
+  --shadow-elevated: 0 12px 32px rgba(11, 31, 51, 0.12);
+  --shadow-modal:    0 20px 48px rgba(11, 31, 51, 0.18);
+
+  --shadow-sm: var(--shadow-soft);
+  --shadow-md: var(--shadow-card);
+  --shadow-lg: var(--shadow-elevated);
+
+  /* ── Motion Tokens (150ms / 250ms / 400ms, ease-out) ────────────────────── */
+  --ease-out:         cubic-bezier(0, 0, 0.2, 1);
+  --motion-fast:      150ms var(--ease-out);
+  --motion-normal:    250ms var(--ease-out);
+  --motion-slow:      400ms var(--ease-out);
+
+  --transition-fast:  var(--motion-fast);
+  --transition-base:  var(--motion-normal);
+  --transition-slow:  var(--motion-slow);
+
+  /* ── Layout & Viewport ─────────────────────────────────────────────────── */
+  --max-content: 32rem; /* 512px */
+  --header-h:    3.75rem;
+}
+
+/* ── Dark "Ops" Theme [data-theme="ops"] ───────────────────────────────────
+   bg #07141F, surface #0E2233, accent cyan #3CC8E6
+   ─────────────────────────────────────────────────────────────────────────── */
+[data-theme="ops"],
+:root[data-theme="ops"],
+body[data-theme="ops"] {
+  --color-bg:             #07141F;
+  --color-surface:        #0E2233;
+  --color-surface-hover:  #153047;
+  --color-accent:         #3CC8E6;
+  --color-primary:        #3CC8E6;
+  --color-primary-dark:   #25B0CE;
+  --color-primary-light:  rgba(60, 200, 230, 0.18);
+
+  --color-water:          #3CC8E6;
+  --color-water-hover:    #5DE0FB;
+  --color-water-light:    rgba(60, 200, 230, 0.16);
+
+  --color-ink:            #EAF3F9;
+  --color-text:           #EAF3F9;
+  --color-mist:           #091B2A;
+  --color-line:           #19374F;
+  --color-border:         #19374F;
+  --color-muted:          #85A2B9;
+  --color-text-muted:     #85A2B9;
+  --color-overlay:        rgba(4, 11, 18, 0.75);
+
+  --glass-bg:             rgba(14, 34, 51, 0.82);
+  --glass-border:         rgba(60, 200, 230, 0.24);
+
+  --shadow-soft:          0 2px 8px rgba(0, 0, 0, 0.35);
+  --shadow-card:          0 4px 18px rgba(0, 0, 0, 0.50);
+  --shadow-elevated:      0 12px 36px rgba(0, 0, 0, 0.65);
+  --shadow-modal:         0 20px 48px rgba(0, 0, 0, 0.80);
+}
+
+/* ── Tabular Numerals Utility (for risk scores & stats) ─────────────────── */
+.tabular-nums,
+[data-tabular-nums="true"] {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+/* ── Heading typography rule ─────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-ink);
+  letter-spacing: -0.015em;
+  font-weight: 700;
+}
+
+/* ── Reduced motion overrides (All disabled by prefers-reduced-motion) ───── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,32 @@
+.glassPanel {
+  background: var(--glass-bg, rgba(255, 255, 255, 0.82));
+  backdrop-filter: blur(var(--glass-blur, 12px));
+  -webkit-backdrop-filter: blur(var(--glass-blur, 12px));
+  border: 1px solid var(--glass-border, rgba(216, 228, 234, 0.75));
+  border-radius: var(--radius-default, 14px);
+  color: var(--color-ink);
+  transition: background var(--motion-fast), border-color var(--motion-fast), box-shadow var(--motion-fast);
+}
+
+.default {
+  box-shadow: var(--shadow-soft);
+}
+
+.elevated {
+  box-shadow: var(--shadow-elevated);
+}
+
+.subtle {
+  background: rgba(255, 255, 255, 0.65);
+  box-shadow: none;
+}
+
+[data-theme="ops"] .subtle {
+  background: rgba(14, 34, 51, 0.55);
+}
+
+/* Padding variants */
+.pad_none { padding: 0; }
+.pad_sm   { padding: var(--space-2); }
+.pad_md   { padding: var(--space-4); }
+.pad_lg   { padding: var(--space-6); }

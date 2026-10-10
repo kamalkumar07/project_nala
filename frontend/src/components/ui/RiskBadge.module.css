@@ -1,0 +1,101 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  user-select: none;
+  transition: all var(--motion-fast);
+}
+
+/* ── Sizes ─────────────────────────────────────────────────────────────────── */
+.sm {
+  padding: 4px 8px;
+  font-size: var(--fs-xs);
+}
+
+.md {
+  padding: 6px 12px;
+  font-size: var(--fs-sm);
+}
+
+.lg {
+  padding: 8px 16px;
+  font-size: var(--fs-base);
+}
+
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.iconSvg {
+  display: block;
+}
+
+.label {
+  display: inline-block;
+}
+
+/* ── Band Palettes (WCAG AA compliant contrast) ───────────────────────────── */
+.low {
+  background: var(--color-risk-low-bg);
+  color: #1F7341;
+  border: 1px solid var(--color-risk-low-border);
+}
+
+.moderate {
+  background: var(--color-risk-moderate-bg);
+  color: #8A5D00;
+  border: 1px solid var(--color-risk-moderate-border);
+}
+
+.high {
+  background: var(--color-risk-high-bg);
+  color: #BA4E0B;
+  border: 1px solid var(--color-risk-high-border);
+}
+
+.severe {
+  background: var(--color-risk-severe-bg);
+  color: #B52B2B;
+  border: 1px solid var(--color-risk-severe-border);
+}
+
+.unknown {
+  background: var(--color-risk-unknown-bg);
+  color: var(--color-muted);
+  border: 1px solid var(--color-risk-unknown-border);
+}
+
+/* ── Dark Ops Theme Overrides ────────────────────────────────────────────── */
+[data-theme="ops"] .low {
+  color: #4ADE80;
+  border-color: rgba(74, 222, 128, 0.35);
+}
+
+[data-theme="ops"] .moderate {
+  color: #FBBF24;
+  border-color: rgba(251, 191, 36, 0.35);
+}
+
+[data-theme="ops"] .high {
+  color: #FB923C;
+  border-color: rgba(251, 146, 60, 0.35);
+}
+
+[data-theme="ops"] .severe {
+  color: #F87171;
+  border-color: rgba(248, 113, 113, 0.35);
+}
+
+[data-theme="ops"] .unknown {
+  color: #94A3B8;
+  border-color: rgba(148, 163, 184, 0.35);
+}

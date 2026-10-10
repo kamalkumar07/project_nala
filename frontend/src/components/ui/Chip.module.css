@@ -1,0 +1,77 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 6px 14px;
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  min-height: var(--touch-target-min, 44px);
+  background: var(--color-mist);
+  color: var(--color-ink);
+  border: 1.5px solid var(--color-line);
+  box-sizing: border-box;
+  user-select: none;
+  transition: all var(--motion-fast);
+}
+
+.sm {
+  font-size: 0.7rem;
+  padding: 4px 10px;
+}
+
+.interactive {
+  cursor: pointer;
+}
+
+.interactive:hover:not(:disabled) {
+  border-color: var(--color-water);
+  color: var(--color-ink);
+  background: #FFFFFF;
+}
+
+[data-theme="ops"] .interactive:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+  border-color: var(--color-accent);
+}
+
+.active {
+  background: var(--color-ink);
+  color: #FFFFFF;
+  border-color: var(--color-ink);
+}
+
+[data-theme="ops"] .active {
+  background: var(--color-accent);
+  color: #07141F;
+  border-color: var(--color-accent);
+}
+
+.interactive:focus-visible {
+  outline: 2px solid var(--color-water);
+  outline-offset: 2px;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge {
+  font-size: 0.7rem;
+  background: rgba(0, 0, 0, 0.08);
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+}
+
+.active .badge {
+  background: rgba(255, 255, 255, 0.25);
+  color: inherit;
+}

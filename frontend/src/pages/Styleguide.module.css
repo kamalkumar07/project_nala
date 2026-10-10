@@ -1,0 +1,338 @@
+.container {
+  min-height: 100vh;
+  background: var(--color-mist);
+  color: var(--color-ink);
+  padding-bottom: var(--space-16);
+}
+
+.header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+  padding: var(--space-6) var(--space-8);
+  box-shadow: var(--shadow-soft);
+}
+
+.headerTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+}
+
+.backBtn {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-water);
+  min-height: var(--touch-target-min);
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-sm);
+  padding: 0 var(--space-2);
+}
+
+.backBtn:hover {
+  text-decoration: underline;
+}
+
+.versionBadge {
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--color-muted);
+  background: var(--color-mist);
+  border: 1px solid var(--color-line);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.pageTitle {
+  font-family: var(--font-heading);
+  font-size: var(--fs-3xl);
+  font-weight: 800;
+  color: var(--color-ink);
+  margin: 0 0 var(--space-2);
+  line-height: var(--lh-tight);
+}
+
+.pageSubtitle {
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  color: var(--color-muted);
+  margin: 0;
+  max-width: 44rem;
+}
+
+.main {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.sectionTitle {
+  font-family: var(--font-heading);
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  color: var(--color-ink);
+  margin: 0;
+  border-bottom: 2px solid var(--color-line);
+  padding-bottom: var(--space-2);
+}
+
+.sectionDesc {
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  color: var(--color-muted);
+  margin: 0;
+  line-height: var(--lh-normal);
+}
+
+.subheading {
+  font-family: var(--font-heading);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--color-ink);
+  margin: var(--space-4) 0 var(--space-2);
+}
+
+/* ── Color Swatches ───────────────────────────────────────────────────────── */
+.colorGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-4);
+}
+
+.colorCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-default);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+
+.swatch {
+  height: 72px;
+  width: 100%;
+}
+
+.colorInfo {
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.colorName {
+  font-family: var(--font-heading);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.colorHex {
+  font-family: monospace;
+  font-size: var(--fs-xs);
+  color: var(--color-muted);
+}
+
+.colorRole {
+  font-size: var(--fs-xs);
+  color: var(--color-muted);
+  margin-top: 4px;
+}
+
+/* ── Typography Specimen ──────────────────────────────────────────────────── */
+.typeSpecimen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.typeLabel {
+  font-family: monospace;
+  font-size: var(--fs-xs);
+  color: var(--color-muted);
+  display: block;
+  margin-bottom: var(--space-1);
+}
+
+.typeH1 {
+  font-size: var(--fs-3xl);
+  margin: 0;
+}
+
+.typeH2 {
+  font-size: var(--fs-2xl);
+  margin: 0;
+}
+
+.typeH3 {
+  font-size: var(--fs-lg);
+  margin: 0;
+}
+
+.typeBody {
+  font-size: var(--fs-base);
+  margin: 0;
+  line-height: var(--lh-loose);
+  color: var(--color-ink);
+  max-width: 48rem;
+}
+
+/* ── Badges ───────────────────────────────────────────────────────────────── */
+.badgeRow {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────────────── */
+.controlRow {
+  margin-bottom: var(--space-2);
+}
+
+.checkboxLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.buttonRow {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* ── Visualizations (ScoreRing & DepthGauge) ──────────────────────────────── */
+.vizGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-6);
+}
+
+.cardHeader {
+  font-family: var(--font-heading);
+  font-size: var(--fs-md);
+  font-weight: 700;
+  margin: 0 0 var(--space-4);
+  color: var(--color-ink);
+}
+
+.ringCenterWrap {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-4) 0;
+}
+
+.gaugeCenterWrap {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-2) 0;
+}
+
+.sliderControl {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.sliderLabel {
+  font-size: var(--fs-sm);
+  color: var(--color-ink);
+}
+
+.rangeInput {
+  width: 100%;
+  accent-color: var(--color-water);
+  min-height: var(--touch-target-min);
+  cursor: pointer;
+}
+
+.presetButtons {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.chipBtn {
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  padding: 6px 10px;
+  background: var(--color-mist);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-full);
+  color: var(--color-ink);
+  cursor: pointer;
+  min-height: 36px;
+  transition: all var(--transition-fast);
+}
+
+.chipBtn:hover {
+  background: var(--color-water-light);
+  border-color: var(--color-water);
+  color: var(--color-water);
+}
+
+.chipBtnActive {
+  background: var(--color-water);
+  border-color: var(--color-water);
+  color: #fff;
+}
+
+.depthSelectorWrap {
+  margin-top: var(--space-4);
+}
+
+.depthSelectLabel {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-ink);
+  display: block;
+}
+
+/* ── Cards Demo ───────────────────────────────────────────────────────────── */
+.cardDemoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-4);
+}
+
+.demoCardTitle {
+  font-family: var(--font-heading);
+  font-size: var(--fs-base);
+  font-weight: 700;
+  margin: 0 0 var(--space-2);
+  color: var(--color-ink);
+}
+
+.demoCardText {
+  font-size: var(--fs-sm);
+  color: var(--color-muted);
+  margin: 0;
+  line-height: var(--lh-normal);
+}
+
+/* ── States Grid ──────────────────────────────────────────────────────────── */
+.statesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-6);
+  align-items: start;
+}

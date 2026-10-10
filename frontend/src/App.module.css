@@ -1,0 +1,10 @@
+/*
+ * App shell — sits below the fixed OfflineBanner when offline.
+ * When the banner is shown (height 2.5rem) we nudge the shell down
+ * so content isn't hidden behind it.
+ */
+.appShell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}

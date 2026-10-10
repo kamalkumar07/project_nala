@@ -1,0 +1,66 @@
+.card {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-default);
+  box-shadow: var(--shadow-soft);
+  color: var(--color-ink);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+  overflow: hidden;
+}
+
+/* ── Padding variants ─────────────────────────────────────────────────────── */
+.pad-none { padding: 0; }
+.pad-sm   { padding: var(--space-3); }
+.pad-md   { padding: var(--space-4); }
+.pad-lg   { padding: var(--space-6); }
+
+/* ── Surface variants ─────────────────────────────────────────────────────── */
+.default {
+  background: var(--color-surface);
+}
+
+.elevated {
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.flat {
+  background: var(--color-mist);
+  box-shadow: none;
+  border-color: var(--color-line);
+}
+
+.muted {
+  background: rgba(216, 228, 234, 0.25);
+  border-color: var(--color-line);
+}
+
+/* ── Interactive states ───────────────────────────────────────────────────── */
+.interactive {
+  cursor: pointer;
+  user-select: none;
+}
+
+.interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+  border-color: rgba(22, 136, 168, 0.4);
+}
+
+.interactive:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-soft);
+}
+
+.interactive:focus-visible {
+  outline: 2px solid var(--color-water);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card, .interactive {
+    transition: none;
+    transform: none !important;
+  }
+}

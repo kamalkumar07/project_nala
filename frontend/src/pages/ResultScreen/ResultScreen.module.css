@@ -1,0 +1,497 @@
+/* ── Screen shell ────────────────────────────────────────────────────────── */
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--color-bg);
+}
+
+.body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  padding: var(--sp-6) var(--sp-4) var(--sp-8);
+  max-width: var(--max-content);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.centerBody {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.heading {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.sub {
+  font-size: var(--fs-base);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.loadingText {
+  color: var(--color-text-muted);
+  font-size: var(--fs-base);
+  margin-top: var(--sp-4);
+}
+
+/* ── Result card ─────────────────────────────────────────────────────────── */
+
+.resultCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  box-shadow: var(--shadow-md);
+}
+
+/* ── Depth badge ─────────────────────────────────────────────────────────── */
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-4);
+  border-radius: var(--radius-lg);
+  border-left: 5px solid transparent;
+}
+
+.ankle   { background: #fef9c3; border-color: var(--color-ankle);   }
+.knee    { background: #fff7ed; border-color: var(--color-knee);    }
+.waist   { background: #fef2f2; border-color: var(--color-waist);   }
+.unknown { background: #f3f4f6; border-color: var(--color-unknown); }
+
+.badgeEmoji { font-size: 2.5rem; flex-shrink: 0; line-height: 1; }
+
+.badgeLabel {
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.badgeDesc {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  margin-top: var(--sp-1);
+}
+
+/* ── Passable badge ──────────────────────────────────────────────────────── */
+
+.passableBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: var(--radius-full);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  width: fit-content;
+}
+
+.passYes     { background: #dcfce7; color: var(--color-success); }
+.passCaution { background: #fff7ed; color: #8A5D00;              }
+.passNo      { background: #fef2f2; color: var(--color-error);   }
+.passUnknown { background: #f3f4f6; color: var(--color-text-muted); }
+
+/* ── Confidence bar ──────────────────────────────────────────────────────── */
+
+.confidenceWrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.confidenceLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.confidencePct { font-weight: 700; color: var(--color-text); }
+
+.confidenceTrack {
+  height: 8px;
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.confidenceFill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.6s ease;
+}
+
+/* ── Rationale ───────────────────────────────────────────────────────────── */
+
+.rationale {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--color-border);
+}
+
+.rationaleLabel { font-weight: 600; color: var(--color-text-muted); }
+
+/* ── Confirm / correct panel ─────────────────────────────────────────────── */
+
+.confirmPanel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.confirmTitle {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.confirmActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.confirmDone,
+.confirmDoneOuter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: var(--sp-4);
+  background: #dcfce7;
+  border-radius: var(--radius-xl);
+  font-size: var(--fs-base);
+  font-weight: 500;
+  color: var(--color-success);
+  text-align: center;
+}
+
+/* ── Correction selector ─────────────────────────────────────────────────── */
+
+.correctWrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.correctPrompt {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.depthGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+}
+
+.depthOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-4) var(--sp-2);
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--color-text);
+  min-height: var(--touch-min);
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+.depthOption:hover { border-color: var(--color-primary); }
+.depthSelected {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* ── Failed card ─────────────────────────────────────────────────────────── */
+
+.failCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--sp-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--sp-6);
+}
+
+.failEmoji { font-size: 3rem; }
+
+/* ── Bottom actions ──────────────────────────────────────────────────────── */
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  margin-top: auto;
+  padding-bottom: max(var(--sp-4), env(safe-area-inset-bottom));
+}
+
+/* ── Top Report Confirmation Banner ─────────────────────────────────────────── */
+.reportHeaderCard {
+  background: #EDF8F1;
+  border: 1px solid #B8E4C9;
+  border-radius: var(--radius-xl, 14px);
+  padding: 16px;
+}
+
+.reportIdRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.successIcon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.successTitle {
+  font-family: var(--font-heading, 'Sora', sans-serif);
+  font-size: var(--fs-lg, 18px);
+  font-weight: 700;
+  color: #1A6838;
+  margin: 0 0 2px 0;
+}
+
+.reportIdTag {
+  font-family: var(--font-mono, monospace);
+  font-size: var(--fs-xs, 12px);
+  color: #248246;
+  font-weight: 600;
+}
+
+/* ── AI Assessment Section ─────────────────────────────────────────────────── */
+.assessmentSection {
+  background: #FFFFFF;
+  border: 1px solid var(--color-border, #D8E4EA);
+  border-radius: var(--radius-xl, 14px);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 2px 6px rgba(11, 31, 51, 0.05);
+}
+
+.assessmentCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border, #D8E4EA);
+  padding-bottom: 10px;
+}
+
+.aiBadge {
+  font-family: var(--font-heading, 'Sora', sans-serif);
+  font-size: var(--fs-xs, 13px);
+  font-weight: 700;
+  color: var(--color-primary, #1688A8);
+}
+
+.confidenceChip {
+  font-size: var(--fs-xs, 12px);
+  font-weight: 700;
+  color: #1A6838;
+  background: #EDF8F1;
+  border: 1px solid #B8E4C9;
+  padding: 2px 8px;
+  border-radius: var(--radius-full, 9999px);
+}
+
+.assessmentBodyGrid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+@media (max-width: 560px) {
+  .assessmentBodyGrid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+}
+
+.depthGaugeWrap {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.assessmentDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.depthCategoryLabel {
+  font-size: var(--fs-xs, 12px);
+  color: var(--color-text-muted, #5B7184);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.depthWordHeading {
+  font-family: var(--font-heading, 'Sora', sans-serif);
+  font-size: var(--fs-xl, 20px);
+  font-weight: 800;
+  color: var(--color-text, #0B1F33);
+  margin: 2px 0 4px 0;
+}
+
+.depthDescText {
+  font-size: var(--fs-xs, 13px);
+  color: var(--color-text-muted, #5B7184);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.passabilityBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full, 9999px);
+  font-size: var(--fs-xs, 13px);
+  width: fit-content;
+}
+
+.rationaleBox {
+  background: var(--color-surface, #F3F8FA);
+  border-left: 3px solid var(--color-primary, #1688A8);
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+
+.rationaleText {
+  font-size: var(--fs-xs, 12px);
+  color: var(--color-text-muted, #5B7184);
+  margin: 0;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* ── Feedback Section ──────────────────────────────────────────────────────── */
+.feedbackSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.accuracyCheckCard,
+.correctionCard {
+  background: var(--color-surface, #F3F8FA);
+  border: 1px solid var(--color-border, #D8E4EA);
+  border-radius: var(--radius-lg, 12px);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.accuracyHeading {
+  font-family: var(--font-heading, 'Sora', sans-serif);
+  font-size: var(--fs-sm, 14px);
+  font-weight: 700;
+  color: var(--color-text, #0B1F33);
+  margin: 0;
+}
+
+.accuracySub {
+  font-size: var(--fs-xs, 12px);
+  color: var(--color-text-muted, #5B7184);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.feedbackBtnRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.feedbackSuccessBanner {
+  background: #EDF8F1;
+  border: 1px solid #B8E4C9;
+  border-radius: var(--radius-md, 8px);
+  padding: 12px 14px;
+  font-size: var(--fs-xs, 13px);
+  color: #1A6838;
+  font-weight: 600;
+}
+
+.depthOptionsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.depthOptBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px;
+  min-height: var(--touch-min, 44px);
+  background: #FFFFFF;
+  border: 1px solid var(--color-border, #D8E4EA);
+  border-radius: var(--radius-md, 8px);
+  font-size: var(--fs-xs, 13px);
+  font-weight: 600;
+  color: var(--color-text, #0B1F33);
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.depthOptBtnActive {
+  background: var(--color-primary, #1688A8);
+  border-color: var(--color-primary, #1688A8);
+  color: #FFFFFF;
+}
+
+.analyzingCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 32px 16px;
+}
+
+.actionsFooter {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}

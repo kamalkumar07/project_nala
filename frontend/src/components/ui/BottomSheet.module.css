@@ -1,0 +1,174 @@
+/* ── Backdrop ─────────────────────────────────────────────────────────────── */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--color-overlay);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: fadeIn var(--transition-base) forwards;
+}
+
+/* ── Panel Base ───────────────────────────────────────────────────────────── */
+.panel {
+  position: relative;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-modal);
+  display: flex;
+  flex-direction: column;
+  max-height: 90dvh;
+  z-index: 1001;
+  overflow: hidden;
+}
+
+/* ── Responsive behavior (Mobile = Bottom Sheet, Desktop = Side Panel) ───── */
+.autoResponsive {
+  width: 100%;
+  max-width: 36rem;
+  border-top-left-radius: var(--radius-xl);
+  border-top-right-radius: var(--radius-xl);
+  animation: slideUp var(--transition-base) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.grabBar {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-1);
+}
+
+.handlePill {
+  width: 44px;
+  height: 5px;
+  background: var(--color-line);
+  border-radius: var(--radius-full);
+}
+
+@media (min-width: 768px) {
+  .backdrop:has(.autoResponsive) {
+    justify-content: flex-end;
+    align-items: stretch;
+  }
+
+  .autoResponsive {
+    width: 28rem;
+    max-width: 90vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    border-top-left-radius: var(--radius-xl);
+    border-bottom-left-radius: var(--radius-xl);
+    border-top-right-radius: 0;
+    animation: slideLeft var(--transition-base) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .autoResponsive .grabBar {
+    display: none;
+  }
+}
+
+/* ── Forced Side Panel ────────────────────────────────────────────────────── */
+.forceSide {
+  width: 28rem;
+  max-width: 90vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  border-top-left-radius: var(--radius-xl);
+  border-bottom-left-radius: var(--radius-xl);
+  animation: slideLeft var(--transition-base) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.backdrop:has(.forceSide) {
+  justify-content: flex-end;
+  align-items: stretch;
+}
+
+/* ── Forced Bottom Sheet ──────────────────────────────────────────────────── */
+.forceBottom {
+  width: 100%;
+  max-width: 36rem;
+  border-top-left-radius: var(--radius-xl);
+  border-top-right-radius: var(--radius-xl);
+  animation: slideUp var(--transition-base) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-5);
+  border-bottom: 1px solid var(--color-line);
+  gap: var(--space-3);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--color-ink);
+  line-height: 1.25;
+}
+
+.closeBtn {
+  min-width: var(--touch-target-min);
+  min-height: var(--touch-target-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  color: var(--color-muted);
+  font-size: var(--fs-md);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.closeBtn:hover {
+  background: var(--color-mist);
+  color: var(--color-ink);
+}
+
+.closeBtn:focus-visible {
+  outline: 2px solid var(--color-water);
+}
+
+/* ── Content ──────────────────────────────────────────────────────────────── */
+.content {
+  padding: var(--space-5);
+  overflow-y: auto;
+  flex: 1;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────────── */
+.footer {
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--color-line);
+  background: var(--color-mist);
+}
+
+/* ── Animations ───────────────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes slideLeft {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop, .panel {
+    animation: none !important;
+    transform: none !important;
+  }
+}

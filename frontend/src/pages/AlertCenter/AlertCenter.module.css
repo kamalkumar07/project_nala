@@ -1,0 +1,423 @@
+.alertCenterContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 16px);
+  padding: var(--space-4, 16px);
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ── Center Header ── */
+.centerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  border-bottom: 1px solid var(--color-line, #D8E4EA);
+  padding-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.centerTitle {
+  font-family: var(--font-heading, 'Sora', sans-serif);
+  font-size: var(--text-lg, 18px);
+  font-weight: 800;
+  color: var(--color-ink, #0B1F33);
+  margin: 0 0 4px 0;
+}
+
+.centerSub {
+  font-size: var(--text-xs, 12px);
+  color: var(--color-muted, #5B7184);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.subBanner {
+  flex-shrink: 0;
+}
+
+.openOptInBtn {
+  min-height: var(--touch-target-min, 44px);
+}
+
+.activeSubCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #EDF8F1;
+  border: 1px solid #B8E4C9;
+  border-radius: var(--radius-md, 8px);
+  padding: 8px 12px;
+}
+
+.activeSubInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-xs, 12px);
+  color: #1A6838;
+}
+
+.activeSubIcon {
+  font-size: 1.25rem;
+}
+
+.activeSubDetails {
+  margin: 0;
+  font-size: 11px;
+  color: #248246;
+}
+
+.unsubBtn {
+  color: #B52B2B;
+  border-color: #F5B8B8;
+  min-height: 36px;
+}
+
+.unsubBtn:hover {
+  background: #FDF2F2;
+}
+
+/* ── Opt-in Form Card ── */
+.optInCard {
+  background: #FFFFFF;
+  border: 1px solid var(--color-line, #D8E4EA);
+  border-radius: var(--radius-lg, 12px);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 4px 12px rgba(11, 31, 51, 0.06);
+}
+
+.optInHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.optInTitle {
+  font-family: var(--font-heading, 'Sora', sans-serif);
+  font-size: var(--text-base, 15px);
+  font-weight: 700;
+  color: var(--color-ink, #0B1F33);
+  margin: 0;
+}
+
+.closeOptInBtn {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  color: var(--color-muted, #5B7184);
+  cursor: pointer;
+  width: var(--touch-target-min, 44px);
+  height: var(--touch-target-min, 44px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.optInDescription {
+  font-size: var(--text-xs, 12px);
+  color: var(--color-muted, #5B7184);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.optInError {
+  font-size: var(--text-xs, 12px);
+  color: #B52B2B;
+  background: #FFF5F5;
+  border: 1px solid #FCD4D4;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm, 6px);
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 680px) {
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fieldCol {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.formLabel {
+  font-size: var(--text-xs, 12px);
+  font-weight: 600;
+  color: var(--color-ink, #0B1F33);
+}
+
+.formSelect,
+.formInput {
+  font-family: inherit;
+  font-size: var(--text-xs, 13px);
+  color: var(--color-ink, #0B1F33);
+  background: #FFFFFF;
+  border: 1px solid var(--color-line, #D8E4EA);
+  border-radius: var(--radius-sm, 6px);
+  padding: 8px 10px;
+  min-height: var(--touch-target-min, 44px);
+}
+
+.formSelect:focus,
+.formInput:focus {
+  outline: none;
+  border-color: var(--color-water, #1688A8);
+}
+
+.formActions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+/* ── Filter Bar ── */
+.filterBar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filterLabel {
+  font-size: var(--text-xs, 12px);
+  font-weight: 700;
+  color: var(--color-muted, #5B7184);
+}
+
+.chipsWrap {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filterChip {
+  font-family: inherit;
+  font-size: var(--text-xs, 12px);
+  font-weight: 600;
+  color: var(--color-ink, #0B1F33);
+  background: #FFFFFF;
+  border: 1px solid var(--color-line, #D8E4EA);
+  border-radius: var(--radius-pill, 9999px);
+  padding: 6px 12px;
+  min-height: var(--touch-target-min, 44px);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.filterChip:hover {
+  border-color: var(--color-water, #1688A8);
+}
+
+.filterChip:focus-visible {
+  outline: 2px solid var(--color-water, #1688A8);
+  outline-offset: 2px;
+}
+
+.filterChipActive {
+  background: var(--color-water, #1688A8);
+  border-color: var(--color-water, #1688A8);
+  color: #FFFFFF;
+}
+
+/* ── Alerts Feed ── */
+.alertsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.alertCard {
+  background: #FFFFFF;
+  border: 1px solid var(--color-line, #D8E4EA);
+  border-radius: var(--radius-md, 10px);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-left-width: 5px;
+  box-shadow: 0 1px 3px rgba(11, 31, 51, 0.04);
+}
+
+.cardSevere {
+  border-left-color: #D64545;
+}
+
+.cardModerate {
+  border-left-color: #E8A317;
+}
+
+.cardLow {
+  border-left-color: #2E9E5B;
+}
+
+/* ── Mandatory Advisory Disclaimer Box ─────────────────────────────────────── */
+.advisoryNoticeBox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(22, 136, 168, 0.08);
+  border: 1px solid rgba(22, 136, 168, 0.22);
+  border-radius: var(--radius-md, 10px);
+  padding: 10px 14px;
+  font-size: var(--text-xs, 12px);
+  color: var(--color-ink, #0B1F33);
+  line-height: 1.45;
+}
+
+[data-theme="ops"] .advisoryNoticeBox {
+  background: rgba(60, 200, 230, 0.08);
+  border-color: rgba(60, 200, 230, 0.25);
+  color: #EAF3F9;
+}
+
+.advisoryIconWrap {
+  flex-shrink: 0;
+  color: var(--color-water, #1688A8);
+  display: flex;
+  align-items: center;
+}
+
+[data-theme="ops"] .advisoryIconWrap {
+  color: #3CC8E6;
+}
+
+.advisoryText {
+  margin: 0;
+  font-weight: 500;
+}
+
+.advisoryHighlight {
+  font-weight: 700;
+  color: #B52B2B;
+}
+
+.cardHigh {
+  border-left-color: #E5742B;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.badgeRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.distanceChip {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-muted, #5B7184);
+  background: var(--color-mist, #F3F8FA);
+  border: 1px solid var(--color-line, #D8E4EA);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill, 9999px);
+}
+
+.timeTag {
+  font-size: 11px;
+  color: var(--color-muted, #5B7184);
+  cursor: help;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.alertAreaHeading {
+  font-family: var(--font-heading, 'Sora', sans-serif);
+  font-size: var(--text-sm, 14px);
+  font-weight: 700;
+  color: var(--color-ink, #0B1F33);
+  margin: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.districtSub {
+  font-weight: 400;
+  color: var(--color-muted, #5B7184);
+}
+
+.alertMessage {
+  margin: 0;
+  font-size: var(--text-xs, 13px);
+  color: var(--color-ink, #0B1F33);
+  line-height: 1.45;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.focusBtn {
+  min-height: var(--touch-target-min, 44px);
+}
+
+/* ── Empty State ── */
+.emptyStateContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 20px;
+  background: var(--color-mist, #F3F8FA);
+  border: 1px dashed var(--color-line, #D8E4EA);
+  border-radius: var(--radius-lg, 14px);
+  margin-top: 12px;
+}
+
+.emptyIcon {
+  font-size: 2.5rem;
+  color: #1F7341;
+  margin-bottom: 8px;
+}
+
+.emptyHeading {
+  font-family: var(--font-heading, 'Sora', sans-serif);
+  font-size: var(--text-base, 16px);
+  font-weight: 700;
+  color: var(--color-ink, #0B1F33);
+  margin: 0 0 6px 0;
+}
+
+.emptySub {
+  font-size: var(--text-xs, 12px);
+  color: var(--color-muted, #5B7184);
+  margin: 0;
+  max-width: 440px;
+  line-height: 1.5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .filterChip {
+    transition: none;
+  }
+}

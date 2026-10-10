@@ -1,0 +1,90 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--color-bg);
+}
+
+.body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  padding: var(--sp-6) var(--sp-5) calc(var(--sp-8) + env(safe-area-inset-bottom));
+  max-width: var(--max-content);
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ── Hero ──────────────────────────────────────────────────────────────────── */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--sp-3);
+  padding: var(--sp-4) 0;
+}
+
+.icon    { font-size: 3rem; }
+.heading { font-size: var(--fs-2xl); font-weight: 700; color: var(--color-text); }
+.sub     { font-size: var(--fs-base); color: var(--color-text-muted); line-height: 1.5; }
+
+/* ── Mock notice ───────────────────────────────────────────────────────────── */
+
+.mockNotice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--color-warn-bg);
+  border: 1px solid #fcd34d;
+  border-radius: var(--radius-lg);
+  font-size: var(--fs-sm);
+  color: var(--color-warn);
+  line-height: 1.4;
+}
+
+/* ── Token form ────────────────────────────────────────────────────────────── */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.label {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.input {
+  width: 100%;
+  min-height: var(--touch-min);
+  padding: var(--sp-3) var(--sp-4);
+  font-size: var(--fs-base);
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--transition-fast);
+  -webkit-appearance: none;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+.input:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ── Hint ──────────────────────────────────────────────────────────────────── */
+
+.hint {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  text-align: center;
+  padding-bottom: var(--sp-4);
+}

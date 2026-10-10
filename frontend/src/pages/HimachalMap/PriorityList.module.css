@@ -1,0 +1,726 @@
+/**
+ * PriorityList.module.css — dark ops theme styling for prioritized hotspot dispatch.
+ *
+ * Theme tokens:
+ *   Background: #07141F
+ *   Surface:    #0E2233
+ *   Hover:      #142C42
+ *   Accent:     #3CC8E6 (cyan)
+ *   Borders:    #19374F
+ *   Text:       #EAF3F9
+ *   Muted:      #85A2B9
+ */
+
+.opsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 16px);
+  padding: var(--space-4, 16px);
+  max-width: 980px;
+  margin: 0 auto;
+  width: 100%;
+  color: #EAF3F9;
+  background-color: #07141F;
+  border-radius: var(--radius-lg, 14px);
+  box-sizing: border-box;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  border-bottom: 1px solid #19374F;
+  padding-bottom: 14px;
+}
+
+.titleArea {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.priorityTitle {
+  font-family: var(--font-heading, 'Sora', sans-serif);
+  font-size: var(--text-lg, 18px);
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.opsIndicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3CC8E6;
+  box-shadow: 0 0 8px rgba(60, 200, 230, 0.8);
+}
+
+.prioritySub {
+  font-size: var(--text-xs, 12px);
+  color: #85A2B9;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.countBadge {
+  font-size: 12px;
+  background: rgba(60, 200, 230, 0.12);
+  border: 1px solid rgba(60, 200, 230, 0.3);
+  color: #3CC8E6;
+  font-weight: 600;
+  border-radius: var(--radius-pill, 9999px);
+  padding: 4px 12px;
+  flex-shrink: 0;
+}
+
+/* ── #1 Urgent Dispatch Hero Card ("Where do we send help first?") ─────────── */
+.urgentHeroCard {
+  background: linear-gradient(135deg, rgba(214, 69, 69, 0.18) 0%, rgba(14, 34, 51, 0.95) 60%);
+  border: 1.5px solid rgba(214, 69, 69, 0.45);
+  border-radius: var(--radius-lg, 14px);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.urgentHeroHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.urgentHeroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(214, 69, 69, 0.25);
+  border: 1px solid #D64545;
+  color: #FF8585;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill, 9999px);
+}
+
+.urgentPulseDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #D64545;
+  box-shadow: 0 0 6px #D64545;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.urgentHeroBody {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.urgentHeroRing {
+  flex-shrink: 0;
+}
+
+.urgentHeroDetails {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.urgentHeroTitle {
+  font-family: var(--font-heading, 'Sora', sans-serif);
+  font-size: var(--text-base, 16px);
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.urgentHeroMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--text-xs, 12px);
+  color: #85A2B9;
+  flex-wrap: wrap;
+}
+
+.urgentActionBox {
+  background: rgba(14, 34, 51, 0.7);
+  border: 1px solid rgba(60, 200, 230, 0.2);
+  border-left: 3px solid #3CC8E6;
+  border-radius: var(--radius-sm, 6px);
+  padding: 10px 14px;
+  font-size: var(--text-xs, 12px);
+  color: #EAF3F9;
+  line-height: 1.45;
+}
+
+.urgentActionLabel {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #3CC8E6;
+  margin-bottom: 2px;
+}
+
+.urgentHeroFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  align-items: center;
+  border-top: 1px solid rgba(25, 55, 79, 0.6);
+  padding-top: 12px;
+}
+
+.urgentFocusBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #3CC8E6;
+  color: #07141F;
+  border: none;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: var(--radius-md, 10px);
+  cursor: pointer;
+  min-height: var(--touch-target-min, 44px);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.urgentFocusBtn:hover {
+  background: #5DE0FB;
+  transform: translateY(-1px);
+}
+
+.urgentFocusBtn:focus-visible {
+  outline: 2px solid #FFFFFF;
+  outline-offset: 2px;
+}
+
+/* ── District Summary Cards ─────────────────────────────────────────────────── */
+.districtSummarySection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.districtSummaryHeader {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #85A2B9;
+  font-weight: 700;
+}
+
+.districtCardsScroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: #19374F transparent;
+}
+
+.districtCardsScroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.districtCardsScroll::-webkit-scrollbar-thumb {
+  background: #19374F;
+  border-radius: 4px;
+}
+
+.districtCard {
+  background: #0E2233;
+  border: 1px solid #19374F;
+  border-radius: var(--radius-md, 10px);
+  padding: 8px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 110px;
+  cursor: pointer;
+  user-select: none;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+  min-height: var(--touch-target-min, 44px);
+  text-align: left;
+}
+
+.districtCard:hover {
+  background: #142C42;
+  border-color: #3CC8E6;
+  transform: translateY(-1px);
+}
+
+.districtCard:focus-visible {
+  outline: 2px solid #3CC8E6;
+  outline-offset: 2px;
+}
+
+.districtCardActive {
+  background: rgba(60, 200, 230, 0.12);
+  border-color: #3CC8E6;
+  box-shadow: 0 0 10px rgba(60, 200, 230, 0.2);
+}
+
+.districtCardName {
+  font-size: 13px;
+  font-weight: 600;
+  color: #FFFFFF;
+  white-space: nowrap;
+}
+
+.districtCardMeta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #85A2B9;
+}
+
+.districtCardDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Filters Bar ──────────────────────────────────────────────────────────── */
+.filterBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 8px 0;
+}
+
+.bandChipsGroup {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.filterChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #0E2233;
+  border: 1px solid #19374F;
+  color: #85A2B9;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill, 9999px);
+  cursor: pointer;
+  min-height: var(--touch-target-min, 44px);
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.filterChip:hover {
+  background: #142C42;
+  color: #FFFFFF;
+  border-color: #85A2B9;
+}
+
+.filterChip:focus-visible {
+  outline: 2px solid #3CC8E6;
+  outline-offset: 2px;
+}
+
+.filterChipActive {
+  background: rgba(60, 200, 230, 0.18);
+  border-color: #3CC8E6;
+  color: #3CC8E6;
+}
+
+.filterChipBadge {
+  font-size: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1px 6px;
+  border-radius: 9999px;
+  font-variant-numeric: tabular-nums;
+}
+
+.filterResetBtn {
+  font-size: 11px;
+  color: #3CC8E6;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  min-height: var(--touch-target-min, 44px);
+  display: flex;
+  align-items: center;
+}
+
+/* ── Ranked Hotspots List ─────────────────────────────────────────────────── */
+.listBody {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.priorityRow {
+  display: grid;
+  grid-template-columns: 32px 48px minmax(0, 1fr);
+  column-gap: 10px;
+  row-gap: 8px;
+  align-items: center;
+  background: #0E2233;
+  border: 1px solid #19374F;
+  border-radius: var(--radius-md, 10px);
+  padding: 12px;
+  min-height: var(--touch-target-min, 44px);
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  user-select: none;
+}
+
+.priorityRow:hover {
+  transform: translateY(-1px);
+  border-color: #3CC8E6;
+  background: #142C42;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.priorityRow:focus-visible {
+  outline: 2px solid #3CC8E6;
+  outline-offset: 2px;
+}
+
+.priorityRowActive {
+  border-color: #3CC8E6;
+  background: rgba(60, 200, 230, 0.1);
+  box-shadow: 0 0 12px rgba(60, 200, 230, 0.2);
+}
+
+/* Rank column */
+.rankBadgeCol {
+  flex-shrink: 0;
+  min-width: 32px;
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rankNumber {
+  font-family: var(--font-heading, 'Sora', sans-serif);
+  font-size: var(--text-sm, 14px);
+  font-weight: 700;
+  color: #85A2B9;
+  font-variant-numeric: tabular-nums;
+}
+
+.topRank1 {
+  color: #FF5A5A;
+  text-shadow: 0 0 8px rgba(255, 90, 90, 0.6);
+  font-size: 15px;
+}
+
+.topRank2 {
+  color: #FF9B42;
+  font-size: 15px;
+}
+
+.topRank3 {
+  color: #FFD15C;
+  font-size: 15px;
+}
+
+.scoreCol {
+  flex-shrink: 0;
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* Info Column */
+.infoCol {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.locationName {
+  font-family: var(--font-heading, 'Sora', sans-serif);
+  font-size: var(--text-sm, 14px);
+  font-weight: 700;
+  color: #FFFFFF;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* Horizontal Severity Bar */
+.severityBarWrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.severityTrack {
+  flex: 1;
+  height: 6px;
+  background: rgba(25, 55, 79, 0.8);
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.severityFill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+.severityScoreNum {
+  font-size: 11px;
+  font-weight: 700;
+  color: #85A2B9;
+  font-variant-numeric: tabular-nums;
+  min-width: 44px;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--text-xs, 12px);
+  color: #85A2B9;
+  flex-wrap: wrap;
+}
+
+.districtName {
+  color: #85A2B9;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.reportCount {
+  color: #85A2B9;
+}
+
+/* Status Stepper on item */
+.statusStepper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  background: rgba(7, 20, 31, 0.8);
+  border: 1px solid #19374F;
+  border-radius: var(--radius-pill, 9999px);
+  padding: 2px 4px;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+.statusStepBtn {
+  background: transparent;
+  border: none;
+  font-size: 10px;
+  font-weight: 600;
+  color: #85A2B9;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill, 9999px);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.statusStepBtn:hover {
+  color: #FFFFFF;
+  background: rgba(60, 200, 230, 0.1);
+}
+
+.statusStepBtnActive {
+  background: #3CC8E6;
+  color: #07141F;
+  font-weight: 700;
+}
+
+.statusStepBtnActiveResolved {
+  background: #2E9E5B;
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.statusStepBtnActiveDispatched {
+  background: #E8A317;
+  color: #07141F;
+  font-weight: 700;
+}
+
+/* Action column */
+.actionCol {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  min-width: 0;
+  border-top: 1px solid #19374F;
+  padding-top: 8px;
+}
+
+.timeTag {
+  font-size: 11px;
+  color: #85A2B9;
+  cursor: help;
+  background: rgba(25, 55, 79, 0.6);
+  border: 1px solid #19374F;
+  border-radius: var(--radius-pill, 9999px);
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+
+.focusHint {
+  font-size: 11px;
+  color: #3CC8E6;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+@media (min-width: 768px) {
+  .urgentHeroBadge,
+  .urgentActionLabel,
+  .districtSummaryHeader,
+  .districtCardMeta,
+  .filterChipBadge,
+  .filterResetBtn,
+  .severityScoreNum,
+  .statusStepBtn,
+  .timeTag,
+  .focusHint {
+    font-size: 12px;
+  }
+}
+
+/* ── Empty State ──────────────────────────────────────────────────────────── */
+.emptyContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+  background: #0E2233;
+  border: 1px dashed #19374F;
+  border-radius: var(--radius-lg, 14px);
+  margin-top: 16px;
+  color: #EAF3F9;
+}
+
+.emptyIcon {
+  font-size: 32px;
+  color: #2E9E5B;
+  margin-bottom: 8px;
+}
+
+.emptyTitle {
+  font-family: var(--font-heading, 'Sora', sans-serif);
+  font-size: var(--text-base, 16px);
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0 0 6px 0;
+}
+
+.emptySubtitle {
+  font-size: var(--text-xs, 12px);
+  color: #85A2B9;
+  margin: 0;
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .priorityRow {
+    grid-template-columns: 32px 48px minmax(0, 1fr);
+    column-gap: 10px;
+  }
+
+  .infoCol {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .actionCol {
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+
+  .urgentHeroFooter {
+    width: 100%;
+  }
+
+  .urgentFocusBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .priorityRow {
+    transition: none;
+  }
+  .priorityRow:hover {
+    transform: none;
+  }
+  .urgentPulseDot {
+    animation: none;
+  }
+  .urgentFocusBtn {
+    transition: none;
+  }
+}
