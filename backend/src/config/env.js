@@ -39,6 +39,7 @@ const schema = z.object({
   REAL_CONFIRM:  z.string().transform((v) => v === 'true').default('false'),
   // getHotspots — primary Phase 3 endpoint; flip to true once Kamal delivers /cloud/hotspots
   REAL_HOTSPOTS: z.string().transform((v) => v === 'true').default('false'),
+  REAL_RISK_ASSESSMENT: z.string().transform((v) => v === 'true').default('false'),
 
   // AWS / Cognito
   AWS_REGION: z.string().default('ap-south-1'),
@@ -78,12 +79,16 @@ const env = result.data;
 // Extra cross-field validation: Cloud API vars must be set when any real
 // endpoint flag is active (USE_MOCK=false or any REAL_* flag is true).
 const needsCloudApi =
-  !env.USE_MOCK || env.REAL_PRESIGN || env.REAL_REPORTS || env.REAL_CONFIRM;
+  !env.USE_MOCK ||
+  env.REAL_PRESIGN ||
+  env.REAL_REPORTS ||
+  env.REAL_CONFIRM ||
+  env.REAL_RISK_ASSESSMENT;
 
 if (needsCloudApi) {
-  if (!env.CLOUD_API_BASE_URL || !env.CLOUD_API_KEY) {
+  if (!env.CLOUD_API_BASE_URL) {
     console.error(
-      '[env] CLOUD_API_BASE_URL and CLOUD_API_KEY are required when ' +
+      '[env] CLOUD_API_BASE_URL is required when ' +
       'USE_MOCK=false or any REAL_* flag is true',
     );
     process.exit(1);

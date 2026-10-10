@@ -46,6 +46,7 @@ const useReal = {
   reports:   !env.USE_MOCK || env.REAL_REPORTS,
   confirm:   !env.USE_MOCK || env.REAL_CONFIRM,
   hotspots:  !env.USE_MOCK || env.REAL_HOTSPOTS,
+  riskAssessment: env.REAL_RISK_ASSESSMENT,
 };
 
 // ── Implemented real endpoints ────────────────────────────────────────────────
@@ -58,6 +59,14 @@ export const getHotspots    = useReal.hotspots  ? cloud.getHotspots    : mock.ge
 
 // ── Always on mock (no real Cloud API endpoint yet) ───────────────────────────
 export const getRisk            = mock.getRisk;
+export const getRiskAssessment = useReal.riskAssessment
+  ? cloud.getRiskAssessment
+  : async () => {
+      const { Errors } = await import('../middleware/errorHandler.js');
+      throw Errors.upstreamError(
+        'Real risk assessment is disabled; set REAL_RISK_ASSESSMENT=true',
+      );
+    };
 export const getWardReports     = mock.getWardReports;
 export const patchReportStatus  = mock.patchReportStatus;
 export const createSubscription = mock.createSubscription;

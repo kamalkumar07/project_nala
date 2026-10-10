@@ -291,6 +291,50 @@ function notImplemented(name) {
 
 export const getRisk             = notImplemented('getRisk');
 
+export async function getRiskAssessment({
+  lat,
+  lng,
+  rainfall_1d_mm,
+  rainfall_3d_mm,
+  slope_deg,
+  tri,
+} = {}) {
+  const latitude = Number(lat);
+  const longitude = Number(lng);
+
+  if (
+    lat === undefined || lat === null || lat === '' ||
+    lng === undefined || lng === null || lng === '' ||
+    !Number.isFinite(latitude) ||
+    !Number.isFinite(longitude) ||
+    latitude < -90 || latitude > 90 ||
+    longitude < -180 || longitude > 180
+  ) {
+    throw Errors.validation('Valid lat and lng are required');
+  }
+
+  const qs = new URLSearchParams({
+    modelVersion: 'V1',
+    lat: String(latitude),
+    lng: String(longitude),
+  });
+
+  const optionalInputs = {
+    rainfall_1d_mm,
+    rainfall_3d_mm,
+    slope_deg,
+    tri,
+  };
+
+  for (const [key, value] of Object.entries(optionalInputs)) {
+    if (value !== undefined && value !== null && value !== '') {
+      qs.set(key, String(value));
+    }
+  }
+
+  return request('GET', `/cloud/risk?${qs}`);
+}
+
 /**
  * GET /cloud/hotspots
  * Returns ranked flood-risk hotspots matching the Phase 3 contract.

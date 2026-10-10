@@ -21,6 +21,7 @@ import alertsRouter   from './routes/alerts.js';
 import authRouter     from './routes/auth.js';
 import wardsRouter    from './routes/wards.js';
 import wardRouter     from './routes/ward.js';
+import riskAssessmentRouter from './routes/riskAssessment.js';
 
 const app = express();
 
@@ -60,6 +61,7 @@ app.use('/api/v1', riskRouter);
 app.use('/api/v1', alertsRouter);
 app.use('/api/v1', authRouter);
 app.use('/api/v1', wardsRouter);
+app.use('/api/v1', riskAssessmentRouter);
 app.use('/api/v1', wardRouter);
 
 // ── 404 for unmatched routes ──────────────────────────────────────────────────
