@@ -21,6 +21,16 @@
         "score": 0.11,
         "band": "LOW",
         "confidence": 1.0,
+        "assessmentStatus": "ASSESSED",
+        "water_depth": "NONE",
+        "passability": "passable",
+        "routePassability": "UNDETERMINED",
+        "evidenceStatus": {
+          "valley_slope": "AVAILABLE",
+          "floodplain_tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
         "factors": {
           "valley_slope": 0.0,
           "floodplain_flatness": 0.28,
@@ -32,6 +42,13 @@
         "score": 0.21,
         "band": "LOW",
         "confidence": 1.0,
+        "assessmentStatus": "ASSESSED",
+        "evidenceStatus": {
+          "slope": "AVAILABLE",
+          "tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
         "factors": {
           "slope": 0.225,
           "tri": 0.41,
@@ -39,7 +56,8 @@
           "rain_3d": 0.121
         }
       },
-      "modelVersion": "V1"
+      "modelVersion": "V1.0",
+      "modelStatus": "PROVISIONAL"
     }
   },
   {
@@ -64,6 +82,16 @@
         "score": 0.4,
         "band": "MEDIUM",
         "confidence": 1.0,
+        "assessmentStatus": "ASSESSED",
+        "water_depth": "ANKLE",
+        "passability": "passable",
+        "routePassability": "UNDETERMINED",
+        "evidenceStatus": {
+          "valley_slope": "AVAILABLE",
+          "floodplain_tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
         "factors": {
           "valley_slope": 0.0,
           "floodplain_flatness": 0.12,
@@ -75,6 +103,13 @@
         "score": 0.51,
         "band": "MEDIUM",
         "confidence": 1.0,
+        "assessmentStatus": "ASSESSED",
+        "evidenceStatus": {
+          "slope": "AVAILABLE",
+          "tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
         "factors": {
           "slope": 0.3,
           "tri": 0.49,
@@ -82,7 +117,8 @@
           "rain_3d": 0.6223
         }
       },
-      "modelVersion": "V1"
+      "modelVersion": "V1.0",
+      "modelStatus": "PROVISIONAL"
     }
   },
   {
@@ -107,6 +143,16 @@
         "score": 0.32,
         "band": "LOW",
         "confidence": 1.0,
+        "assessmentStatus": "ASSESSED",
+        "water_depth": "ANKLE",
+        "passability": "passable",
+        "routePassability": "UNDETERMINED",
+        "evidenceStatus": {
+          "valley_slope": "AVAILABLE",
+          "floodplain_tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
         "factors": {
           "valley_slope": 0.0,
           "floodplain_flatness": 0.0,
@@ -118,6 +164,13 @@
         "score": 0.57,
         "band": "MEDIUM",
         "confidence": 1.0,
+        "assessmentStatus": "ASSESSED",
+        "evidenceStatus": {
+          "slope": "AVAILABLE",
+          "tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
         "factors": {
           "slope": 0.5167,
           "tri": 0.65,
@@ -125,7 +178,8 @@
           "rain_3d": 0.8646
         }
       },
-      "modelVersion": "V1"
+      "modelVersion": "V1.0",
+      "modelStatus": "PROVISIONAL"
     }
   },
   {
@@ -150,6 +204,16 @@
         "score": 0.13,
         "band": "LOW",
         "confidence": 1.0,
+        "assessmentStatus": "ASSESSED",
+        "water_depth": "NONE",
+        "passability": "passable",
+        "routePassability": "UNDETERMINED",
+        "evidenceStatus": {
+          "valley_slope": "AVAILABLE",
+          "floodplain_tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
         "factors": {
           "valley_slope": 0.0,
           "floodplain_flatness": 0.0,
@@ -161,6 +225,13 @@
         "score": 0.62,
         "band": "MEDIUM",
         "confidence": 1.0,
+        "assessmentStatus": "ASSESSED",
+        "evidenceStatus": {
+          "slope": "AVAILABLE",
+          "tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
         "factors": {
           "slope": 0.97,
           "tri": 0.8875,
@@ -168,7 +239,8 @@
           "rain_3d": 0.2275
         }
       },
-      "modelVersion": "V1"
+      "modelVersion": "V1.0",
+      "modelStatus": "PROVISIONAL"
     }
   },
   {
@@ -193,6 +265,16 @@
         "score": 0.84,
         "band": "HIGH",
         "confidence": 1.0,
+        "assessmentStatus": "ASSESSED",
+        "water_depth": "WAIST",
+        "passability": "not passable",
+        "routePassability": "UNDETERMINED",
+        "evidenceStatus": {
+          "valley_slope": "AVAILABLE",
+          "floodplain_tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
         "factors": {
           "valley_slope": 0.8,
           "floodplain_flatness": 0.9,
@@ -204,6 +286,13 @@
         "score": 0.33,
         "band": "LOW",
         "confidence": 1.0,
+        "assessmentStatus": "ASSESSED",
+        "evidenceStatus": {
+          "slope": "AVAILABLE",
+          "tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
         "factors": {
           "slope": 0.02,
           "tri": 0.075,
@@ -211,7 +300,8 @@
           "rain_3d": 0.659
         }
       },
-      "modelVersion": "V1"
+      "modelVersion": "V1.0",
+      "modelStatus": "PROVISIONAL"
     }
   },
   {
@@ -236,6 +326,16 @@
         "score": 0.42,
         "band": "MEDIUM",
         "confidence": 1.0,
+        "assessmentStatus": "ASSESSED",
+        "water_depth": "KNEE",
+        "passability": "not passable",
+        "routePassability": "UNDETERMINED",
+        "evidenceStatus": {
+          "valley_slope": "AVAILABLE",
+          "floodplain_tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
         "factors": {
           "valley_slope": 0.0,
           "floodplain_flatness": 0.0,
@@ -247,6 +347,13 @@
         "score": 0.9,
         "band": "HIGH",
         "confidence": 1.0,
+        "assessmentStatus": "ASSESSED",
+        "evidenceStatus": {
+          "slope": "AVAILABLE",
+          "tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
         "factors": {
           "slope": 0.85,
           "tri": 0.865,
@@ -254,7 +361,8 @@
           "rain_3d": 0.7591
         }
       },
-      "modelVersion": "V1"
+      "modelVersion": "V1.0",
+      "modelStatus": "PROVISIONAL"
     }
   },
   {
@@ -279,6 +387,16 @@
         "score": 0.0,
         "band": "LOW",
         "confidence": 0.45,
+        "assessmentStatus": "ASSESSED",
+        "water_depth": "NONE",
+        "passability": "passable",
+        "routePassability": "UNDETERMINED",
+        "evidenceStatus": {
+          "valley_slope": "AVAILABLE",
+          "floodplain_tri": "AVAILABLE",
+          "rain_1d": "MISSING",
+          "rain_3d": "MISSING"
+        },
         "factors": {
           "valley_slope": 0.0,
           "floodplain_flatness": 0.0
@@ -288,12 +406,20 @@
         "score": 0.35,
         "band": "MEDIUM",
         "confidence": 0.55,
+        "assessmentStatus": "ASSESSED",
+        "evidenceStatus": {
+          "slope": "AVAILABLE",
+          "tri": "AVAILABLE",
+          "rain_1d": "MISSING",
+          "rain_3d": "MISSING"
+        },
         "factors": {
           "slope": 0.5583,
           "tri": 0.75
         }
       },
-      "modelVersion": "V1"
+      "modelVersion": "V1.0",
+      "modelStatus": "PROVISIONAL"
     }
   },
   {
@@ -318,6 +444,16 @@
         "score": 0.36,
         "band": "MEDIUM",
         "confidence": 0.55,
+        "assessmentStatus": "ASSESSED",
+        "water_depth": "ANKLE",
+        "passability": "passable",
+        "routePassability": "UNDETERMINED",
+        "evidenceStatus": {
+          "valley_slope": "MISSING",
+          "floodplain_tri": "MISSING",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
         "factors": {
           "rain_1d": 0.5122,
           "rain_3d": 0.4755
@@ -327,12 +463,20 @@
         "score": 0.33,
         "band": "LOW",
         "confidence": 0.45,
+        "assessmentStatus": "ASSESSED",
+        "evidenceStatus": {
+          "slope": "MISSING",
+          "tri": "MISSING",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
         "factors": {
           "rain_1d": 0.5122,
           "rain_3d": 0.4755
         }
       },
-      "modelVersion": "V1"
+      "modelVersion": "V1.0",
+      "modelStatus": "PROVISIONAL"
     }
   },
   {
@@ -357,15 +501,33 @@
         "score": 0.09,
         "band": "LOW",
         "confidence": 0.0,
+        "assessmentStatus": "INSUFFICIENT_DATA",
+        "water_depth": "NONE",
+        "passability": "passable",
+        "routePassability": "UNDETERMINED",
+        "evidenceStatus": {
+          "valley_slope": "MISSING",
+          "floodplain_tri": "MISSING",
+          "rain_1d": "MISSING",
+          "rain_3d": "MISSING"
+        },
         "factors": {}
       },
       "landslide": {
         "score": 0.11,
         "band": "LOW",
         "confidence": 0.0,
+        "assessmentStatus": "INSUFFICIENT_DATA",
+        "evidenceStatus": {
+          "slope": "MISSING",
+          "tri": "MISSING",
+          "rain_1d": "MISSING",
+          "rain_3d": "MISSING"
+        },
         "factors": {}
       },
-      "modelVersion": "V1"
+      "modelVersion": "V1.0",
+      "modelStatus": "PROVISIONAL"
     }
   },
   {
@@ -390,6 +552,16 @@
         "score": 0.47,
         "band": "MEDIUM",
         "confidence": 1.0,
+        "assessmentStatus": "ASSESSED",
+        "water_depth": "KNEE",
+        "passability": "not passable",
+        "routePassability": "UNDETERMINED",
+        "evidenceStatus": {
+          "valley_slope": "AVAILABLE",
+          "floodplain_tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
         "factors": {
           "valley_slope": 0.9,
           "floodplain_flatness": 0.96,
@@ -401,6 +573,13 @@
         "score": 0.05,
         "band": "LOW",
         "confidence": 1.0,
+        "assessmentStatus": "ASSESSED",
+        "evidenceStatus": {
+          "slope": "AVAILABLE",
+          "tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
         "factors": {
           "slope": 0.01,
           "tri": 0.03,
@@ -408,7 +587,8 @@
           "rain_3d": 0.0907
         }
       },
-      "modelVersion": "V1"
+      "modelVersion": "V1.0",
+      "modelStatus": "PROVISIONAL"
     }
   },
   {
@@ -433,6 +613,16 @@
         "score": 0.21,
         "band": "LOW",
         "confidence": 1.0,
+        "assessmentStatus": "ASSESSED",
+        "water_depth": "ANKLE",
+        "passability": "passable",
+        "routePassability": "UNDETERMINED",
+        "evidenceStatus": {
+          "valley_slope": "AVAILABLE",
+          "floodplain_tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
         "factors": {
           "valley_slope": 0.0,
           "floodplain_flatness": 0.28,
@@ -444,6 +634,13 @@
         "score": 0.32,
         "band": "LOW",
         "confidence": 1.0,
+        "assessmentStatus": "ASSESSED",
+        "evidenceStatus": {
+          "slope": "AVAILABLE",
+          "tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
         "factors": {
           "slope": 0.3,
           "tri": 0.41,
@@ -451,7 +648,8 @@
           "rain_3d": 0.285
         }
       },
-      "modelVersion": "V1"
+      "modelVersion": "V1.0",
+      "modelStatus": "PROVISIONAL"
     }
   },
   {
@@ -476,6 +674,16 @@
         "score": 0.28,
         "band": "LOW",
         "confidence": 1.0,
+        "assessmentStatus": "ASSESSED",
+        "water_depth": "ANKLE",
+        "passability": "passable",
+        "routePassability": "UNDETERMINED",
+        "evidenceStatus": {
+          "valley_slope": "AVAILABLE",
+          "floodplain_tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
         "factors": {
           "valley_slope": 0.0,
           "floodplain_flatness": 0.0,
@@ -487,6 +695,13 @@
         "score": 0.62,
         "band": "MEDIUM",
         "confidence": 1.0,
+        "assessmentStatus": "ASSESSED",
+        "evidenceStatus": {
+          "slope": "AVAILABLE",
+          "tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
         "factors": {
           "slope": 0.6,
           "tri": 0.69,
@@ -494,7 +709,232 @@
           "rain_3d": 0.4939
         }
       },
-      "modelVersion": "V1"
+      "modelVersion": "V1.0",
+      "modelStatus": "PROVISIONAL"
+    }
+  },
+  {
+    "id": "case_13_invalid_negative_rain",
+    "description": "Input with negative rainfall (<0.0 mm) flagged as INVALID",
+    "input": {
+      "latitude": 31.1048,
+      "longitude": 77.1734,
+      "slope_deg": 20.0,
+      "tri": 25.0,
+      "rainfall_1d_mm": -10.0,
+      "rainfall_3d_mm": -5.0
+    },
+    "expected_output": {
+      "location": {
+        "latitude": 31.1048,
+        "longitude": 77.1734,
+        "district": "Shimla"
+      },
+      "flood": {
+        "score": 0.0,
+        "band": "LOW",
+        "confidence": 0.45,
+        "assessmentStatus": "ASSESSED",
+        "water_depth": "NONE",
+        "passability": "passable",
+        "routePassability": "UNDETERMINED",
+        "evidenceStatus": {
+          "valley_slope": "AVAILABLE",
+          "floodplain_tri": "AVAILABLE",
+          "rain_1d": "INVALID",
+          "rain_3d": "INVALID"
+        },
+        "factors": {
+          "valley_slope": 0.0,
+          "floodplain_flatness": 0.0
+        }
+      },
+      "landslide": {
+        "score": 0.23,
+        "band": "LOW",
+        "confidence": 0.55,
+        "assessmentStatus": "ASSESSED",
+        "evidenceStatus": {
+          "slope": "AVAILABLE",
+          "tri": "AVAILABLE",
+          "rain_1d": "INVALID",
+          "rain_3d": "INVALID"
+        },
+        "factors": {
+          "slope": 0.35,
+          "tri": 0.55
+        }
+      },
+      "modelVersion": "V1.0",
+      "modelStatus": "PROVISIONAL"
+    }
+  },
+  {
+    "id": "case_14_invalid_slope_exceeds_90",
+    "description": "Input with slope > 90 degrees flagged as INVALID",
+    "input": {
+      "latitude": 31.1048,
+      "longitude": 77.1734,
+      "slope_deg": 110.0,
+      "tri": 25.0,
+      "rainfall_1d_mm": 50.0,
+      "rainfall_3d_mm": 80.0
+    },
+    "expected_output": {
+      "location": {
+        "latitude": 31.1048,
+        "longitude": 77.1734,
+        "district": "Shimla"
+      },
+      "flood": {
+        "score": 0.26,
+        "band": "LOW",
+        "confidence": 0.7,
+        "assessmentStatus": "ASSESSED",
+        "water_depth": "ANKLE",
+        "passability": "passable",
+        "routePassability": "UNDETERMINED",
+        "evidenceStatus": {
+          "valley_slope": "INVALID",
+          "floodplain_tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
+        "factors": {
+          "floodplain_flatness": 0.0,
+          "rain_1d": 0.3617,
+          "rain_3d": 0.3617
+        }
+      },
+      "landslide": {
+        "score": 0.34,
+        "band": "MEDIUM",
+        "confidence": 0.65,
+        "assessmentStatus": "ASSESSED",
+        "evidenceStatus": {
+          "slope": "INVALID",
+          "tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
+        "factors": {
+          "tri": 0.55,
+          "rain_1d": 0.3617,
+          "rain_3d": 0.3617
+        }
+      },
+      "modelVersion": "V1.0",
+      "modelStatus": "PROVISIONAL"
+    }
+  },
+  {
+    "id": "case_15_explicit_zero_rainfall",
+    "description": "Valid explicit zero rainfall (0.0 mm) flagged as AVAILABLE with zero contribution",
+    "input": {
+      "latitude": 31.1048,
+      "longitude": 77.1734,
+      "slope_deg": 20.0,
+      "tri": 25.0,
+      "rainfall_1d_mm": 0.0,
+      "rainfall_3d_mm": 0.0
+    },
+    "expected_output": {
+      "location": {
+        "latitude": 31.1048,
+        "longitude": 77.1734,
+        "district": "Shimla"
+      },
+      "flood": {
+        "score": 0.0,
+        "band": "LOW",
+        "confidence": 1.0,
+        "assessmentStatus": "ASSESSED",
+        "water_depth": "NONE",
+        "passability": "passable",
+        "routePassability": "UNDETERMINED",
+        "evidenceStatus": {
+          "valley_slope": "AVAILABLE",
+          "floodplain_tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
+        "factors": {
+          "valley_slope": 0.0,
+          "floodplain_flatness": 0.0,
+          "rain_1d": 0.0,
+          "rain_3d": 0.0
+        }
+      },
+      "landslide": {
+        "score": 0.23,
+        "band": "LOW",
+        "confidence": 1.0,
+        "assessmentStatus": "ASSESSED",
+        "evidenceStatus": {
+          "slope": "AVAILABLE",
+          "tri": "AVAILABLE",
+          "rain_1d": "AVAILABLE",
+          "rain_3d": "AVAILABLE"
+        },
+        "factors": {
+          "slope": 0.35,
+          "tri": 0.55,
+          "rain_1d": 0.0,
+          "rain_3d": 0.0
+        }
+      },
+      "modelVersion": "V1.0",
+      "modelStatus": "PROVISIONAL"
+    }
+  },
+  {
+    "id": "case_16_explicit_unknown_strings",
+    "description": "All environmental features supplied as UNKNOWN string literals resulting in INSUFFICIENT_DATA",
+    "input": {
+      "latitude": 31.1048,
+      "longitude": 77.1734,
+      "slope_deg": "UNKNOWN",
+      "tri": "UNKNOWN",
+      "rainfall_1d_mm": "UNKNOWN",
+      "rainfall_3d_mm": "UNKNOWN"
+    },
+    "expected_output": {
+      "location": {
+        "latitude": 31.1048,
+        "longitude": 77.1734,
+        "district": "Shimla"
+      },
+      "flood": {
+        "score": 0.09,
+        "band": "LOW",
+        "confidence": 0.0,
+        "assessmentStatus": "INSUFFICIENT_DATA",
+        "water_depth": "NONE",
+        "passability": "passable",
+        "routePassability": "UNDETERMINED",
+        "evidenceStatus": {
+          "valley_slope": "UNKNOWN",
+          "floodplain_tri": "UNKNOWN",
+          "rain_1d": "UNKNOWN",
+          "rain_3d": "UNKNOWN"
+        },
+        "factors": {}
+      },
+      "landslide": {
+        "score": 0.11,
+        "band": "LOW",
+        "confidence": 0.0,
+        "assessmentStatus": "INSUFFICIENT_DATA",
+        "evidenceStatus": {
+          "slope": "UNKNOWN",
+          "tri": "UNKNOWN",
+          "rain_1d": "UNKNOWN",
+          "rain_3d": "UNKNOWN"
+        },
+        "factors": {}
+      },
+      "modelVersion": "V1.0",
+      "modelStatus": "PROVISIONAL"
     }
   }
 ]

@@ -163,7 +163,8 @@ def test_risk_engine_contract_shimla():
         elevation_m=2205.0
     )
 
-    assert output["modelVersion"] == "V1"
+    assert output["modelVersion"] == "V1.0"
+    assert output["modelStatus"] == "PROVISIONAL"
     assert output["location"]["district"] == "Shimla"
     assert output["location"]["latitude"] == 31.1048
     assert output["location"]["longitude"] == 77.1734

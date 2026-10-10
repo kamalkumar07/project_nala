@@ -20,7 +20,8 @@ from src.models.landslide_model import LandslideRiskModel
 class NalaRiskEngine:
     """Master production-oriented Local Risk Engine for Himachal Pradesh."""
 
-    MODEL_VERSION = "V1"
+    MODEL_VERSION = "V1.0"
+    MODEL_STATUS = "PROVISIONAL"
 
     def __init__(self):
         self.boundary_engine = HimachalBoundaryEngine()
@@ -90,15 +91,21 @@ class NalaRiskEngine:
                 "score": flood_res["score"],
                 "band": flood_res["band"],
                 "confidence": flood_res["confidence"],
+                "assessmentStatus": flood_res["assessmentStatus"],
                 "water_depth": flood_res["water_depth"],
                 "passability": flood_res["passability"],
+                "routePassability": flood_res["routePassability"],
+                "evidenceStatus": flood_res["evidenceStatus"],
                 "factors": flood_res["factors"]
             },
             "landslide": {
                 "score": landslide_res["score"],
                 "band": landslide_res["band"],
                 "confidence": landslide_res["confidence"],
+                "assessmentStatus": landslide_res["assessmentStatus"],
+                "evidenceStatus": landslide_res["evidenceStatus"],
                 "factors": landslide_res["factors"]
             },
-            "modelVersion": self.MODEL_VERSION
+            "modelVersion": self.MODEL_VERSION,
+            "modelStatus": self.MODEL_STATUS
         }

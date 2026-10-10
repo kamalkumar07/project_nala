@@ -15,7 +15,8 @@ from src.normalization.scalers import RiskScalers
 class LandslideRiskModel:
     """Scientific V1 deterministic risk model for Himalayan landslides."""
 
-    VERSION = "V1"
+    VERSION = "V1.0"
+    STATUS = "PROVISIONAL"
 
     # Calibrated feature weights based on 2023 disaster ground-truth empirical correlations
     WEIGHTS = {
@@ -31,6 +32,24 @@ class LandslideRiskModel:
         "MEDIUM_MAX": 0.69
     }
 
+    @staticmethod
+    def evaluate_feature_state(val: Any, val_min: float = 0.0, val_max: Optional[float] = None) -> str:
+        """Classify feature input state into AVAILABLE, MISSING, UNKNOWN, or INVALID."""
+        if val is None:
+            return "MISSING"
+        if isinstance(val, str):
+            if val.strip().upper() == "UNKNOWN":
+                return "UNKNOWN"
+            return "INVALID"
+        if not (isinstance(val, (int, float, np.floating, np.integer)) and np.isfinite(val)):
+            return "INVALID"
+        fval = float(val)
+        if fval < val_min:
+            return "INVALID"
+        if val_max is not None and fval > val_max:
+            return "INVALID"
+        return "AVAILABLE"
+
     @classmethod
     def evaluate(
         cls,
@@ -41,12 +60,25 @@ class LandslideRiskModel:
         elevation_m: Optional[float] = None,
         recent_reports: Optional[int] = None
     ) -> Dict[str, Any]:
-        """Compute Landslide risk score, factors, confidence, and assigned risk band."""
+        """Compute Landslide risk score, factors, confidence, evidenceStatus, and assessmentStatus."""
         factors: Dict[str, float] = {}
         missing_penalties = 0.0
 
+        # Evaluate feature availability states
+        s_state = cls.evaluate_feature_state(slope_deg, val_min=0.0, val_max=90.0)
+        t_state = cls.evaluate_feature_state(tri, val_min=0.0)
+        r1_state = cls.evaluate_feature_state(rainfall_1d_mm, val_min=0.0)
+        r3_state = cls.evaluate_feature_state(rainfall_3d_mm, val_min=0.0)
+
+        evidence_status = {
+            "slope": s_state,
+            "tri": t_state,
+            "rain_1d": r1_state,
+            "rain_3d": r3_state
+        }
+
         # 1. Slope Factor
-        if slope_deg is not None and np.isfinite(slope_deg) and slope_deg >= 0:
+        if s_state == "AVAILABLE":
             f_slope = float(RiskScalers.domain_slope_landslide(slope_deg))
             factors["slope"] = round(f_slope, 4)
         else:
@@ -54,7 +86,7 @@ class LandslideRiskModel:
             missing_penalties += 0.35
 
         # 2. TRI Factor
-        if tri is not None and np.isfinite(tri) and tri >= 0:
+        if t_state == "AVAILABLE":
             f_tri = float(RiskScalers.domain_tri_landslide(tri))
             factors["tri"] = round(f_tri, 4)
         else:
@@ -62,7 +94,7 @@ class LandslideRiskModel:
             missing_penalties += 0.20
 
         # 3. Rainfall 1-Day Factor
-        if rainfall_1d_mm is not None and np.isfinite(rainfall_1d_mm) and rainfall_1d_mm >= 0:
+        if r1_state == "AVAILABLE":
             f_rain_1d = float(RiskScalers.domain_rainfall(rainfall_1d_mm))
             factors["rain_1d"] = round(f_rain_1d, 4)
         else:
@@ -70,7 +102,7 @@ class LandslideRiskModel:
             missing_penalties += 0.25
 
         # 4. Rainfall 3-Day Factor (normalized on 3-day accumulation scale)
-        if rainfall_3d_mm is not None and np.isfinite(rainfall_3d_mm) and rainfall_3d_mm >= 0:
+        if r3_state == "AVAILABLE":
             # Scale 3-day sum by 1.6 to match single-day severity curve
             f_rain_3d = float(RiskScalers.domain_rainfall(rainfall_3d_mm / 1.6))
             factors["rain_3d"] = round(f_rain_3d, 4)
@@ -86,9 +118,9 @@ class LandslideRiskModel:
             f_rain_3d * cls.WEIGHTS["rain_3d"]
         )
 
-        # Nonlinear amplification: If steep slope (>=25°) AND heavy rain (>64.4mm),
+        # Nonlinear amplification: If steep slope (>=22°) AND heavy rain (>=64.4mm),
         # colluvium failure probability jumps nonlinearly
-        if (slope_deg is not None and slope_deg >= 22.0) and (rainfall_1d_mm is not None and rainfall_1d_mm >= 64.4):
+        if (s_state == "AVAILABLE" and slope_deg >= 22.0) and (r1_state == "AVAILABLE" and rainfall_1d_mm >= 64.4):
             boost = 0.12 * (f_slope * f_rain_1d)
             base_score += boost
 
@@ -105,10 +137,18 @@ class LandslideRiskModel:
         else:
             band = "HIGH"
 
+        # Assessment Status: If all environmental features are missing/invalid/unknown, report INSUFFICIENT_DATA
+        if all(st in {"MISSING", "INVALID", "UNKNOWN"} for st in [s_state, t_state, r1_state, r3_state]):
+            assessment_status = "INSUFFICIENT_DATA"
+        else:
+            assessment_status = "ASSESSED"
+
         return {
             "score": round(score, 2),
             "band": band,
             "confidence": round(confidence, 2),
+            "assessmentStatus": assessment_status,
+            "evidenceStatus": evidence_status,
             "factors": factors,
             "raw_score": score
         }

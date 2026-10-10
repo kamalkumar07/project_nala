@@ -26,8 +26,8 @@ def engine():
 
 
 def test_golden_cases_count(golden_cases):
-    """Verify that all 12 golden test cases are present."""
-    assert len(golden_cases) == 12
+    """Verify that all 16 golden test cases are present."""
+    assert len(golden_cases) == 16
 
 
 def test_golden_cases_execution(golden_cases, engine):
@@ -48,14 +48,22 @@ def test_golden_cases_execution(golden_cases, engine):
         assert actual["flood"]["score"] == expected["flood"]["score"], f"Flood score mismatch in {case_id}"
         assert actual["flood"]["band"] == expected["flood"]["band"], f"Flood band mismatch in {case_id}"
         assert actual["flood"]["confidence"] == expected["flood"]["confidence"], f"Flood confidence mismatch in {case_id}"
+        assert actual["flood"]["assessmentStatus"] == expected["flood"]["assessmentStatus"], f"Flood assessmentStatus mismatch in {case_id}"
+        assert actual["flood"]["water_depth"] == expected["flood"]["water_depth"], f"Flood water_depth mismatch in {case_id}"
+        assert actual["flood"]["passability"] == expected["flood"]["passability"], f"Flood passability mismatch in {case_id}"
+        assert actual["flood"]["routePassability"] == "UNDETERMINED", f"Flood routePassability mismatch in {case_id}"
+        assert actual["flood"]["evidenceStatus"] == expected["flood"]["evidenceStatus"], f"Flood evidenceStatus mismatch in {case_id}"
 
         # 3. Landslide
         assert actual["landslide"]["score"] == expected["landslide"]["score"], f"Landslide score mismatch in {case_id}"
         assert actual["landslide"]["band"] == expected["landslide"]["band"], f"Landslide band mismatch in {case_id}"
         assert actual["landslide"]["confidence"] == expected["landslide"]["confidence"], f"Landslide confidence mismatch in {case_id}"
+        assert actual["landslide"]["assessmentStatus"] == expected["landslide"]["assessmentStatus"], f"Landslide assessmentStatus mismatch in {case_id}"
+        assert actual["landslide"]["evidenceStatus"] == expected["landslide"]["evidenceStatus"], f"Landslide evidenceStatus mismatch in {case_id}"
 
-        # 4. Model Version
-        assert actual["modelVersion"] == "V1"
+        # 4. Model Version & Status
+        assert actual["modelVersion"] == "V1.0"
+        assert actual["modelStatus"] == "PROVISIONAL"
 
 
 def test_golden_case_invalid_coordinate(engine):

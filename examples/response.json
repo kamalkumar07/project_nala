@@ -8,8 +8,16 @@
     "score": 0.34,
     "band": "LOW",
     "confidence": 1.0,
+    "assessmentStatus": "ASSESSED",
     "water_depth": "NONE",
     "passability": "passable",
+    "routePassability": "UNDETERMINED",
+    "evidenceStatus": {
+      "valley_slope": "AVAILABLE",
+      "floodplain_tri": "AVAILABLE",
+      "rain_1d": "AVAILABLE",
+      "rain_3d": "AVAILABLE"
+    },
     "factors": {
       "valley_slope": 0.0,
       "floodplain_flatness": 0.0,
@@ -21,6 +29,13 @@
     "score": 0.74,
     "band": "HIGH",
     "confidence": 1.0,
+    "assessmentStatus": "ASSESSED",
+    "evidenceStatus": {
+      "slope": "AVAILABLE",
+      "tri": "AVAILABLE",
+      "rain_1d": "AVAILABLE",
+      "rain_3d": "AVAILABLE"
+    },
     "factors": {
       "slope": 0.6833,
       "tri": 0.865,
@@ -28,5 +43,6 @@
       "rain_3d": 0.5856
     }
   },
-  "modelVersion": "V1"
+  "modelVersion": "V1.0",
+  "modelStatus": "PROVISIONAL"
 }
