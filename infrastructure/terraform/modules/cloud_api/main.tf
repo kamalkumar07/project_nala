@@ -99,7 +99,14 @@ data "archive_file" "lambda_zip" {
   output_path = "${path.module}/lambda/function.zip"
 
   excludes = [
-    "function.zip"
+    "function.zip",
+    "districts/lookup.test.mjs",
+    "risk/fixtures/**",
+    "risk/tests/**",
+    "tests/**",
+    "node_modules/ngeohash/.pi-subagents",
+    "node_modules/ngeohash/.pi-subagents/**",
+    "wards/lookup.mjs"
   ]
 }
 

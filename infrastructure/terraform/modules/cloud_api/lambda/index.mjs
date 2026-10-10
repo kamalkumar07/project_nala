@@ -11,6 +11,7 @@ import {
 } from "@aws-sdk/lib-dynamodb";
 import ngeohash from "ngeohash";
 import { calculateRisk } from "./risk/engine.mjs";
+import { assessRiskV1 } from "./risk/v1-engine.mjs";
 import { findDistrict } from "./districts/lookup.mjs";
 
 const s3 = new S3Client({
@@ -622,6 +623,124 @@ if (routeKey === "GET /cloud/risk") {
       return response(400, {
         error: "VALIDATION_ERROR",
         message: "Valid lat and lng are required"
+      });
+    }
+
+    // Opt-in V1 risk assessment. Legacy behavior remains the default.
+    if (params.modelVersion === "V1") {
+      const readOptionalNumber = (key) => {
+        if (params[key] === undefined || params[key] === "") {
+          return null;
+        }
+        return Number(params[key]);
+      };
+
+      const slope_deg = readOptionalNumber("slope_deg");
+      const tri = readOptionalNumber("tri");
+      const rainfall_1d_mm = readOptionalNumber("rainfall_1d_mm");
+      const rainfall_3d_mm = readOptionalNumber("rainfall_3d_mm");
+      const elevation_m = readOptionalNumber("elevation_m");
+      const recent_reports = readOptionalNumber("recent_reports");
+
+      const optionalInputs = {
+        slope_deg,
+        tri,
+        rainfall_1d_mm,
+        rainfall_3d_mm,
+        elevation_m,
+        recent_reports
+      };
+
+      for (const [key, value] of Object.entries(optionalInputs)) {
+        if (value !== null && !Number.isFinite(value)) {
+          return response(400, {
+            error: "VALIDATION_ERROR",
+            message: `${key} must be a number when provided`
+          });
+        }
+      }
+
+            const nonNegativeInputs = [
+        "tri",
+        "rainfall_1d_mm",
+        "rainfall_3d_mm",
+        "recent_reports"
+      ];
+
+      for (const key of nonNegativeInputs) {
+        const value = optionalInputs[key];
+
+        if (value !== null && value < 0) {
+          return response(400, {
+            error: "VALIDATION_ERROR",
+            message: `${key} must be non-negative`
+          });
+        }
+      }
+
+      if (
+        slope_deg !== null &&
+        (slope_deg < 0 || slope_deg > 90)
+      ) {
+        return response(400, {
+          error: "VALIDATION_ERROR",
+          message: "slope_deg must be between 0 and 90"
+        });
+      }
+
+      const allowedDepths = new Set([
+        "NONE",
+        "ANKLE",
+        "KNEE",
+        "WAIST",
+        "ABOVE_WAIST",
+        "UNKNOWN"
+      ]);
+
+      const rawWaterDepth = params.reported_water_depth;
+
+      if (
+        rawWaterDepth !== undefined &&
+        typeof rawWaterDepth !== "string"
+      ) {
+        return response(400, {
+          error: "VALIDATION_ERROR",
+          message: "reported_water_depth must be a string"
+        });
+      }
+
+      const reported_water_depth =
+        rawWaterDepth?.trim().toUpperCase() || null;
+
+      if (
+        reported_water_depth !== null &&
+        !allowedDepths.has(reported_water_depth)
+      ) {
+        return response(400, {
+          error: "VALIDATION_ERROR",
+          message: "reported_water_depth must be a recognized depth category"
+        });
+      }
+
+      const districtResult = await findDistrict(lat, lng);
+
+      const risk = assessRiskV1({
+        latitude: lat,
+        longitude: lng,
+        district: districtResult?.district ?? "Outside_Himachal_Pradesh",
+        slope_deg,
+        tri,
+        rainfall_1d_mm,
+        rainfall_3d_mm,
+        elevation_m,
+        recent_reports,
+        reported_water_depth
+      });
+
+      return response(200, {
+        ...risk,
+        modelStatus: "PROVISIONAL",
+        evidenceNote: "Risk estimates are preliminary and depend on available input data."
       });
     }
 

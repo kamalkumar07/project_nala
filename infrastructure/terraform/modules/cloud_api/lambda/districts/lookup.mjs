@@ -35,19 +35,33 @@ async function loadDistricts() {
   }
 
   districtsCache = geojson.features;
-
   return districtsCache;
 }
 
-export async function findDistrict(lat, lng) {
-  const districts = await loadDistricts();
+export function findDistrictInGeoJSON(districts, lat, lng) {
+  if (!Array.isArray(districts)) {
+    throw new TypeError("District features must be an array");
+  }
+
+  if (
+    !Number.isFinite(lat) ||
+    lat < -90 ||
+    lat > 90 ||
+    !Number.isFinite(lng) ||
+    lng < -180 ||
+    lng > 180
+  ) {
+    throw new TypeError("Valid latitude and longitude are required");
+  }
+
   const location = point([lng, lat]);
 
   for (const district of districts) {
     const geometryType = district.geometry?.type;
 
     if (
-      (geometryType === "Polygon" || geometryType === "MultiPolygon") &&
+      (geometryType === "Polygon" ||
+        geometryType === "MultiPolygon") &&
       booleanPointInPolygon(location, district)
     ) {
       return {
@@ -59,4 +73,9 @@ export async function findDistrict(lat, lng) {
   }
 
   return null;
+}
+
+export async function findDistrict(lat, lng) {
+  const districts = await loadDistricts();
+  return findDistrictInGeoJSON(districts, lat, lng);
 }
