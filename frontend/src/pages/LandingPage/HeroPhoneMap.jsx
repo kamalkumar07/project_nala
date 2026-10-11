@@ -122,7 +122,12 @@ export function HeroPhoneMap() {
 
               {/* Seeded Pins */}
               {SEEDED_PINS.map((pin, idx) => (
-                <g key={pin.id} transform={`translate(${pin.x}, ${pin.y})`} className={styles.seededPinGroup}>
+                <g
+  key={pin.id}
+  className={styles.hazardPin}
+  style={{ '--pin-delay': `${idx * 350}ms` }}
+  transform={`translate(${pin.x}, ${pin.y})`}
+>
                   <circle cx="0" cy="0" r="10" fill={pin.color} opacity="0.25" />
                   <circle cx="0" cy="0" r="5" fill={pin.color} />
                   <circle cx="0" cy="0" r="2" fill="#FFFFFF" />
@@ -141,20 +146,25 @@ export function HeroPhoneMap() {
               ))}
 
               {/* Arriving Hazard Report Pin with Radiating Ripple */}
-              {arrivedReport && (
-                <g transform={`translate(${focusPin.x}, ${focusPin.y})`} className={styles.arrivedPinGroup}>
-                  <circle cx="0" cy="0" r="20" fill={focusPin.color} className={styles.arrivingRipple} />
-                  <circle cx="0" cy="0" r="12" fill={focusPin.color} className={styles.arrivingRippleDelay} />
-                  <circle cx="0" cy="0" r="7" fill={focusPin.color} />
-                  <circle cx="0" cy="0" r="3" fill="#FFFFFF" />
-                </g>
-              )}
+{arrivedReport && (
+  <g transform={`translate(${focusPin.x}, ${focusPin.y})`}>
+    <g className={styles.arrivingHazardPin}>
+      <circle cx="0" cy="0" r="20" fill={focusPin.color} className={styles.arrivingRipple} />
+      <circle cx="0" cy="0" r="12" fill={focusPin.color} className={styles.arrivingRippleDelay} />
+      <circle cx="0" cy="0" r="7" fill={focusPin.color} />
+      <circle cx="0" cy="0" r="3" fill="#FFFFFF" />
+    </g>
+  </g>
+)}
             </svg>
           </div>
 
           {/* Arriving Report In-App Floating Card */}
           {arrivedReport && (
-            <div className={styles.phoneAlertCard} role="status" aria-live="polite">
+            <div
+  className={`${styles.phoneAlertCard} ${styles.phoneAlertCardAnimated}`}
+  role="status"
+>
               <div className={styles.phoneAlertTop}>
                 <div className={styles.phoneAlertBadge} style={{ background: focusPin.color }}>
                   <AlertOctagon size={10} aria-hidden="true" color="#FFFFFF" />

@@ -88,36 +88,31 @@ describe('LandingPage — Product-First Rebuild', () => {
     expect(screen.getByRole('heading', { name: /district response teams/i })).toBeInTheDocument();
   });
 
-  it('renders Under the Hood architecture diagram with all 7 required nodes and plain captions', () => {
+    it('renders the public risk intelligence workflow with all 4 stages', () => {
     render(
       <MemoryRouter>
         <LandingPage />
       </MemoryRouter>
     );
 
-    expect(screen.getByRole('heading', { name: /under the hood/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', {
+        name: /from reports to risk intelligence/i,
+      })
+    ).toBeInTheDocument();
 
-    // 7 architecture nodes: Phone, S3, Bedrock, DynamoDB, Risk engine, Cloud API, Map and alerts
-    const requiredNodes = [
-      'Phone',
-      'S3',
-      'Bedrock',
-      'DynamoDB',
-      'Cloud API',
-      'Risk engine',
-      'Map and alerts',
+    const requiredStages = [
+      'Community Reports',
+      'Intelligent Analysis',
+      'Risk Intelligence',
+      'Informed Action',
     ];
 
-    requiredNodes.forEach((nodeName) => {
-      const nodes = screen.getAllByText(nodeName);
-      expect(nodes.length).toBeGreaterThan(0);
+    requiredStages.forEach((stage) => {
+      expect(
+        screen.getByRole('heading', { name: stage })
+      ).toBeInTheDocument();
     });
-
-    // Plain captions (rendered in desktop grid and mobile stacked list)
-    expect(screen.getAllByText(/citizen photographs street with mandatory gps coordinates/i).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/direct presigned put upload bypasses server bottlenecks/i).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/analyzes visual markers \(tyres, kerbs\) to estimate depth/i).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/millisecond-latency store indexing reports/i).length).toBeGreaterThan(0);
   });
 
   it('renders clean footer with strictly the 3 allowed links and the mandatory U5 advisory line', () => {

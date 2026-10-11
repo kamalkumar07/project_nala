@@ -227,18 +227,29 @@ export function LandingPage() {
           </div>
         </section>
 
-        {/* ── SECTION 3: UNDER THE HOOD (ANIMATED SVG ARCHITECTURE DIAGRAM) ───── */}
-        <section className={styles.underTheHoodSection} aria-label="System architecture">
-          <div className={styles.sectionHeader}>
-            <span className={styles.sectionOverline}>System architecture</span>
-            <h2 className={styles.sectionTitle}>Under the hood</h2>
-            <p className={styles.sectionSubtitle}>
-              A serverless event-driven architecture connecting citizen devices with automated emergency intelligence.
-            </p>
-          </div>
+        {/* ── SECTION 3: FROM REPORTS TO RISK INTELLIGENCE ───── */}
+<section
+  className={styles.underTheHoodSection}
+  aria-labelledby="risk-workflow-title"
+>
+  <div className={styles.sectionHeader}>
+    <span className={styles.sectionOverline}>How PARVAT works</span>
 
-          <ArchitectureDiagram />
-        </section>
+    <h2
+      id="risk-workflow-title"
+      className={styles.sectionTitle}
+    >
+      From Reports to Risk Intelligence
+    </h2>
+
+    <p className={styles.sectionSubtitle}>
+      Turning community observations and environmental information
+      into actionable risk insights.
+    </p>
+  </div>
+
+  <ArchitectureDiagram />
+</section>
 
         {/* ── SECTION 4: CLEAN FOOTER ─────────────────────────────────────────── */}
         <footer className={styles.cleanFooter} role="contentinfo">

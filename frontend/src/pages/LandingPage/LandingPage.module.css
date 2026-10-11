@@ -72,14 +72,34 @@
 }
 
 /* ── Navbar ───────────────────────────────────────────────────────────────── */
+/* ── APPLE-INSPIRED LIQUID GLASS NAVBAR ─────────────────────── */
+
 .navbar {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(243, 248, 250, 0.92);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--color-line, #D8E4EA);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.82) 0%,
+      rgba(230, 248, 255, 0.64) 45%,
+      rgba(255, 255, 255, 0.76) 100%
+    );
+
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+
+  box-shadow:
+    0 1px 0 rgba(120, 190, 220, 0.16),
+    0 8px 28px rgba(18, 72, 105, 0.055);
+
+  isolation: isolate;
+  transition:
+    background 300ms ease,
+    box-shadow 300ms ease;
 }
 
 .navContainer {
@@ -1408,5 +1428,555 @@
   .arrivedPinGroup,
   .streetWaterRise {
     animation: none !important;
+  }
+}
+/* ── PARVAT: PUBLIC RISK INTELLIGENCE WORKFLOW ───────────────── */
+
+.workflowGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.workflowCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 230px;
+  padding: 24px 20px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #ffffff 0%, #f4fbfd 100%);
+  border: 1px solid #d9edf2;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(7, 31, 51, 0.05);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.workflowCard:hover {
+  transform: translateY(-4px);
+  border-color: #8ed8e7;
+  box-shadow: 0 14px 30px rgba(7, 31, 51, 0.09);
+}
+
+.workflowCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.workflowNumber {
+  color: #1688a8;
+  font-family: var(--font-heading, 'Sora', sans-serif);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.workflowIcon {
+  display: flex;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #1688a8;
+  background: #e5f7fb;
+  border: 1px solid #d1eef5;
+  border-radius: 13px;
+}
+
+.workflowTitle {
+  margin: 0 0 10px;
+  color: #0b1f33;
+  font-family: var(--font-heading, 'Sora', sans-serif);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.workflowDescription {
+  margin: 0;
+  color: #526779;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+@media (max-width: 1000px) {
+  .workflowGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 540px) {
+  .workflowGrid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 22px;
+  }
+
+  .workflowCard {
+    min-height: auto;
+    padding: 20px;
+  }
+
+  .workflowCardTop {
+    margin-bottom: 18px;
+  }
+
+  .workflowTitle {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .workflowCard {
+    transition: none;
+  }
+
+  .workflowCard:hover {
+    transform: none;
+  }
+}
+/* ── PARVAT: DYNAMIC WORKFLOW ANIMATIONS ───────────────────── */
+
+/* Smooth entrance for the workflow cards */
+.workflowCard {
+  animation: workflowReveal 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  will-change: opacity, transform;
+}
+
+.workflowCard:nth-child(1) {
+  animation-delay: 100ms;
+}
+
+.workflowCard:nth-child(2) {
+  animation-delay: 220ms;
+}
+
+.workflowCard:nth-child(3) {
+  animation-delay: 340ms;
+}
+
+.workflowCard:nth-child(4) {
+  animation-delay: 460ms;
+}
+
+@keyframes workflowReveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Refined hover glow */
+.workflowCard:hover {
+  border-color: #63cfe4;
+  box-shadow:
+    0 14px 32px rgba(7, 31, 51, 0.1),
+    0 0 22px rgba(22, 136, 168, 0.12);
+}
+
+/* Icon interaction */
+.workflowIcon {
+  transition:
+    transform 300ms ease,
+    background-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.workflowCard:hover .workflowIcon {
+  transform: translateY(-2px) scale(1.06);
+  background-color: #d6f4fa;
+  box-shadow: 0 0 18px rgba(22, 136, 168, 0.12);
+}
+
+/* Accessibility: respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .workflowCard {
+    animation: none;
+    will-change: auto;
+  }
+
+  .workflowIcon {
+    transition: none;
+  }
+
+  .workflowCard:hover .workflowIcon {
+    transform: none;
+  }
+}
+/* ── PARVAT: CINEMATIC HERO ENTRANCE ────────────────────────── */
+
+.heroHeadline {
+  animation: heroTextReveal 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: 100ms;
+}
+
+.heroSubhead {
+  animation: heroTextReveal 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: 260ms;
+}
+
+.heroCtas {
+  animation: heroTextReveal 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: 420ms;
+}
+
+@keyframes heroTextReveal {
+  from {
+  opacity: 0;
+  transform: translateY(40px);
+  filter: blur(6px);
+}
+
+  to {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+}
+
+/* Respect accessibility preferences */
+@media (prefers-reduced-motion: reduce) {
+  .heroHeadline,
+  .heroSubhead,
+  .heroCtas {
+    animation: none;
+  }
+}
+/* ── PARVAT: HAZARD SCANNING EFFECT ─────────────────────────── */
+
+.streetScene {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gentle scanning highlight */
+@keyframes hazardScan {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.65;
+  }
+
+  85% {
+    opacity: 0.65;
+  }
+
+  100% {
+    transform: translateY(250px);
+    opacity: 0;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .streetScene {
+    animation: none;
+  }
+}
+/* ── PARVAT: LIQUID GLASS EXPERIENCE ───────────────────────── */
+
+/* Ambient glass lighting */
+.landingShell {
+  position: relative;
+  isolation: isolate;
+}
+
+.landingShell::before {
+  content: "";
+  position: absolute;
+  top: 100px;
+  left: -140px;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(67, 197, 235, 0.14) 0%,
+    rgba(67, 197, 235, 0.05) 42%,
+    transparent 72%
+  );
+  filter: blur(24px);
+  pointer-events: none;
+  z-index: -1;
+  animation: liquidDrift 14s ease-in-out infinite alternate;
+}
+
+/* Glass surface for workflow cards */
+.workflowCard {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.88),
+      rgba(225, 246, 253, 0.62)
+    );
+  backdrop-filter: blur(16px) saturate(145%);
+  -webkit-backdrop-filter: blur(16px) saturate(145%);
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 8px 28px rgba(20, 80, 110, 0.07);
+  transition:
+    transform 350ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 350ms ease,
+    border-color 350ms ease;
+}
+
+/* Moving glass reflection on hover */
+.workflowCard {
+  position: relative;
+  overflow: hidden;
+}
+
+.workflowCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(
+    110deg,
+    transparent 10%,
+    rgba(255, 255, 255, 0.58) 48%,
+    transparent 90%
+  );
+  transform: skewX(-18deg);
+  transition: left 700ms ease;
+}
+
+.workflowCard:hover::before {
+  left: 150%;
+}
+
+.workflowCard:hover {
+  transform: translateY(-5px);
+  border-color: rgba(94, 205, 232, 0.8);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 18px 38px rgba(20, 80, 110, 0.12),
+    0 0 22px rgba(72, 196, 226, 0.1);
+}
+
+/* Fluid ambient movement */
+@keyframes liquidDrift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(55px, 28px, 0) scale(1.08);
+  }
+
+  100% {
+    transform: translate3d(20px, 65px, 0) scale(0.96);
+  }
+}
+
+/* Accessible motion and glass fallbacks */
+@media (prefers-reduced-motion: reduce) {
+  .landingShell::before {
+    animation: none;
+  }
+
+  .workflowCard,
+  .workflowCard::before {
+    transition: none;
+  }
+
+  .workflowCard:hover {
+    transform: none;
+  }
+}
+
+@supports not (backdrop-filter: blur(16px)) {
+  .workflowCard {
+    background: rgba(244, 251, 253, 0.98);
+  }
+}
+/* ── PARVAT: LIVE PHONE MAP ANIMATIONS ─────────────────────── */
+
+/* Gentle floating motion for the phone */
+.phoneChassis {
+  animation: phoneFloat 6s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+@keyframes phoneFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Give the phone frame a subtle glass-like highlight */
+.phoneChassis::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    125deg,
+    rgba(255, 255, 255, 0.10) 0%,
+    transparent 22%,
+    transparent 72%,
+    rgba(85, 210, 255, 0.07) 100%
+  );
+  z-index: 5;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .phoneChassis {
+    animation: none;
+  }/* ── LIVE HAZARD MARKER ANIMATIONS ─────────────────────────── */
+
+.hazardPin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hazardPinPulse 2.8s ease-in-out infinite;
+  animation-delay: var(--pin-delay, 0ms);
+}
+
+@keyframes hazardPinPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.72;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hazardPin {
+    animation: none;
+  }
+}
+}
+/* ── LIVE INCOMING HAZARD ANIMATIONS ──────────────────────── */
+
+/* Dropping incoming hazard pin */
+.arrivingHazardPin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hazardDropIn 700ms cubic-bezier(0.2, 0.8, 0.25, 1) both;
+}
+
+@keyframes hazardDropIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-24px) scale(0.55);
+  }
+
+  65% {
+    opacity: 1;
+    transform: translateY(3px) scale(1.08);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Expanding ripple rings around the incoming report */
+.arrivingHazardPin circle:first-child {
+  animation: hazardRipple 2.2s ease-out infinite;
+}
+
+.arrivingHazardPin circle:nth-child(2) {
+  animation: hazardRipple 2.2s ease-out infinite;
+  animation-delay: 450ms;
+}
+
+@keyframes hazardRipple {
+  0% {
+    opacity: 0.7;
+    r: 8;
+  }
+
+  100% {
+    opacity: 0;
+    r: 27;
+  }
+}
+
+/* Incoming alert card glow */
+.phoneAlertCardAnimated {
+  animation:
+    alertCardEnter 650ms cubic-bezier(0.2, 0.7, 0.2, 1) both,
+    alertCardGlow 3.5s ease-in-out 700ms infinite;
+}
+
+@keyframes alertCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes alertCardGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 rgba(255, 80, 80, 0);
+  }
+
+  50% {
+    box-shadow: 0 0 22px rgba(255, 80, 80, 0.16);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .phoneChassis,
+  .hazardPin {
+    animation: none !important;
+  }
+}
+
+/* ── LIVE HAZARD MARKER ANIMATIONS ─────────────────────────── */
+
+.hazardPin {
+  animation: hazardPinPulse 2.8s ease-in-out infinite;
+  animation-delay: var(--pin-delay, 0ms);
+}
+
+@keyframes hazardPinPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.72;
   }
 }
