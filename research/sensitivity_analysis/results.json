@@ -1,0 +1,10 @@
+{
+  "reference_commit": "200fd804e74e1b0ece7f8cb5ee574544da5d2ef2",
+  "files": [
+    "feature_sensitivity.csv",
+    "interaction_thresholds.csv",
+    "missing_data.csv",
+    "weight_sensitivity.csv"
+  ],
+  "parity": "NOT_EXECUTED: canonical Python dependencies/source are on remote branch; adapter parity was not claimed. Golden-case parity requires running the canonical engine against integration/golden_cases.json."
+}

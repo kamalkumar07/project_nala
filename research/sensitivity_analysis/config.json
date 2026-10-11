@@ -1,0 +1,15 @@
+{
+  "reference_commit": "200fd804e74e1b0ece7f8cb5ee574544da5d2ef2",
+  "source": "origin/feature/nala-ai-ml-v1",
+  "note": "Analytical replica configuration; not production configuration.",
+  "implemented_weights": {
+    "flood": {"rain_1d": 0.30, "rain_3d": 0.25, "slope": 0.30, "tri": 0.15},
+    "landslide": {"slope": 0.35, "tri": 0.20, "rain_1d": 0.25, "rain_3d": 0.20}
+  },
+  "bands": {"low_max": 0.34, "medium_max": 0.69},
+  "interaction_thresholds": {
+    "flood": {"slope_deg": 6.0, "rainfall_1d_mm": 64.4, "boost": 0.15},
+    "landslide": {"slope_deg": 22.0, "rainfall_1d_mm": 64.4, "boost": 0.12}
+  },
+  "rainfall_breakpoints": [[0.0, 0.0], [15.5, 0.15], [64.4, 0.45], [115.5, 0.75], [204.4, 1.0]]
+}

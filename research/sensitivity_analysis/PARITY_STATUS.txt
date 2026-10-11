@@ -1,0 +1,1 @@
+NOT_EXECUTED: canonical Python dependencies/source are on remote branch; adapter parity was not claimed. Golden-case parity requires running the canonical engine against integration/golden_cases.json.

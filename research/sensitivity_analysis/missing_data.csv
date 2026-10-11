@@ -1,0 +1,17 @@
+model,missing,raw,score,band,confidence,boost
+flood,none,0.1989110429447853,0.2,LOW,1.0,0.0
+flood,rain_1d,0.09041411042944786,0.09,LOW,0.7,0.0
+flood,rain_3d,0.10849693251533743,0.11,LOW,0.75,0.0
+flood,slope,0.2589110429447853,0.26,LOW,0.7,0.0
+flood,tri,0.2289110429447853,0.23,LOW,0.85,0.0
+flood,rain_1d+rain_3d,0.0,0.0,LOW,0.45,0.0
+flood,slope+tri,0.2889110429447853,0.29,LOW,0.55,0.0
+flood,all,0.09,0.09,LOW,0.0,0.0
+landslide,none,0.5081620654396728,0.51,MEDIUM,1.0,0.0
+landslide,rain_1d,0.417747955010225,0.42,MEDIUM,0.75,0.0
+landslide,rain_3d,0.43583077709611456,0.44,MEDIUM,0.8,0.0
+landslide,slope,0.3827453987730062,0.38,MEDIUM,0.65,0.0
+landslide,tri,0.3981620654396728,0.4,MEDIUM,0.8,0.0
+landslide,rain_1d+rain_3d,0.3454166666666667,0.35,MEDIUM,0.55,0.0
+landslide,slope+tri,0.27274539877300613,0.27,LOW,0.45,0.0
+landslide,all,0.11,0.11,LOW,0.0,0.0
