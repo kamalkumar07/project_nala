@@ -44,6 +44,7 @@ import {
 } from 'lucide-react';
 
 import { useHotspots, useReports } from '../../api/index.js';
+import { getRiskAssessment } from '../../services/api.js';
 import {
   Button,
   GlassPanel,
@@ -208,6 +209,12 @@ export function HimachalMap() {
 
   // User detected coordinates { lat, lng }
   const [userCoords, setUserCoords] = useState(null);
+
+  // Point-based risk assessment
+const [assessmentPoint, setAssessmentPoint] = useState(null);
+const [assessmentResult, setAssessmentResult] = useState(null);
+const [assessmentLoading, setAssessmentLoading] = useState(false);
+const [assessmentError, setAssessmentError] = useState(null);
 
   // Hotspots hook: auto-refreshes every 30 seconds
   const {
@@ -846,6 +853,32 @@ export function HimachalMap() {
       map.on('mouseleave', 'unclustered-icon-layer', () => {
         hotspotPopupRef.current?.remove();
       });
+// Select a map point for risk assessment.
+// Existing hotspot, cluster, and district interactions remain untouched.
+map.on('click', (event) => {
+  const interactiveLayers = [
+    'clusters-layer',
+    'unclustered-icon-layer',
+    'hp-districts-fill',
+  ].filter((layerId) => map.getLayer(layerId));
+
+  const features = interactiveLayers.length
+    ? map.queryRenderedFeatures(event.point, {
+        layers: interactiveLayers,
+      })
+    : [];
+
+  if (features.length > 0) return;
+
+  const { lng, lat } = event.lngLat;
+
+  if (!isInsideHP(lat, lng)) return;
+
+  setSelectedHotspot(null);
+  setAssessmentPoint({ lat, lng });
+  setAssessmentResult(null);
+  setAssessmentError(null);
+});
 
       // Click on unclustered hotspot marker
       map.on('click', 'unclustered-icon-layer', (e) => {
@@ -1124,20 +1157,48 @@ export function HimachalMap() {
     });
   }, [selectedHotspot, effectiveReports]);
 
-  function handleFocusHotspot(hotspot) {
-    setSelectedHotspot(hotspot);
-    setSheetExpanded(true);
-    if (!mapRef.current || !hotspot.lat || !hotspot.lng) return;
-    if (!isInsideHP(hotspot.lat, hotspot.lng)) {
-      toast.error(`${hotspot.wardName || hotspot.district || 'This hotspot'} is outside the Himachal Pradesh map area.`);
-      return;
-    }
-    mapRef.current.flyTo({
-      center: [hotspot.lng, hotspot.lat],
-      zoom: 10,
-      essential: true,
-    });
+  async function handleAssessLocation(lat, lng) {
+  if (!isInsideHP(lat, lng)) {
+    toast.error('Please select a location inside Himachal Pradesh.');
+    return;
   }
+
+  setAssessmentPoint({ lat, lng });
+  setAssessmentResult(null);
+  setAssessmentError(null);
+  setAssessmentLoading(true);
+
+  try {
+    const result = await getRiskAssessment({ lat, lng });
+    setAssessmentResult(result);
+  } catch (error) {
+    setAssessmentError(
+      error?.message || 'Unable to assess this location. Please try again.',
+    );
+  } finally {
+    setAssessmentLoading(false);
+  }
+}
+
+function handleFocusHotspot(hotspot) {
+  setSelectedHotspot(hotspot);
+  setSheetExpanded(true);
+
+  if (!mapRef.current || !hotspot.lat || !hotspot.lng) return;
+
+  if (!isInsideHP(hotspot.lat, hotspot.lng)) {
+    toast.error(
+      `${hotspot.wardName || hotspot.district || 'This hotspot'} is outside the Himachal Pradesh map area.`,
+    );
+    return;
+  }
+
+  mapRef.current.flyTo({
+    center: [hotspot.lng, hotspot.lat],
+    zoom: 10,
+    essential: true,
+  });
+}
 
   // Count of critical hotspots
   const criticalCount = useMemo(() => {
@@ -1180,6 +1241,103 @@ export function HimachalMap() {
         )}
       </div>
 
+{/* Point-based Risk Assessment */}
+{assessmentPoint && (
+  <div className={styles.assessmentPanel} role="region" aria-label="Risk assessment">
+    <div className={styles.assessmentHeader}>
+      <div>
+        <strong>Risk Assessment</strong>
+        <p>
+          {assessmentPoint.lat.toFixed(4)}, {assessmentPoint.lng.toFixed(4)}
+        </p>
+      </div>
+
+      <button
+        type="button"
+        onClick={() => {
+          setAssessmentPoint(null);
+          setAssessmentResult(null);
+          setAssessmentError(null);
+        }}
+        aria-label="Close risk assessment"
+      >
+        <X size={16} />
+      </button>
+    </div>
+
+    <p className={styles.assessmentHint}>
+      Assess flood and landslide risk for this location.
+    </p>
+
+    <Button
+      variant="primary"
+      size="sm"
+      onClick={() =>
+        handleAssessLocation(assessmentPoint.lat, assessmentPoint.lng)
+      }
+      disabled={assessmentLoading}
+    >
+      {assessmentLoading ? (
+        <>
+          <Loader2
+            size={14}
+            aria-hidden="true"
+            style={{ marginRight: '6px' }}
+          />
+          Assessing…
+        </>
+      ) : (
+        'Assess location'
+      )}
+    </Button>
+
+    {assessmentError && (
+      <div className={styles.assessmentError} role="alert">
+        <p>{assessmentError}</p>
+        <button
+          type="button"
+          onClick={() =>
+            handleAssessLocation(assessmentPoint.lat, assessmentPoint.lng)
+          }
+          disabled={assessmentLoading}
+        >
+          Retry
+        </button>
+      </div>
+    )}
+
+    {assessmentResult && (
+      <div className={styles.assessmentResults} aria-live="polite">
+        <div>
+          <span>Flood risk</span>
+          <strong>
+            {assessmentResult.flood?.score == null
+              ? 'Unavailable'
+              : `${assessmentResult.flood.score}`}
+          </strong>
+          <small>{assessmentResult.flood?.band ?? 'No score'}</small>
+        </div>
+
+        <div>
+          <span>Landslide risk</span>
+          <strong>
+            {assessmentResult.landslide?.score == null
+              ? 'Unavailable'
+              : `${assessmentResult.landslide.score}`}
+          </strong>
+          <small>{assessmentResult.landslide?.band ?? 'No score'}</small>
+        </div>
+
+        <p>
+          Status:{' '}
+          {assessmentResult.assessmentStatus ?? 'Unknown'}
+          {' · '}
+          Model: {assessmentResult.modelStatus ?? 'Unknown'}
+        </p>
+      </div>
+    )}
+  </div>
+)}
       <div className={styles.mapLegend} role="group" aria-label="Map risk legend">
         {[
           ['LOW', 'Low risk'],

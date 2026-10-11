@@ -169,6 +169,36 @@ export async function getRisk(params = {}, signal) {
   const query = qs.toString() ? `?${qs}` : '';
   return request('GET', `/api/v1/risk${query}`, undefined, signal);
 }
+/**
+ * Fetch a provisional flood and landslide assessment for a specific location.
+ * Environmental inputs are optional and should only be supplied when available.
+ *
+ * @param {{
+ *   lat: number,
+ *   lng: number,
+ *   rainfall_1d_mm?: number,
+ *   rainfall_3d_mm?: number,
+ *   slope_deg?: number,
+ *   tri?: number
+ * }} params
+ * @param {AbortSignal} [signal]
+ */
+export async function getRiskAssessment(params, signal) {
+  const qs = new URLSearchParams();
+
+  for (const [key, value] of Object.entries(params)) {
+    if (value !== undefined && value !== null && value !== '') {
+      qs.set(key, String(value));
+    }
+  }
+
+  return request(
+    'GET',
+    `/api/v1/risk/assessment?${qs.toString()}`,
+    undefined,
+    signal,
+  );
+}
 
 // ── Ward officer ──────────────────────────────────────────────────────────────
 
