@@ -40,7 +40,7 @@ import { useReportStore } from './useReportStore.js';
 import { validateReportForm } from './validation.js';
 import { compressImage } from '../../utils/imageCompressor.js';
 import { isInsideHimachal } from '../../utils/geoUtils.js';
-import { apiRequest, putToS3 } from '../../api/client.js';
+import { submitCloudReport, getCloudReport, confirmCloudReport } from '../../api/cloudClient.js';
 import { Button, SegmentedControl, DepthGauge, useToast } from '../../components/ui/index.js';
 import { HazardIcon } from '../../components/icons/HazardIcons.jsx';
 import { ReportMapPreview } from './ReportMapPreview.jsx';
@@ -104,6 +104,8 @@ export function ReportFlowPage({ initialStep = 1 }) {
     setHazardType,
     setNote,
     setReportId,
+    reportToken,
+    setReportToken,
     reset: resetStore,
   } = useReportStore();
 
@@ -236,39 +238,20 @@ export function ReportFlowPage({ initialStep = 1 }) {
     try {
       const fileToUpload = compressedFile || photo;
 
-      // 1. Presign upload
-      const presignData = await apiRequest('/api/v1/uploads/presign', {
-        method: 'POST',
-        body: {
-          contentType: fileToUpload.type || 'image/jpeg',
-          sizeBytes: fileToUpload.size,
-        },
+      // Submit photo and create report using the AWS cloud API.
+      const reportRes = await submitCloudReport({
+        file: fileToUpload,
+        lat,
+        lng,
+        note,
+        clientTimestamp: new Date().toISOString(),
       });
 
-      const { photoKey, uploadUrl } = presignData;
-      if (!uploadUrl || !photoKey) {
-        throw new Error('Could not connect to storage. Please try again.');
-      }
-
-      // 2. Direct browser upload
-      await putToS3(uploadUrl, fileToUpload);
-      setTimelineStatus((prev) => ({ ...prev, uploaded: true, reading: true }));
-
-      // 3. Create report record
-      const reportRes = await apiRequest('/api/v1/reports', {
-        method: 'POST',
-        body: {
-          photoKey,
-          lat: Number(lat),
-          lng: Number(lng),
-          hazardType,
-          note: note ? note.slice(0, 500) : undefined,
-          clientTimestamp: new Date().toISOString(),
-        },
-      });
-
-      const newId = reportRes.reportId || reportRes.id;
+      const newId = reportRes.reportId;
+      if (!newId) throw new Error('AWS did not return a report ID.');
       setReportId(newId);
+      setReportToken(reportRes.reportToken);
+      setTimelineStatus((prev) => ({ ...prev, uploaded: true }));
 
       // Advance timeline
       setTimelineStatus({
@@ -283,7 +266,7 @@ export function ReportFlowPage({ initialStep = 1 }) {
       pollTimerRef.current = setInterval(async () => {
         attempts += 1;
         try {
-          const polled = await apiRequest(`/api/v1/reports/${encodeURIComponent(newId)}`);
+          const polled = await getCloudReport(newId);
           if (polled.status === 'assessed' || polled.assessment) {
             clearInterval(pollTimerRef.current);
             setTimelineStatus({
@@ -297,28 +280,15 @@ export function ReportFlowPage({ initialStep = 1 }) {
               setAssessedReport(polled);
               setCurrentStep('result');
             }, 600);
-          } else if (polled.status === 'failed') {
+          } else if (['failed', 'analysis_failed'].includes(polled.status)) {
             clearInterval(pollTimerRef.current);
             throw new Error('Analysis could not determine water depth. You can confirm manually.');
           }
         } catch (err) {
           if (attempts >= 15) {
             clearInterval(pollTimerRef.current);
-            // Fallback: show result with undetermined depth so user is not blocked
-            const fallbackReport = {
-              reportId: newId,
-              status: 'assessed',
-              lat,
-              lng,
-              hazardType,
-              assessment: {
-                depthClass: 'unknown',
-                passable: 'caution',
-                confidence: 0.7,
-              },
-            };
-            setAssessedReport(fallbackReport);
-            setCurrentStep('result');
+            setCurrentStep(2);
+            setSubmitError('Could not retrieve the AWS assessment. Please try again.');
           }
         }
       }, 1500);
@@ -335,13 +305,11 @@ export function ReportFlowPage({ initialStep = 1 }) {
   async function handleConfirmAccurate() {
     if (!assessedReport?.reportId) return;
     try {
-      await apiRequest(`/api/v1/reports/${encodeURIComponent(assessedReport.reportId)}/confirm`, {
-        method: 'PATCH',
-        body: {
-          userConfirmed: true,
-          userDepthClass: assessedReport.assessment?.depthClass || 'unknown',
-        },
-      });
+      await confirmCloudReport(
+        assessedReport.reportId,
+        reportToken,
+        assessedReport.assessment?.depthClass || 'unknown',
+      );
       setConfirmedAccurate(true);
       toast.success('Thank you for confirming!');
     } catch {
@@ -354,13 +322,11 @@ export function ReportFlowPage({ initialStep = 1 }) {
     if (!assessedReport?.reportId) return;
     setSavingCorrection(true);
     try {
-      await apiRequest(`/api/v1/reports/${encodeURIComponent(assessedReport.reportId)}/confirm`, {
-        method: 'PATCH',
-        body: {
-          userConfirmed: true,
-          userDepthClass: userDepthChoice,
-        },
-      });
+      await confirmCloudReport(
+        assessedReport.reportId,
+        reportToken,
+        userDepthChoice,
+      );
       setConfirmedAccurate(true);
       setIsCorrectingDepth(false);
       setAssessedReport((prev) => ({

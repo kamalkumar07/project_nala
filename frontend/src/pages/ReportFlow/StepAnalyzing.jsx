@@ -42,7 +42,7 @@ export function StepAnalyzing() {
       clearInterval(timerRef.current);
       navigate(`/result?id=${reportId}`, { state: { report } });
     }
-    if (report.status === 'failed') {
+    if (['failed', 'analysis_failed'].includes(report.status)) {
       clearInterval(timerRef.current);
       // Show in-page error — no good result to navigate to
     }
@@ -63,7 +63,7 @@ export function StepAnalyzing() {
     );
   }
 
-  const failed = report?.status === 'failed';
+ const failed = ['failed', 'analysis_failed'].includes(report?.status);
 
   return (
     <div className={styles.flow}>

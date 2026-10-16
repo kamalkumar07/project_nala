@@ -17,7 +17,7 @@
 import { useState } from 'react';
 import { useNavigate, useSearchParams, useLocation } from 'react-router-dom';
 import { useReportPoller } from '../../hooks/useReportPoller.js';
-import { apiRequest } from '../../api/client.js';
+import { confirmCloudReport } from '../../api/cloudClient.js';
 import { useReportStore } from '../ReportFlow/useReportStore.js';
 import { 
   CheckCircle2, 
@@ -61,6 +61,7 @@ export function ResultScreen() {
   const [searchParams] = useSearchParams();
   const location = useLocation();
   const resetStore = useReportStore((s) => s.reset);
+  const reportToken = useReportStore((s) => s.reportToken);
 
   const reportId = searchParams.get('id');
 
@@ -89,13 +90,11 @@ export function ResultScreen() {
     setSavingFeedback(true);
     setFeedbackError('');
     try {
-      await apiRequest(`/api/v1/reports/${encodeURIComponent(reportId)}/confirm`, {
-        method: 'PATCH',
-        body: {
-          userConfirmed: true,
-          userDepthClass: assessment?.depthClass || 'unknown',
-        },
-      });
+      await confirmCloudReport(
+        reportId,
+        reportToken,
+        assessment?.depthClass || 'unknown',
+      );
       setConfirmedSuccess(true);
       setCorrecting(false);
     } catch (err) {
@@ -111,13 +110,7 @@ export function ResultScreen() {
     setSavingFeedback(true);
     setFeedbackError('');
     try {
-      await apiRequest(`/api/v1/reports/${encodeURIComponent(reportId)}/confirm`, {
-        method: 'PATCH',
-        body: {
-          userConfirmed: true,
-          userDepthClass: selectedDepth,
-        },
-      });
+      await confirmCloudReport(reportId, reportToken, selectedDepth);
       setConfirmedSuccess(true);
       setCorrecting(false);
     } catch (err) {
@@ -174,7 +167,7 @@ export function ResultScreen() {
   }
 
   // Failed state
-  if (report.status === 'failed') {
+  if (['failed', 'analysis_failed'].includes(report.status)) {
     return (
       <div className={styles.screen}>
         <PageHeader title="Assessment result" onBack={null} />

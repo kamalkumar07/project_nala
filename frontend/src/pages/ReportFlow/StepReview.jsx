@@ -14,6 +14,7 @@
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useReportStore } from './useReportStore.js';
+import { submitCloudReport } from '../../api/cloudClient.js';
 import { AlertTriangle, MapPin, Loader2, RotateCcw } from 'lucide-react';
 import { HazardIcon } from '../../components/icons/HazardIcons.jsx';
 import { Button } from '../../components/ui/Button.jsx';
@@ -55,6 +56,7 @@ export function StepReview() {
     setHazardType,
     setNote,
     setReportId,
+    setReportToken,
   } = useReportStore();
 
   const [submitting, setSubmitting] = useState(false);
@@ -81,48 +83,18 @@ export function StepReview() {
     abortRef.current = controller;
 
     try {
-      // ── Step 1: Presign upload URL ──────────────────────────────────────────
       setStepIndex(0);
-      const presignRes = await apiRequest('/api/v1/uploads/presign', {
-        method: 'POST',
-        body: {
-          contentType: uploadPayload.type || 'image/jpeg',
-          sizeBytes: uploadPayload.size,
-        },
-        signal: controller.signal,
+      const createRes = await submitCloudReport({
+        file: uploadPayload,
+        lat,
+        lng,
+        note: note ? note.trim().slice(0, 280) : undefined,
+        clientTimestamp: new Date().toISOString(),
       });
-
-      const { photoKey, uploadUrl } = presignRes || {};
-      if (!photoKey || !uploadUrl) {
-        throw new Error('Invalid upload authorization received from server.');
-      }
-
-      // ── Step 2: Direct browser PUT to S3 ────────────────────────────────────
-      setStepIndex(1);
-      await putToS3(uploadUrl, uploadPayload, controller.signal);
-
-      // ── Step 3: Register report with Express backend ────────────────────────
-      setStepIndex(2);
-      const createRes = await apiRequest('/api/v1/reports', {
-        method: 'POST',
-        body: {
-          photoKey,
-          lat: Number(lat),
-          lng: Number(lng),
-          hazardType: hazardType || 'flood',
-          note: note ? note.trim().slice(0, MAX_NOTE_LENGTH) : undefined,
-          clientTimestamp: new Date().toISOString(),
-        },
-        signal: controller.signal,
-      });
-
-      // Secure: Never log or display reportToken
       const newReportId = createRes?.reportId;
-      if (!newReportId) {
-        throw new Error('Server did not return a valid report identifier.');
-      }
-
+      if (!newReportId) throw new Error('AWS did not return a report ID.');
       setReportId(newReportId);
+      setReportToken(createRes.reportToken);
 
       // Advance to analyzing poll screen
       navigate(`/report/analyzing?id=${encodeURIComponent(newReportId)}`);

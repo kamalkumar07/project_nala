@@ -27,6 +27,7 @@ export const useReportStore = create((set, get) => ({
   hazardType:         'flood',
   note:               '',
   reportId:           null,
+  reportToken:         null,
 
   setPhoto(file, compressedFile, previewUrl) {
     const prev = get().photoPreview;
@@ -65,6 +66,10 @@ export const useReportStore = create((set, get) => ({
     set({ reportId: id });
   },
 
+  setReportToken(token) {
+    set({ reportToken: token });
+  },
+
   reset() {
     const prev = get().photoPreview;
     if (prev) URL.revokeObjectURL(prev);
@@ -80,6 +85,7 @@ export const useReportStore = create((set, get) => ({
       hazardType:         'flood',
       note:               '',
       reportId:           null,
+      reportToken:         null,
     });
   },
 }));

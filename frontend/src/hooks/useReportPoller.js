@@ -12,9 +12,9 @@
  */
 
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { getReport } from '../services/api.js';
+import { getCloudReport } from '../api/cloudClient.js';
 
-const TERMINAL = new Set(['assessed', 'failed']);
+const TERMINAL = new Set(['assessed', 'failed', 'analysis_failed']);
 const POLL_INTERVAL_MS = 2000;
 
 export function useReportPoller(reportId) {
@@ -37,7 +37,7 @@ export function useReportPoller(reportId) {
 
     setPolling(true);
     try {
-      const data = await getReport(reportId, controller.signal);
+      const data = await getCloudReport(reportId, controller.signal);
       if (!mountedRef.current) return;
 
       setReport(data);
